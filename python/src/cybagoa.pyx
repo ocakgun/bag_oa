@@ -39,9 +39,40 @@ cdef extern from "bagoa.hpp" namespace "bagoa":
 
 cdef class PyOALayout:
     cdef OALayout c_layout
-    def __init__(self):
-        pass
-    def add_rect(self, unicode lay_name, unicode purp_name
+    cdef unicode encoding
+    def __init__(self, unicode encoding):
+        self.encoding = encoding
+    
+    def add_rect(self, layer, bbox, int arr_nx=1, int arr_ny=1,
+                 double arr_spx=0.0, double arr_spy=0.0):
+        lay = layer[0].encode(self.encoding)
+        purp = layer[1].encode(self.encoding)
+        self.c_layout.add_rect(lay, purp, bbox[0][0], bbox[0][1],
+                               bbox[1][0], bbox[1][1], arr_nx, arr_ny,
+                               arr_spx, arr_spy)
+
+    def add_via(self, unicode id, loc, unicode orient,
+                int num_rows, int num_cols, double sp_rows, double sp_cols,
+                enc1, enc2, double cut_width=-1, double cut_height=-1,
+                int arr_nx=1, int arr_ny=1, double arr_spx=0.0,
+                double arr_spy=0.0):
+        via_name = id.encode(self.encoding)
+        via_orient = orient.encode(self.encoding)
+        self.c_layout.add_via(via_name, loc[0], loc[1], via_orient, 
+                              num_rows, num_cols, sp_rows, sp_cols,
+                              enc1[0], enc1[3], enc1[1], enc1[2],
+                              enc2[0], enc2[3], enc2[1], enc2[2],
+                              cut_width, cut_height, arr_nx, arr_ny, arr_spx, arr_spy)
+
+    def add_pin(self, unicode net_name, unicode pin_name, unicode label, layer, bbox):
+        c_net = net_name.encode(self.encoding)
+        c_pin = pin_name.encode(self.encoding)
+        c_label = label.encode(self.encoding)
+        lay = layer[0].encode(self.encoding)
+        purp = layer[1].encode(self.encoding)
+        self.c_layout.add_pin(c_net, c_pin, c_label, lay, purp,
+                              bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1])
+
 
 cdef class PyOALayoutLibrary:
     cdef OALayoutLibrary c_lib
