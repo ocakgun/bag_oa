@@ -2,16 +2,90 @@
 
 namespace bagoa {
 
+    // OA namespace object
     const oa::oaNativeNS ns;
-    
+    // Layout pin access direction (all)
+    const oa::oaByte pin_dir = oacTop | oacBottom | oacLeft | oacRight;    
+
     oa::oaBoolean LibDefObserver::onLoadWarnings(oa::oaLibDefList *obj, const oa::oaString & msg,
                                                  oa::oaLibDefListWarningTypeEnum type) {
         throw std::runtime_error("OA Error: " + static_cast<std::string>(msg));
         return true;
     }
-    
-    void OAWriter::open(const std::string & lib_path, const std::string & library,
-                        const std::string & cell, const std::string & view) {        
+
+    void OALayout::add_rect(const std::string & lay_name, const std::string & purp_name,
+                            double xl, double yb, double xr, double yt,
+                            unsigned int nx, unsigned int ny,
+                            double spx, double spy) {
+        Rect r;
+        r.layer = lay_name;
+        r.purpose = purp_name;
+        r.bbox[0] = xl;
+        r.bbox[1] = yb;
+        r.bbox[2] = xr;
+        r.bbox[3] = yt;        
+        r.nx = nx;
+        r.ny = ny;
+        r.spx = spx;
+        r.spy = spy;
+
+        rect_list.push_back(r);
+    }
+
+    void OALayout::add_via(const std::string & via_name, double xc, double yc,
+                           const std::string & orient, unsigned int num_rows,
+                           unsigned int num_cols, double sp_rows, double sp_cols,
+                           double enc1_xl, double enc1_yb, double enc1_xr, double enc1_yt,
+                           double enc2_xl, double enc2_yb, double enc2_xr, double enc2_yt,
+                           double cut_width, double cut_height,
+                           unsigned int nx, unsigned int ny,
+                           double spx, double spy) {
+        Via v;
+        v.via_id = oa::oaString(via_name.c_str());
+        v.orient = oa::oaOrient(oa::oaString(orient.c_str()));
+        v.loc[0] = xc;
+        v.loc[1] = yc;        
+        v.num_rows = num_rows;
+        v.num_cols = num_cols;
+        v.spacing[0] = sp_cols;
+        v.spacing[1] = sp_rows;
+        v.enc1[0] = (enc1_xr + enc1_xl) / 2.0;
+        v.enc1[1] = (enc1_yt + enc1_yb) / 2.0;
+        v.off1[0] = (enc1_xr - enc1_xl) / 2.0;
+        v.off1[1] = (enc1_yt - enc1_yb) / 2.0;
+        v.enc2[0] = (enc2_xr + enc2_xl) / 2.0;
+        v.enc2[1] = (enc2_yt + enc2_yb) / 2.0;
+        v.off2[0] = (enc2_xr - enc2_xl) / 2.0;
+        v.off2[1] = (enc2_yt - enc2_yb) / 2.0;
+        v.cut_width = cut_width;
+        v.cut_height = cut_height;
+        v.nx = nx;
+        v.ny = ny;
+        v.spx = spx;
+        v.spy = spy;
+
+        via_list.push_back(v);
+    }
+
+    void OALayout::add_pin(const std::string & net_name, const std::string & pin_name,
+                           const std::string & label, const std::string & lay_name,
+                           const std::string & purp_name, double xl, double yb,
+                           double xr, double yt) {
+        Pin p;
+        p.layer = lay_name;
+        p.purpose = purp_name;
+        p.bbox[0] = xl;
+        p.bbox[1] = yb;
+        p.bbox[2] = xr;
+        p.bbox[3] = yt;        
+        p.term_name = oa::oaString(net_name.c_str());
+        p.pin_name = oa::oaString(pin_name.c_str());
+        p.label = oa::oaString(label.c_str());
+
+        pin_list.push_back(p);
+    }
+
+    void OALayoutLibrary::open_library(const std::string & lib_path, const std::string & library) {
         // initialize OA.
         oaDesignInit( oacAPIMajorRevNumber, oacAPIMinorRevNumber, oacDataModelRevNumber);
 
@@ -20,7 +94,7 @@ namespace bagoa {
         oa::oaLibDefList::openLibs(lib_def_path);
         
         // open library
-        oa::oaScalarName lib_name(ns, library.c_str());
+        lib_name = oa::oaScalarName(ns, library.c_str());
         lib_ptr = oa::oaLib::find(lib_name);
         if (lib_ptr == NULL) {
             throw std::invalid_argument("Cannot find library " + library);
@@ -61,21 +135,66 @@ namespace bagoa {
             oa::oaLayerNum id = purp->getNumber();
             purp_map[name] = id;
         }
+
+        is_open = true;
+        
+    }    
+
+    void OALayoutLibrary::add_purpose(const std::string & purp_name, unsigned int purp_num) {
+        purp_map[purp_name] = (oa::oaPurposeNum)purp_num;
+    }
+    
+    
+    void OALayoutLibrary::add_layer(const std::string & lay_name, unsigned int lay_num) {
+        lay_map[lay_name] = (oa::oaLayerNum)lay_num;
+    }
+    
+    void OALayoutLibrary::close() {
+        if (is_open) {            
+            tech_ptr->close();
+            lib_ptr->close();
+
+            is_open = false;
+        }
+        
+    }
+
+    void OALayoutLibrary::create_layout(const std::string & cell, const std::string & view,
+                                        const OALayout & layout) {
+        // do nothing if no library is opened
+        if (!is_open) {
+            return;
+        }
         
         // open design and top block
         oa::oaScalarName cell_name(ns, cell.c_str());
         oa::oaScalarName view_name(ns, view.c_str());
-        dsn_ptr = oa::oaDesign::open(lib_name, cell_name, view_name, oa::oaViewType::get(oa::oacMaskLayout), 'w');
-        blk_ptr = oa::oaBlock::create(dsn_ptr);
-        is_open = true;
-    }    
+        oa::oaDesign * dsn_ptr = oa::oaDesign::open(lib_name, cell_name, view_name,
+                                                    oa::oaViewType::get(oa::oacMaskLayout), 'w');
+        oa::oaBlock * blk_ptr = oa::oaBlock::create(dsn_ptr);
 
-    oa::oaCoord OAWriter::double_to_oa(double val) {
+        // create geometries
+        for( RectIter it = layout.rect_list.begin(); it != layout.rect_list.end(); it++) {
+            create_rect(blk_ptr, *it);
+        }
+        for( ViaIter it = layout.via_list.begin(); it != layout.via_list.end(); it++) {
+            create_via(blk_ptr, *it);
+        }
+        for( PinIter it = layout.pin_list.begin(); it != layout.pin_list.end(); it++) {
+            create_pin(blk_ptr, *it);
+        }        
+
+        // save and close
+        dsn_ptr->save();
+        dsn_ptr->close();
+    }
+
+    oa::oaCoord OALayoutLibrary::double_to_oa(double val) {
         return (oa::oaCoord) round(val * dbu_per_uu);
     }
 
-    void OAWriter::array_figure(oa::oaFig * fig_ptr, unsigned int nx, unsigned int ny,
-                                double spx, double spy) {
+    void OALayoutLibrary::array_figure(oa::oaFig * fig_ptr, unsigned int nx, unsigned int ny,
+                                       double spx, double spy) {
         if (nx > 1 || ny > 1) {
             oa::oaCoord spx_oa = double_to_oa(spx);
             oa::oaCoord spy_oa = double_to_oa(spy);
@@ -89,122 +208,86 @@ namespace bagoa {
                 }
             }
         }
-    }    
-    
-    bool OAWriter::create_via(const std::string & via_name, double xc, double yc,
-                              const std::string & orient, unsigned int num_rows,
-                              unsigned int num_cols, double sp_rows, double sp_cols,
-                              double enc1_xl, double enc1_yb, double enc1_xr, double enc1_yt,
-                              double enc2_xl, double enc2_yb, double enc2_xr, double enc2_yt,
-                              double cut_width, double cut_height,
-                              unsigned int nx, unsigned int ny,
-                              double spx, double spy) {
-        if (!is_open) {
-            return false;
-        }        
-        // get via definition
-        oa::oaString via_id(via_name.c_str());
-        oa::oaStdViaDef * vdef = static_cast<oa::oaStdViaDef *>(oa::oaViaDef::find(tech_ptr, via_id));
+    }
+
+    void OALayoutLibrary::create_via(oa::oaBlock * blk_ptr, const Via & inst) {
+        oa::oaStdViaDef * vdef = static_cast<oa::oaStdViaDef *>(oa::oaViaDef::find(tech_ptr, inst.via_id));
         if (vdef == NULL) {
-            std::cout << "create_via: unknown via " << via_name << ", skipping." << std::endl;
-            return false;    
+            std::cout << "create_via: unknown via " << inst.via_id << ", skipping." << std::endl;
+            return;
         }
         
-        oa::oaTransform xfm((oa::oaOffset)double_to_oa(xc),
-                            (oa::oaOffset)double_to_oa(yc),
-                            oa::oaOrient(oa::oaString(orient.c_str())));
+        oa::oaTransform xfm((oa::oaOffset)double_to_oa(inst.loc[0]),
+                            (oa::oaOffset)double_to_oa(inst.loc[1]),
+                            inst.orient);
 
         oa::oaViaParam params;
-        params.setCutRows(num_rows);
-        params.setCutColumns(num_cols);
-        params.setCutSpacing(oa::oaVector((oa::oaOffset)double_to_oa(sp_cols),
-                                          (oa::oaOffset)double_to_oa(sp_rows)));
-        
-        double encx = (enc1_xl + enc1_xr) / 2.0;
-        double ency = (enc1_yb + enc1_yt) / 2.0;
-        double offx = (enc1_xr - enc1_xl) / 2.0;
-        double offy = (enc1_yt - enc1_yb) / 2.0;
-        params.setLayer1Enc(oa::oaVector((oa::oaOffset)double_to_oa(encx),
-                                         (oa::oaOffset)double_to_oa(ency)));
-        params.setLayer1Offset(oa::oaVector((oa::oaOffset)double_to_oa(offx),
-                                            (oa::oaOffset)double_to_oa(offy)));        
-        encx = (enc2_xl + enc2_xr) / 2.0;
-        ency = (enc2_yb + enc2_yt) / 2.0;
-        offx = (enc2_xr - enc2_xl) / 2.0;
-        offy = (enc2_yt - enc2_yb) / 2.0;
-        params.setLayer2Enc(oa::oaVector((oa::oaOffset)double_to_oa(encx),
-                                         (oa::oaOffset)double_to_oa(ency)));
-        params.setLayer2Offset(oa::oaVector((oa::oaOffset)double_to_oa(offx),
-                                            (oa::oaOffset)double_to_oa(offy)));
-
-        if (cut_width > 0) {
-            params.setCutWidth((oa::oaDist)double_to_oa(cut_width));            
+        params.setCutRows(inst.num_rows);
+        params.setCutColumns(inst.num_cols);
+        params.setCutSpacing(oa::oaVector((oa::oaOffset)double_to_oa(inst.spacing[0]),
+                                          (oa::oaOffset)double_to_oa(inst.spacing[1])));        
+        params.setLayer1Enc(oa::oaVector((oa::oaOffset)double_to_oa(inst.enc1[0]),
+                                         (oa::oaOffset)double_to_oa(inst.enc1[1])));
+        params.setLayer1Offset(oa::oaVector((oa::oaOffset)double_to_oa(inst.off1[0]),
+                                            (oa::oaOffset)double_to_oa(inst.off1[1])));
+        params.setLayer2Enc(oa::oaVector((oa::oaOffset)double_to_oa(inst.enc2[0]),
+                                         (oa::oaOffset)double_to_oa(inst.enc2[1])));
+        params.setLayer2Offset(oa::oaVector((oa::oaOffset)double_to_oa(inst.off2[0]),
+                                            (oa::oaOffset)double_to_oa(inst.off2[1])));
+        if (inst.cut_width > 0) {
+            params.setCutWidth((oa::oaDist)double_to_oa(inst.cut_width));            
         }
-        if (cut_height > 0) {
-            params.setCutHeight((oa::oaDist)double_to_oa(cut_height));            
+        if (inst.cut_height > 0) {
+            params.setCutHeight((oa::oaDist)double_to_oa(inst.cut_height));            
         }
         
-        oa::oaFig * v = static_cast<oa::oaFig *>(oa::oaStdVia::create(blk_ptr, vdef, xfm, &params));
-        array_figure(v, nx, ny, spx, spy);
-        return true;
+        oa::oaFig * fig = static_cast<oa::oaFig *>(oa::oaStdVia::create(blk_ptr, vdef, xfm, &params));
+        array_figure(fig, inst.nx, inst.ny, inst.spx, inst.spy);
     }
-   
-    bool OAWriter::create_rect(const std::string & lay_name, const std::string & purp_name,
-                               double xl, double yb, double xr, double yt,
-                               unsigned int nx, unsigned int ny,
-                               double spx, double spy) {
-        if (!is_open) {
-            return false;
-        }
-
-        LayerIter lay_iter = lay_map.find(lay_name);
+    
+    void OALayoutLibrary::create_rect(oa::oaBlock * blk_ptr, const Rect & inst) {
+        LayerIter lay_iter = lay_map.find(inst.layer);
         if (lay_iter == lay_map.end()) {
-            std::cout << "create_rect: unknown layer " << lay_name << ", skipping." << std::endl;
-            return false;
+            std::cout << "create_rect: unknown layer " << inst.layer << ", skipping." << std::endl;
+            return;
         }
         oa::oaLayerNum layer = lay_iter->second;
 
-        PurposeIter purp_iter = purp_map.find(purp_name);
+        PurposeIter purp_iter = purp_map.find(inst.purpose);
         if (purp_iter == purp_map.end()) {
-            std::cout << "create_rect: unknown purpose " << purp_name << ", skipping." << std::endl;
-            return false;
+            std::cout << "create_rect: unknown purpose " << inst.purpose << ", skipping." << std::endl;
+            return;
         }
         oa::oaPurposeNum purpose = purp_iter->second;
 
-        oa::oaBox box(double_to_oa(xl), double_to_oa(yb), double_to_oa(xr), double_to_oa(yt));
+        oa::oaBox box(double_to_oa(inst.bbox[0]), double_to_oa(inst.bbox[1]),
+                      double_to_oa(inst.bbox[2]), double_to_oa(inst.bbox[3]));
         oa::oaRect * r = oa::oaRect::create(blk_ptr, layer, purpose, box);
-        array_figure(static_cast<oa::oaFig *>(r), nx, ny, spx, spy);
-        return true;
+        array_figure(static_cast<oa::oaFig *>(r), inst.nx, inst.ny, inst.spx, inst.spy);
     }
-
-    bool OAWriter::create_pin(const std::string & net_name, const std::string & pin_name,
-                              const std::string & label, const std::string & lay_name,
-                              const std::string & purp_name, double xl, double yb,
-                              double xr, double yt) {
-        if (!is_open) {
-            return false;
-        }
-
+    
+    void OALayoutLibrary::create_pin(oa::oaBlock * blk_ptr, const Pin & inst) {
         // draw pin rectangle
-        LayerIter lay_iter = lay_map.find(lay_name);
+        LayerIter lay_iter = lay_map.find(inst.layer);
         if (lay_iter == lay_map.end()) {
-            std::cout << "create_pin: unknown layer " << lay_name << ", skipping." << std::endl;
-            return false;
+            std::cout << "create_rect: unknown layer " << inst.layer << ", skipping." << std::endl;
+            return;
         }
         oa::oaLayerNum layer = lay_iter->second;
 
-        PurposeIter purp_iter = purp_map.find(purp_name);
+        PurposeIter purp_iter = purp_map.find(inst.purpose);
         if (purp_iter == purp_map.end()) {
-            std::cout << "create_pin: unknown purpose " << purp_name << ", skipping." << std::endl;
-            return false;
+            std::cout << "create_rect: unknown purpose " << inst.purpose << ", skipping." << std::endl;
+            return;
         }
         oa::oaPurposeNum purpose = purp_iter->second;
 
-        oa::oaBox box(double_to_oa(xl), double_to_oa(yb), double_to_oa(xr), double_to_oa(yt));
+        oa::oaBox box(double_to_oa(inst.bbox[0]), double_to_oa(inst.bbox[1]),
+                      double_to_oa(inst.bbox[2]), double_to_oa(inst.bbox[3]));
         oa::oaRect * r = oa::oaRect::create(blk_ptr, layer, purpose, box);
 
         // get terminal
-        oa::oaName term_name(ns, oa::oaString(net_name.c_str()));
+        oa::oaName term_name(ns, inst.term_name);
         oa::oaTerm * term = oa::oaTerm::find(blk_ptr, term_name);
 	if (term == NULL) {
             // get net
@@ -218,9 +301,7 @@ namespace bagoa {
 	}
 
         // create pin and add rectangle to pin.
-        oa::oaByte dir = oacTop | oacBottom | oacLeft | oacRight;
-        oa::oaString pin_name_oa(pin_name.c_str());
-        oa::oaPin * pin = oa::oaPin::create(term, pin_name_oa, dir);
+        oa::oaPin * pin = oa::oaPin::create(term, inst.pin_name, pin_dir);
 	r->addToPin(pin);
 
         // get label location and orientation
@@ -234,32 +315,9 @@ namespace bagoa {
         }
 
         // create label
-        oa::oaString label_name(label.c_str());
-        oa::oaText::create(blk_ptr, layer, purpose, label_name,
+        oa::oaText::create(blk_ptr, layer, purpose, inst.label,
                            op, oa::oacCenterCenterTextAlign, lorient,
                            oa::oacRomanFont, lheight);
-        return true;
     }
     
-
-    void OAWriter::add_purpose(const std::string & purp_name, unsigned int purp_num) {
-        purp_map[purp_name] = (oa::oaPurposeNum)purp_num;
-    }
-    
-    
-    void OAWriter::add_layer(const std::string & lay_name, unsigned int lay_num) {
-        lay_map[lay_name] = (oa::oaLayerNum)lay_num;
-    }
-    
-    void OAWriter::close() {
-        if (is_open) {            
-            dsn_ptr->save();
-            dsn_ptr->close();
-            tech_ptr->close();
-            lib_ptr->close();
-
-            is_open = false;
-        }
-        
-    }
 }
