@@ -248,7 +248,7 @@ namespace bagoa {
     
     
     void OAWriter::add_layer(const std::string & lay_name, unsigned int lay_num) {
-        purp_map[lay_name] = (oa::oaLayerNum)lay_num;
+        lay_map[lay_name] = (oa::oaLayerNum)lay_num;
     }
     
     void OAWriter::close() {
