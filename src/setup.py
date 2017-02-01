@@ -2,7 +2,7 @@ from distutils.core import setup, Extension
 from Cython.Build import cythonize
 
 setup(
-    ext_modules=cythonize(Extension('bag_oa',
+    ext_modules=cythonize(Extension('py_bag_oa',
                                     sources=['py_bag_oa.pyx', 'bag_oa.cpp'],
                                     language='c++',
                                     include_dirs=['/tools/projects/erichang/BAG_2.0/oa_dist/include/oa'],

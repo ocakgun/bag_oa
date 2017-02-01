@@ -94,7 +94,8 @@ namespace bag_oa {
     bool OAWriter::create_via(const std::string & via_name, double xc, double yc,
                               const std::string & orient, unsigned int num_rows,
                               unsigned int num_cols, double sp_rows, double sp_cols,
-                              const double (&enc1)[4], const double (&enc2)[4],
+                              double enc1_xl, double enc1_yb, double enc1_xr, double enc1_yt,
+                              double enc2_xl, double enc2_yb, double enc2_xr, double enc2_yt,
                               double cut_width, double cut_height,
                               unsigned int nx, unsigned int ny,
                               double spx, double spy) {
@@ -116,18 +117,18 @@ namespace bag_oa {
         params.setCutSpacing(oa::oaVector((oa::oaOffset)double_to_oa(sp_cols),
                                           (oa::oaOffset)double_to_oa(sp_rows)));
         
-        double encx = (enc1[0] + enc1[1]) / 2.0;
-        double ency = (enc1[2] + enc1[3]) / 2.0;
-        double offx = (enc1[1] - enc1[0]) / 2.0;
-        double offy = (enc1[2] - enc1[3]) / 2.0;
+        double encx = (enc1_xl + enc1_xr) / 2.0;
+        double ency = (enc1_yb + enc1_yt) / 2.0;
+        double offx = (enc1_xr - enc1_xl) / 2.0;
+        double offy = (enc1_yt - enc1_yb) / 2.0;
         params.setLayer1Enc(oa::oaVector((oa::oaOffset)double_to_oa(encx),
                                          (oa::oaOffset)double_to_oa(ency)));
         params.setLayer1Offset(oa::oaVector((oa::oaOffset)double_to_oa(offx),
                                             (oa::oaOffset)double_to_oa(offy)));        
-        encx = (enc2[0] + enc2[1]) / 2.0;
-        ency = (enc2[2] + enc2[3]) / 2.0;
-        offx = (enc2[1] - enc2[0]) / 2.0;
-        offy = (enc2[2] - enc2[3]) / 2.0;
+        encx = (enc2_xl + enc2_xr) / 2.0;
+        ency = (enc2_yb + enc2_yt) / 2.0;
+        offx = (enc2_xr - enc2_xl) / 2.0;
+        offy = (enc2_yt - enc2_yb) / 2.0;
         params.setLayer2Enc(oa::oaVector((oa::oaOffset)double_to_oa(encx),
                                          (oa::oaOffset)double_to_oa(ency)));
         params.setLayer2Offset(oa::oaVector((oa::oaOffset)double_to_oa(offx),

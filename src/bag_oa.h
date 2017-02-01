@@ -38,7 +38,8 @@ namespace bag_oa {
         bool create_via(const std::string & via_name, double xc, double yc,
                         const std::string & orient, unsigned int num_rows,
                         unsigned int num_cols, double sp_rows, double sp_cols,
-                        const double (&enc1)[4], const double (&enc2)[4],
+                        double enc1_xl, double enc1_yb, double enc1_xr, double enc1_yt,
+                        double enc2_xl, double enc2_yb, double enc2_xr, double enc2_yt,
                         double cut_width=-1, double cut_height=-1,
                         unsigned int nx=1, unsigned int ny=1,
                         double spx=0, double spy=0);
