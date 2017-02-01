@@ -223,9 +223,9 @@ namespace bag_oa {
 
         // create label
         oa::oaString label_name(label.c_str());
-        oa::oaText *text = oa::oaText::create(blk_ptr, layer, purpose, label_name,
-                                              op, oa::oacCenterCenterTextAlign, lorient,
-                                              oa::oacRomanFont, lheight);
+        oa::oaText::create(blk_ptr, layer, purpose, label_name,
+                           op, oa::oacCenterCenterTextAlign, lorient,
+                           oa::oacRomanFont, lheight);
         return true;
     }
     
