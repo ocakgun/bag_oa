@@ -1,6 +1,6 @@
 #include "bag_oa.h"
 
-banesoace bag_oa {
+namespace bag_oa {
 
     const oa::oaNativeNS ns;
     
@@ -13,13 +13,16 @@ banesoace bag_oa {
     OAWriter::OAWriter(const std::string & lib_path, const std::string & library, const std::string & cell, const std::string & view) :
     lib_def_obs(1), is_closed(false), dbu_per_uu(0)
     {
+        // initialize OA.
+        oaDesignInit( oacAPIMajorRevNumber, oacAPIMinorRevNumber, oacDataModelRevNumber);
+
         // open library definition
         oa::oaString lib_def_path(lib_path.c_str());
         oa::oaLibDefList::openLibs(lib_def_path);
         
         // open library
         oa::oaScalarName lib_name(ns, library.c_str());
-        oa::oaLib * lib_ptr = oa::oaLib::find(lib_name);
+        lib_ptr = oa::oaLib::find(lib_name);
         if (lib_ptr == NULL) {
             throw std::invalid_argument("Cannot find library " + library);
         } else if (!lib_ptr->isValid()) {
@@ -27,7 +30,7 @@ banesoace bag_oa {
         }
         
         // open technology file
-        oa::oaTech * tech_ptr = oa::oaTech::find(lib_ptr);
+        tech_ptr = oa::oaTech::find(lib_ptr);
         if (tech_ptr == NULL) {
             // opened tech not found, attempt to open
             if (!oa::oaTech::exists(lib_ptr)) {
@@ -41,19 +44,19 @@ banesoace bag_oa {
         }
 
         // get database unit
-        dbu_per_uu = tech_ptr->getDBUPerUU();
+        dbu_per_uu = tech_ptr->getDBUPerUU(oa::oaViewType::get(oa::oacMaskLayout));
         
         // fill layer/purpose map
         oa::oaString temp;
         oa::oaIter<oa::oaLayer> layers(tech_ptr->getLayers());
-        while (oaLayer *layer = layers.getNext()) {
+        while (oa::oaLayer *layer = layers.getNext()) {
             layer->getName(temp);
             std::string name = static_cast<std::string>(temp);
             oa::oaLayerNum id = layer->getNumber();
             lay_map[name] = id;
         }
         oa::oaIter<oa::oaPurpose> purposes(tech_ptr->getPurposes());
-        while (oaLayer *purp = purposes.getNext()) {
+        while (oa::oaPurpose *purp = purposes.getNext()) {
             purp->getName(temp);
             std::string name = static_cast<std::string>(temp);
             oa::oaLayerNum id = purp->getNumber();
@@ -77,12 +80,12 @@ banesoace bag_oa {
             oa::oaCoord spx_oa = double_to_oa(spx);
             oa::oaCoord spy_oa = double_to_oa(spy);
             for (unsigned int j = 1; j < ny; j++) {
-                fig->copy(oa::oaTransform(0, j * spy_oa));
+                fig_ptr->copy(oa::oaTransform(0, j * spy_oa));
             }
             for (unsigned int i = 1; i < nx; i++) {
                 oa::oaCoord offx = i * spx_oa;
                 for (unsigned int j = 0; j < ny; j++) {
-                    fig->copy(oa::oaTransform(offx, j * spy_oa));
+                    fig_ptr->copy(oa::oaTransform(offx, j * spy_oa));
                 }
             }
         }
@@ -97,12 +100,12 @@ banesoace bag_oa {
                               double spx, double spy) {
         // get via definition
         oa::oaString via_id(via_name.c_str());
-        oa::oaStdViaDef vdef = static_cast<oa::oaStdViaDef *>(oa::oaViaDef::find(tech_ptr, via_id));
+        oa::oaStdViaDef * vdef = static_cast<oa::oaStdViaDef *>(oa::oaViaDef::find(tech_ptr, via_id));
         if (vdef == NULL) {
-            std::cout << "create_via: unknown via " << via_name << ", skipping.";
+            std::cout << "create_via: unknown via " << via_name << ", skipping." << std::endl;
             return false;    
         }
-
+        
         oa::oaTransform xfm((oa::oaOffset)double_to_oa(xc),
                             (oa::oaOffset)double_to_oa(yc),
                             oa::oaOrient(oa::oaString(orient.c_str())));
@@ -137,7 +140,7 @@ banesoace bag_oa {
             params.setCutHeight((oa::oaDist)double_to_oa(cut_height));            
         }
         
-        oa::oaFig * v = static_cast<oa::oaFig *>(oa::oaStdVia::create(blk_ptr, vdef, xfm, params));
+        oa::oaFig * v = static_cast<oa::oaFig *>(oa::oaStdVia::create(blk_ptr, vdef, xfm, &params));
         array_figure(v, nx, ny, spx, spy);
         return true;
     }
@@ -148,14 +151,14 @@ banesoace bag_oa {
                                double spx, double spy) {
         LayerIter lay_iter = lay_map.find(lay_name);
         if (lay_iter == lay_map.end()) {
-            std::cout << "create_rect: unknown layer " << lay_name << ", skipping.";
+            std::cout << "create_rect: unknown layer " << lay_name << ", skipping." << std::endl;
             return false;
         }
         oa::oaLayerNum layer = lay_iter->second;
 
         PurposeIter purp_iter = purp_map.find(purp_name);
         if (purp_iter == purp_map.end()) {
-            std::cout << "create_rect: unknown purpose " << purp_name << ", skipping.";
+            std::cout << "create_rect: unknown purpose " << purp_name << ", skipping." << std::endl;
             return false;
         }
         oa::oaPurposeNum purpose = purp_iter->second;
@@ -173,14 +176,14 @@ banesoace bag_oa {
         // draw pin rectangle
         LayerIter lay_iter = lay_map.find(lay_name);
         if (lay_iter == lay_map.end()) {
-            std::cout << "create_rect: unknown layer " << lay_name << ", skipping.";
+            std::cout << "create_pin: unknown layer " << lay_name << ", skipping." << std::endl;
             return false;
         }
         oa::oaLayerNum layer = lay_iter->second;
 
         PurposeIter purp_iter = purp_map.find(purp_name);
         if (purp_iter == purp_map.end()) {
-            std::cout << "create_rect: unknown purpose " << purp_name << ", skipping.";
+            std::cout << "create_pin: unknown purpose " << purp_name << ", skipping." << std::endl;
             return false;
         }
         oa::oaPurposeNum purpose = purp_iter->second;
@@ -203,14 +206,14 @@ banesoace bag_oa {
 	}
 
         // create pin and add rectangle to pin.
-        oa::oaByte dir = oa::oacTop | oa::oacBottom | oa::oacLeft | oa::oacRight;
+        oa::oaByte dir = oacTop | oacBottom | oacLeft | oacRight;
         oa::oaString pin_name_oa(pin_name.c_str());
-        oa::oaPin * pin = oaPin::create(term, pin_name_oa, dir);
+        oa::oaPin * pin = oa::oaPin::create(term, pin_name_oa, dir);
 	r->addToPin(pin);
 
         // get label location and orientation
         oa::oaPoint op;
-        box.getcenter(op);
+        box.getCenter(op);
         oa::oaOrient lorient("R0");
         oa::oaDist lheight = (oa::oaDist)box.getHeight();
         if (box.getHeight() > box.getWidth()) {
@@ -220,9 +223,9 @@ banesoace bag_oa {
 
         // create label
         oa::oaString label_name(label.c_str());
-	oaText *text = oa::oaText::create(blk_ptr, layer, purpose, label_name,
-                                          op, oa::oacCenterCenterTextAlign, lorient,
-                                          oa::oacRomanFont, lheight);
+        oa::oaText *text = oa::oaText::create(blk_ptr, layer, purpose, label_name,
+                                              op, oa::oacCenterCenterTextAlign, lorient,
+                                              oa::oacRomanFont, lheight);
         return true;
     }
     
