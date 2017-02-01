@@ -40,13 +40,25 @@ cdef extern from "bagoa.hpp" namespace "bagoa":
 cdef class PyOAWriter:
     cdef OAWriter c_writer
     cdef unicode encoding
+    cdef bytes lib_path
+    cdef bytes library
+    cdef bytes cell
+    cdef bytes view
     def __init__(self, unicode lib_path, unicode library, unicode cell, unicode view,
                  unicode encoding=u'utf-8'):
         self.encoding = encoding
-        self.c_writer = OAWriter()
-        self.c_writer.open(lib_path.encode(encoding), library.encode(encoding),
-                           cell.encode(encoding), view.encode(encoding))
+        self.lib_path = lib_path.encode(encoding)
+        self.library = library.encode(encoding)
+        self.cell = cell.encode(encoding)
+        self.view = view.encode(encoding)
 
+    def __enter__(self):
+        self.c_writer.open(self.lib_path, self.library, self.cell, self.view)
+        return self
+
+    def __exit__(self, *args):
+        self.close()
+        
     def __del__(self):
         self.close()
             
