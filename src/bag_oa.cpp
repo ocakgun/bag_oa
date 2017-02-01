@@ -1,4 +1,4 @@
-#include "bag_oa.h"
+#include "bag_oa.hpp"
 
 namespace bag_oa {
 

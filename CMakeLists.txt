@@ -27,36 +27,5 @@ endif()
 
 message(status "** CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 
-set(SOURCES
-  src/bag_oa.cpp
-  src/bag_oa.h
-  src/test.cpp
-  )
-
-link_directories(/tools/projects/erichang/BAG_2.0/oa_dist/lib/linux_rhel50_gcc44x_64/opt)
-
-add_executable(testoa ${SOURCES})
-
-# setup include directories
-include_directories(
-  /tools/projects/erichang/BAG_2.0/oa_dist/include/oa
-  )
-
-# test executable dependencies (transitive)
-target_link_libraries(testoa
-  oaCommon
-  oaBase
-  oaPlugIn
-  oaDM
-  oaTech
-  oaDesign
-  ${CMAKE_DL_LIBS}
-  )
-# set test executable folder
-set_property(TARGET testoa PROPERTY FOLDER "executables")
-
-# install targets to folders
-install(TARGETS testoa
-        RUNTIME DESTINATION ${psf_BINARY_DIR}/bin
-        LIBRARY DESTINATION ${psf_BINARY_DIR}/bin
-)
+add_subdirectory(src lib)
+add_subdirectory(test bin)

@@ -1,3 +1,6 @@
+#ifndef BAG_OA_H_
+#define BAG_OA_H_
+
 #include <iostream>
 #include <exception>
 #include <stdexcept>
@@ -74,3 +77,4 @@ namespace bag_oa {
     
 }
 
+#endif
