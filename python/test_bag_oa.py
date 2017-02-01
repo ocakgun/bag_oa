@@ -1,10 +1,11 @@
-from cybagoa import PyOAWriter
+from cybagoa import PyOALayout
 
 writer = PyOAWriter('./cds.lib', 'AAAFOO', 'testpyoa', 'layout')
 writer.add_purpose('pin', 251)
 
-writer.create_rect(('M1', 'drawing'), [[0.0, 0.0], [0.2, 0.1]],
-                   arr_nx=3, arr_ny=2, arr_spx=0.25, arr_spy=0.2)
+layout = PyOALayout()
+layout.create_rect(('M1', 'drawing'), [[0.0, 0.0], [0.2, 0.1]],
+                     arr_nx=3, arr_ny=2, arr_spx=0.25, arr_spy=0.2)
 
 writer.create_pin('foo', 'foo1', 'foo:', ('M2', 'pin'),
                   [[0.5, 0.5], [0.7, 0.6]])

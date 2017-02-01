@@ -6,54 +6,55 @@ from libcpp cimport bool
 cdef extern from "bagoa.hpp" namespace "bagoa":
     cdef cppclass LibDefObserver:
         pass
-    cdef cppclass OAWriter:
-        OAWriter()
-        void open(const string & lib_path, const string & library,
-                  const string & cell, const string & view) except +
 
-        bool create_rect(const string & lay_name, const string & purp_name,
-                         double xl, double yb, double xr, double yt,
-                         unsigned int nx, unsigned int ny,
-                         double spx, double spy) except +
+    cdef cppclass OALayout:
+        OALayout()
+        void add_rect(const string & lay_name, const string & purp_name,
+                      double xl, double yb, double xr, double yt,
+                      unsigned int nx, unsigned int ny,
+                      double spx, double spy) except +
 
-        bool create_via(const string & via_name, double xc, double yc,
-                        const string & orient, unsigned int num_rows,
-                        unsigned int num_cols, double sp_rows, double sp_cols,
-                        double enc1_xl, double enc1_yb, double enc1_xr, double enc1_yt,
-                        double enc2_xl, double enc2_yb, double enc2_xr, double enc2_yt,
-                        double cut_width, double cut_height,
-                        unsigned int nx, unsigned int ny,
-                        double spx, double spy) except +
+        void add_via(const string & via_name, double xc, double yc,
+                     const string & orient, unsigned int num_rows,
+                     unsigned int num_cols, double sp_rows, double sp_cols,
+                     double enc1_xl, double enc1_yb, double enc1_xr, double enc1_yt,
+                     double enc2_xl, double enc2_yb, double enc2_xr, double enc2_yt,
+                     double cut_width, double cut_height,
+                     unsigned int nx, unsigned int ny,
+                     double spx, double spy) except +
 
-        bool create_pin(const string & net_name, const string & pin_name,
-                        const string & label, const string & lay_name,
-                        const string & purp_name, double xl, double yb,
-                        double xr, double yt) except +
+        void add_pin(const string & net_name, const string & pin_name,
+                     const string & label, const string & lay_name,
+                     const string & purp_name, double xl, double yb,
+                     double xr, double yt) except +
 
-        void add_purpose(const string & purp_name, unsigned int purp_num)
-
-        void add_layer(const string & lay_name, unsigned int lay_num)
-        
+    cdef cppclass OALayoutLibrary:
+        OALayoutLibrary()
+        void open_library(const string & lib_path, const string & library) except +
+        void add_purpose(const string & purp_name, unsigned int purp_num) except +
+        void add_layer(const string & lay_name, unsigned int lay_num) except +
         void close() except +
+        void create_layout(const string & cell, const string & view, const OALayout & layout) except +
 
 
-cdef class PyOAWriter:
-    cdef OAWriter c_writer
-    cdef unicode encoding
+cdef class PyOALayout:
+    cdef OALayout c_layout
+    def __init__(self):
+        pass
+    def add_rect(self, unicode lay_name, unicode purp_name
+
+cdef class PyOALayoutLibrary:
+    cdef OALayoutLibrary c_lib
     cdef bytes lib_path
     cdef bytes library
-    cdef bytes cell
-    cdef bytes view
-    def __init__(self, unicode lib_path, unicode library, unicode cell, unicode view,
-                 unicode encoding=u'utf-8'):
-        self.encoding = encoding
+    cdef unicode encoding
+    def __init__(self, unicode lib_path, unicode library, unicode encoding):
         self.lib_path = lib_path.encode(encoding)
         self.library = library.encode(encoding)
-        self.cell = cell.encode(encoding)
-        self.view = view.encode(encoding)
-
+        self.encoding = encoding
+    
     def __enter__(self):
-        self.c_writer.open(self.lib_path, self.library, self.cell, self.view)
+        self.c_lib.open_library(self.lib_path, self.library)
         return self
 
     def __exit__(self, *args):
@@ -63,35 +64,14 @@ cdef class PyOAWriter:
         self.close()
             
     def close(self):
-        self.c_writer.close()
+        self.c_lib.close()
         
     def add_purpose(self, unicode purp_name, int purp_num):
-        self.c_writer.add_purpose(purp_name.encode(self.encoding), purp_num)
+        self.c_lib.add_purpose(purp_name.encode(self.encoding), purp_num)
 
     def add_layer(self, unicode lay_name, int lay_num):
-        self.c_writer.add_layer(lay_name.encode(self.encoding), lay_num)
+        self.c_lib.add_layer(lay_name.encode(self.encoding), lay_num)
 
-
-    def create_rect(self, layer, bbox, int arr_nx=1, int arr_ny=1, double arr_spx=0.0, double arr_spy=0.0):
-        lay = layer[0].encode(self.encoding)
-        purp = layer[1].encode(self.encoding)
-        (xl, yb), (xr, yt) = bbox
-        self.c_writer.create_rect(lay, purp, xl, yb, xr, yt,
-                                  arr_nx, arr_ny, arr_spx, arr_spy)
-
-    def create_pin(self, unicode net_name, unicode pin_name, unicode label, layer, bbox):
-        lay = layer[0].encode(self.encoding)
-        purp = layer[1].encode(self.encoding)
-        (xl, yb), (xr, yt) = bbox
-        self.c_writer.create_pin(net_name.encode(self.encoding), pin_name.encode(self.encoding),
-                                 label.encode(self.encoding), lay, purp, xl, yb, xr, yt)
-
-    def create_via(self, unicode id, loc, unicode orient, int num_rows, int num_cols,
-                   double sp_rows, double sp_cols, enc1, enc2,
-                   double cut_width=-1, double cut_height=-1, int arr_nx=1,
-                   int arr_ny=1, double arr_spx=0.0, double arr_spy=0.0):
-        self.c_writer.create_via(id.encode(self.encoding), loc[0], loc[1], orient.encode(self.encoding),
-                                 num_rows, num_cols, sp_rows, sp_cols,
-                                 enc1[0], enc1[3], enc1[1], enc1[2],
-                                 enc2[0], enc2[3], enc2[1], enc2[2],
-                                 cut_width, cut_height, arr_nx, arr_ny, arr_spx, arr_spy)
+    def create_layout(self, unicode cell, unicode view, PyOALayout layout):
+        self.c_lib.create_layout(cell.encode(self.encoding), view.encode(self.encoding),
+                                 layout.c_layout)
