@@ -95,6 +95,51 @@ banesoace bag_oa {
                               double cut_width, double cut_height,
                               unsigned int nx, unsigned int ny,
                               double spx, double spy) {
+        // get via definition
+        oa::oaString via_id(via_name.c_str());
+        oa::oaStdViaDef vdef = static_cast<oa::oaStdViaDef *>(oa::oaViaDef::find(tech_ptr, via_id));
+        if (vdef == NULL) {
+            std::cout << "create_via: unknown via " << via_name << ", skipping.";
+            return false;    
+        }
+
+        oa::oaTransform xfm((oa::oaOffset)double_to_oa(xc),
+                            (oa::oaOffset)double_to_oa(yc),
+                            oa::oaOrient(oa::oaString(orient.c_str())));
+
+        oa::oaViaParam params;
+        params.setCutRows(num_rows);
+        params.setCutColumns(num_cols);
+        params.setCutSpacing(oa::oaVector((oa::oaOffset)double_to_oa(sp_cols),
+                                          (oa::oaOffset)double_to_oa(sp_rows)));
+        
+        double encx = (enc1[0] + enc1[1]) / 2.0;
+        double ency = (enc1[2] + enc1[3]) / 2.0;
+        double offx = (enc1[1] - enc1[0]) / 2.0;
+        double offy = (enc1[2] - enc1[3]) / 2.0;
+        params.setLayer1Enc(oa::oaVector((oa::oaOffset)double_to_oa(encx),
+                                         (oa::oaOffset)double_to_oa(ency)));
+        params.setLayer1Offset(oa::oaVector((oa::oaOffset)double_to_oa(offx),
+                                            (oa::oaOffset)double_to_oa(offy)));        
+        encx = (enc2[0] + enc2[1]) / 2.0;
+        ency = (enc2[2] + enc2[3]) / 2.0;
+        offx = (enc2[1] - enc2[0]) / 2.0;
+        offy = (enc2[2] - enc2[3]) / 2.0;
+        params.setLayer2Enc(oa::oaVector((oa::oaOffset)double_to_oa(encx),
+                                         (oa::oaOffset)double_to_oa(ency)));
+        params.setLayer2Offset(oa::oaVector((oa::oaOffset)double_to_oa(offx),
+                                            (oa::oaOffset)double_to_oa(offy)));
+
+        if (cut_width > 0) {
+            params.setCutWidth((oa::oaDist)double_to_oa(cut_width));            
+        }
+        if (cut_height > 0) {
+            params.setCutHeight((oa::oaDist)double_to_oa(cut_height));            
+        }
+        
+        oa::oaFig * v = static_cast<oa::oaFig *>(oa::oaStdVia::create(blk_ptr, vdef, xfm, params));
+        array_figure(v, nx, ny, spx, spy);
+        return true;
     }
    
     bool OAWriter::create_rect(const std::string & lay_name, const std::string & purp_name,
@@ -118,6 +163,7 @@ banesoace bag_oa {
         oa::oaBox box(double_to_oa(xl), double_to_oa(yb), double_to_oa(xr), double_to_oa(yt));
         oa::oaRect * r = oa::oaRect::create(blk_ptr, layer, purpose, box);
         array_figure(static_cast<oa::oaFig *>(r), nx, ny, spx, spy);
+        return true;
     }
 
     bool OAWriter::create_pin(const std::string & net_name, const std::string & pin_name,
@@ -176,7 +222,8 @@ banesoace bag_oa {
         oa::oaString label_name(label.c_str());
 	oaText *text = oa::oaText::create(blk_ptr, layer, purpose, label_name,
                                           op, oa::oacCenterCenterTextAlign, lorient,
-                                          oa::oacRomanFont, lheight);        
+                                          oa::oacRomanFont, lheight);
+        return true;
     }
     
 
