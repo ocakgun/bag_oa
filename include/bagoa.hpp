@@ -1,5 +1,5 @@
-#ifndef BAG_OA_H_
-#define BAG_OA_H_
+#ifndef BAGOA_H_
+#define BAGOA_H_
 
 #include <iostream>
 #include <exception>
@@ -12,7 +12,7 @@
 // techID = techOpenTechFile(lib_name "tech.oa" "r")
 // techGetPurposeNum(techID "pin")
 
-namespace bag_oa {
+namespace bagoa {
     
     typedef std::map<std::string, oa::oaLayerNum> LayerMap;
     typedef std::map<std::string, oa::oaLayerNum>::iterator LayerIter;

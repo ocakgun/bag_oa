@@ -1,15 +1,15 @@
 # list sources explicitly, so if we add/remove sources cmake 
 # knows to update makefiles.
 set(SOURCES 
-  bag_oa.cpp
-  ${CMAKE_SOURCE_DIR}/include/bag_oa.hpp
+  bagoa.cpp
+  ${CMAKE_SOURCE_DIR}/include/bagoa.hpp
   )
 
 # setup link library path.  Must call before defining target.
 link_directories( $ENV{OA_LINK_DIR} )
 
 # build shared library
-add_library( bag_oa SHARED ${SOURCES} )
+add_library( bagoa SHARED ${SOURCES} )
 
 # setup include libraries
 include_directories( ${CMAKE_SOURCE_DIR}/include
@@ -20,13 +20,13 @@ message(status "** OA_LINK_DIR: $ENV{OA_LINK_DIR}")
 message(status "** OA_INCLUDE_DIR: $ENV{OA_INCLUDE_DIR}")
 
 # shared library dependencies
-target_link_libraries( bag_oa oaCommon oaBase oaPlugIn oaDM oaTech oaDesign ${CMAKE_DL_LIBS} )
+target_link_libraries( bagoa oaCommon oaBase oaPlugIn oaDM oaTech oaDesign ${CMAKE_DL_LIBS} )
 
 # set shared library file folder
-set_property( TARGET bag_oa PROPERTY FOLDER "libraries" )
+set_property( TARGET bagoa PROPERTY FOLDER "libraries" )
 
 # install target to folders
-install( TARGETS bag_oa
-  RUNTIME DESTINATION ${bag_oa_BINARY_DIR}/bin
-  LIBRARY DESTINATION ${bag_oa_BINARY_DIR}/lib
+install( TARGETS bagoa
+  RUNTIME DESTINATION ${bagoa_BINARY_DIR}/bin
+  LIBRARY DESTINATION ${bagoa_BINARY_DIR}/lib
   )

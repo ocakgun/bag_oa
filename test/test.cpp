@@ -1,4 +1,4 @@
-#include "bag_oa.hpp"
+#include "bagoa.hpp"
 
 
 int main(int argc, char *argv[])
@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
         double enc2[] = {0.4, 0.3, 0.2, 0.1};
 
         std::cout << "1" << std::endl;        
-        bag_oa::OAWriter writer;
+        bagoa::OAWriter writer;
         writer.open("./cds.lib", "AAAFOO", "testoa", "layout");
         std::cout << "2" << std::endl;        
         writer.add_purpose("pin", 251);

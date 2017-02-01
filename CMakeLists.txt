@@ -1,7 +1,7 @@
 # CMake 3.4.3 required to export all symbols on windows.
 cmake_minimum_required(VERSION 3.4.3)
 
-project(bag_oa)
+project(bagoa)
 
 # organize targets into folders.
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)

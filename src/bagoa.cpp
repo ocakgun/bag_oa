@@ -1,6 +1,6 @@
-#include "bag_oa.hpp"
+#include "bagoa.hpp"
 
-namespace bag_oa {
+namespace bagoa {
 
     const oa::oaNativeNS ns;
     
