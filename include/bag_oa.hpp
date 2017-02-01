@@ -30,9 +30,12 @@ namespace bag_oa {
     
     class OAWriter {
     public:
-        OAWriter(const std::string & lib_path, const std::string & library,
-                 const std::string & cell, const std::string & view);
-
+        OAWriter() : is_open(false), dbu_per_uu(0), lib_def_obs(1) {}
+        ~OAWriter() { close(); }
+        
+        void open(const std::string & lib_path, const std::string & library,
+                  const std::string & cell, const std::string & view);
+        
         bool create_rect(const std::string & lay_name, const std::string & purp_name,
                          double xl, double yb, double xr, double yt,
                          unsigned int nx=1, unsigned int ny=1,
@@ -63,16 +66,16 @@ namespace bag_oa {
 
         void array_figure(oa::oaFig * fig_ptr, unsigned int nx, unsigned int ny,
                           double spx, double spy);
-        
-        LibDefObserver lib_def_obs;
-        bool is_closed;
+        bool is_open;
         oa::oaUInt4 dbu_per_uu;
+        LayerMap lay_map;
+        PurposeMap purp_map;
+        LibDefObserver lib_def_obs;
+
         oa::oaLib * lib_ptr;
         oa::oaTech * tech_ptr;
         oa::oaDesign * dsn_ptr;
         oa::oaBlock * blk_ptr;
-        LayerMap lay_map;
-        PurposeMap purp_map;
     };
     
 }

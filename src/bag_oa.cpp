@@ -10,9 +10,8 @@ namespace bag_oa {
         return true;
     }
     
-    OAWriter::OAWriter(const std::string & lib_path, const std::string & library, const std::string & cell, const std::string & view) :
-    lib_def_obs(1), is_closed(false), dbu_per_uu(0)
-    {
+    void OAWriter::open(const std::string & lib_path, const std::string & library,
+                        const std::string & cell, const std::string & view) {        
         // initialize OA.
         oaDesignInit( oacAPIMajorRevNumber, oacAPIMinorRevNumber, oacDataModelRevNumber);
 
@@ -68,6 +67,7 @@ namespace bag_oa {
         oa::oaScalarName view_name(ns, view.c_str());
         dsn_ptr = oa::oaDesign::open(lib_name, cell_name, view_name, oa::oaViewType::get(oa::oacMaskLayout), 'w');
         blk_ptr = oa::oaBlock::create(dsn_ptr);
+        is_open = true;
     }    
 
     oa::oaCoord OAWriter::double_to_oa(double val) {
@@ -99,6 +99,9 @@ namespace bag_oa {
                               double cut_width, double cut_height,
                               unsigned int nx, unsigned int ny,
                               double spx, double spy) {
+        if (!is_open) {
+            return false;
+        }        
         // get via definition
         oa::oaString via_id(via_name.c_str());
         oa::oaStdViaDef * vdef = static_cast<oa::oaStdViaDef *>(oa::oaViaDef::find(tech_ptr, via_id));
@@ -150,6 +153,10 @@ namespace bag_oa {
                                double xl, double yb, double xr, double yt,
                                unsigned int nx, unsigned int ny,
                                double spx, double spy) {
+        if (!is_open) {
+            return false;
+        }
+
         LayerIter lay_iter = lay_map.find(lay_name);
         if (lay_iter == lay_map.end()) {
             std::cout << "create_rect: unknown layer " << lay_name << ", skipping." << std::endl;
@@ -174,6 +181,10 @@ namespace bag_oa {
                               const std::string & label, const std::string & lay_name,
                               const std::string & purp_name, double xl, double yb,
                               double xr, double yt) {
+        if (!is_open) {
+            return false;
+        }
+
         // draw pin rectangle
         LayerIter lay_iter = lay_map.find(lay_name);
         if (lay_iter == lay_map.end()) {
@@ -241,9 +252,14 @@ namespace bag_oa {
     }
     
     void OAWriter::close() {
-        dsn_ptr->save();
-        dsn_ptr->close();
-        tech_ptr->close();
-        lib_ptr->close();
+        if (is_open) {            
+            dsn_ptr->save();
+            dsn_ptr->close();
+            tech_ptr->close();
+            lib_ptr->close();
+
+            is_open = false;
+        }
+        
     }
 }
