@@ -15,9 +15,15 @@
 namespace bagoa {
     
     typedef std::map<std::string, oa::oaLayerNum> LayerMap;
-    typedef std::map<std::string, oa::oaLayerNum>::iterator LayerIter;
+    typedef LayerMap::iterator LayerIter;
     typedef std::map<std::string, oa::oaPurposeNum> PurposeMap;
-    typedef std::map<std::string, oa::oaPurposeNum>::iterator PurposeIter;
+    typedef PurposeMap::iterator PurposeIter;
+    typedef std::map<std::string, int> IntMap;
+    typedef IntMap::const_iterator IntIter;
+    typedef std::map<std::string, std::string> StrMap;
+    typedef StrMap::const_iterator StrIter;
+    typedef std::map<std::string, double> DoubleMap;
+    typedef DoubleMap::const_iterator DoubleIter;
     
     class LibDefObserver : public oa::oaObserver<oa::oaLibDefList> {
     public:
@@ -27,6 +33,20 @@ namespace bagoa {
         oa::oaBoolean onLoadWarnings(oa::oaLibDefList *obj, const oa::oaString & msg,
                                      oa::oaLibDefListWarningTypeEnum type);
     };
+
+    struct Inst {
+        oa::oaString lib_name;
+        oa::oaString cell_name;
+        oa::oaString view_name;
+        oa::oaString inst_name;
+        double loc[2];
+        oa::oaOrient orient;
+        int num_rows;
+        int num_cols;
+        double sp_rows;
+        double sp_cols;
+        oa::oaParamArray params;
+    };  
     
     struct Rect {
         std::string layer;
@@ -60,6 +80,8 @@ namespace bagoa {
         oa::oaString label;
     };
 
+    typedef std::vector<Inst> InstList;
+    typedef InstList::const_iterator InstIter;
     typedef std::vector<Rect> RectList;
     typedef RectList::const_iterator RectIter;
     typedef std::vector<Via> ViaList;
@@ -71,7 +93,13 @@ namespace bagoa {
     public:
         OALayout() {}
         ~OALayout() {}
-        
+
+        void add_inst(const std::string & lib_name, const std::string & cell_name,
+                      const std::string & view_name, const std::string & inst_name,
+                      double xc, double yc, const std::string & orient,
+                      const IntMap & int_params, const StrMap & str_params,
+                      const DoubleMap & double_params, int num_rows=1,
+                      int num_cols=1, double sp_rows=0.0, double sp_cols=0.0);
         
         void add_rect(const std::string & lay_name, const std::string & purp_name,
                       double xl, double yb, double xr, double yt,
@@ -91,7 +119,8 @@ namespace bagoa {
                      const std::string & label, const std::string & lay_name,
                      const std::string & purp_name, double xl, double yb,
                      double xr, double yt);
-        
+
+        InstList inst_list;
         RectList rect_list;
         ViaList via_list;
         PinList pin_list;
@@ -117,6 +146,7 @@ namespace bagoa {
         oa::oaCoord double_to_oa(double val);
         void array_figure(oa::oaFig * fig_ptr, unsigned int nx, unsigned int ny,
                           double spx, double spy);
+        void create_inst(oa::oaBlock * blk_ptr, const Inst & inst);
         void create_rect(oa::oaBlock * blk_ptr, const Rect & inst);
         void create_via(oa::oaBlock * blk_ptr, const Via & inst);
         void create_pin(oa::oaBlock * blk_ptr, const Pin & inst);

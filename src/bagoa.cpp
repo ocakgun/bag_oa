@@ -13,6 +13,44 @@ namespace bagoa {
         return true;
     }
 
+    void OALayout::add_inst(const std::string & lib_name, const std::string & cell_name,
+                            const std::string & view_name, const std::string & inst_name,
+                            double xc, double yc, const std::string & orient,
+                            const IntMap & int_params, const StrMap & str_params,
+                            const DoubleMap & double_params, int num_rows,
+                            int num_cols, double sp_rows, double sp_cols) {
+        Inst obj;
+        obj.lib_name = oa::oaString(lib_name.c_str());
+        obj.cell_name = oa::oaString(cell_name.c_str());
+        obj.view_name = oa::oaString(view_name.c_str());
+        obj.inst_name = oa::oaString(inst_name.c_str());
+        obj.loc[0] = xc;
+        obj.loc[1] = yc;
+        obj.orient = oa::oaOrient(oa::oaString(orient.c_str()));
+        obj.num_rows = num_rows;
+        obj.num_cols = num_cols;
+        obj.sp_rows = sp_rows;
+        obj.sp_cols = sp_cols;
+
+        // build OA param array
+        for(IntIter it = int_params.begin(); it != int_params.end(); it++) {
+            oa::oaString key(it->first.c_str());
+            obj.params.append(oa::oaParam(key, it->second));
+        }
+        for(DoubleIter it = double_params.begin(); it != double_params.end(); it++) {
+            oa::oaString key(it->first.c_str());
+            obj.params.append(oa::oaParam(key, it->second));
+        }
+        for(StrIter it = str_params.begin(); it != str_params.end(); it++) {
+            oa::oaString key(it->first.c_str());
+            obj.params.append(oa::oaParam(key, oa::oaString(it->second.c_str())));
+        }
+        
+        inst_list.push_back(obj);
+    }
+    
+
+    
     void OALayout::add_rect(const std::string & lay_name, const std::string & purp_name,
                             double xl, double yb, double xr, double yt,
                             unsigned int nx, unsigned int ny,
@@ -174,6 +212,9 @@ namespace bagoa {
         oa::oaBlock * blk_ptr = oa::oaBlock::create(dsn_ptr);
 
         // create geometries
+        for( InstIter it = layout.inst_list.begin(); it != layout.inst_list.end(); it++) {
+            create_inst(blk_ptr, *it);
+        }
         for( RectIter it = layout.rect_list.begin(); it != layout.rect_list.end(); it++) {
             create_rect(blk_ptr, *it);
         }
@@ -210,6 +251,32 @@ namespace bagoa {
         }
     }
 
+    void OALayoutLibrary::create_inst(oa::oaBlock * blk_ptr, const Inst & inst) {
+        oa::oaScalarName lib_name(ns, inst.lib_name);
+        oa::oaScalarName cell_name(ns, inst.cell_name);
+        oa::oaScalarName view_name(ns, inst.view_name);
+        oa::oaScalarName inst_name(ns, inst.inst_name);
+
+        oa::oaTransform xfm((oa::oaOffset)double_to_oa(inst.loc[0]),
+                            (oa::oaOffset)double_to_oa(inst.loc[1]),
+                            inst.orient);
+
+        oa::oaOffset dx = (oa::oaOffset)double_to_oa(inst.sp_cols);
+        oa::oaOffset dy = (oa::oaOffset)double_to_oa(inst.sp_rows);
+        const oa::oaParamArray * params_ptr = &inst.params;
+        if (params_ptr->getNumElements() == 0) {
+            // disable parameters if empty
+            params_ptr = NULL;
+        }
+        if (inst.num_rows > 1 || inst.num_cols > 1) {         
+            oa::oaArrayInst::create(blk_ptr, lib_name, cell_name, view_name, inst_name,
+                                    xfm, dx, dy, inst.num_rows, inst.num_cols, params_ptr);
+        } else {
+            oa::oaScalarInst::create(blk_ptr, lib_name, cell_name, view_name, inst_name,
+                                     xfm, params_ptr);            
+        }
+    }
+    
     void OALayoutLibrary::create_via(oa::oaBlock * blk_ptr, const Via & inst) {
         oa::oaStdViaDef * vdef = static_cast<oa::oaStdViaDef *>(oa::oaViaDef::find(tech_ptr, inst.via_id));
         if (vdef == NULL) {
