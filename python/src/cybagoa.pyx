@@ -1,6 +1,7 @@
 # distutils: language = c++
 
 from libcpp.string cimport string
+from libcpp.map cimport map
 from libcpp cimport bool
 
 cdef extern from "bagoa.hpp" namespace "bagoa":
@@ -9,6 +10,14 @@ cdef extern from "bagoa.hpp" namespace "bagoa":
 
     cdef cppclass OALayout:
         OALayout()
+
+        void add_inst(const string & lib_name, const string & cell_name,
+                      const string & view_name, const string & inst_name,
+                      double xc, double yc, const string & orient,
+                      const map[string, int] int_params, const map[string, string] str_params,
+                      const map[string, double] double_params, int num_rows,
+                      int num_cols, double sp_rows, double sp_cols) except +
+        
         void add_rect(const string & lay_name, const string & purp_name,
                       double xl, double yb, double xr, double yt,
                       unsigned int nx, unsigned int ny,
@@ -42,7 +51,37 @@ cdef class PyOALayout:
     cdef unicode encoding
     def __init__(self, unicode encoding):
         self.encoding = encoding
-    
+
+    def add_inst(self, unicode lib, unicode cell, unicode view,
+                 unicode name, loc, unicode orient, params=None,
+                 int num_rows=1, int num_cols=1, double sp_rows=0.0,
+                 double sp_cols=0.0):
+        cdef map[string, int] int_map
+        cdef map[string, string] str_map
+        cdef map[string, double] double_map
+        lib_name = lib.encode(self.encoding)
+        cell_name = cell.encode(self.encoding)
+        view_name = view.encode(self.encoding)
+        inst_name = name.encode(self.encoding)
+        c_orient = orient.encode(self.encoding)
+        params = params or {}
+        for key, val in params.items():
+            key = key.encode(self.encoding)
+            if isinstance(val, bytes):
+                str_map[key] = val
+            elif isinstance(val, unicode):
+                str_map[key] = val.encode(self.encoding)
+            elif isinstance(val, int):
+                int_map[key] = val
+            elif isinstance(val, float):
+                double_map[key] = val
+
+        self.c_layout.add_inst(lib_name, cell_name, view_name,
+                               inst_name, loc[0], loc[1],
+                               c_orient, int_map, str_map,
+                               double_map, num_rows, num_cols,
+                               sp_rows, sp_cols)
+        
     def add_rect(self, layer, bbox, int arr_nx=1, int arr_ny=1,
                  double arr_spx=0.0, double arr_spy=0.0):
         lay = layer[0].encode(self.encoding)
