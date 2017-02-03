@@ -35,7 +35,7 @@ cdef extern from "bagoa.hpp" namespace "bagoa":
         void add_pin(const string & net_name, const string & pin_name,
                      const string & label, const string & lay_name,
                      const string & purp_name, double xl, double yb,
-                     double xr, double yt) except +
+                     double xr, double yt, bool make_pin_obj) except +
 
     cdef cppclass OALayoutLibrary:
         OALayoutLibrary()
@@ -103,14 +103,16 @@ cdef class PyOALayout:
                               enc2[0], enc2[3], enc2[1], enc2[2],
                               cut_width, cut_height, arr_nx, arr_ny, arr_spx, arr_spy)
 
-    def add_pin(self, unicode net_name, unicode pin_name, unicode label, layer, bbox):
+    def add_pin(self, unicode net_name, unicode pin_name, unicode label, layer, bbox,
+                bool make_rect=True):
         c_net = net_name.encode(self.encoding)
         c_pin = pin_name.encode(self.encoding)
         c_label = label.encode(self.encoding)
         lay = layer[0].encode(self.encoding)
         purp = layer[1].encode(self.encoding)
         self.c_layout.add_pin(c_net, c_pin, c_label, lay, purp,
-                              bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1])
+                              bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1],
+                              make_rect)
 
 
 cdef class PyOALayoutLibrary:

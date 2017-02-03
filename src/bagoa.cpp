@@ -108,7 +108,7 @@ namespace bagoa {
     void OALayout::add_pin(const std::string & net_name, const std::string & pin_name,
                            const std::string & label, const std::string & lay_name,
                            const std::string & purp_name, double xl, double yb,
-                           double xr, double yt) {
+                           double xr, double yt, bool make_pin_obj) {
         Pin p;
         p.layer = lay_name;
         p.purpose = purp_name;
@@ -119,6 +119,7 @@ namespace bagoa {
         p.term_name = oa::oaString(net_name.c_str());
         p.pin_name = oa::oaString(pin_name.c_str());
         p.label = oa::oaString(label.c_str());
+        p.make_pin_obj = make_pin_obj;
 
         pin_list.push_back(p);
     }
@@ -337,39 +338,20 @@ namespace bagoa {
         // draw pin rectangle
         LayerIter lay_iter = lay_map.find(inst.layer);
         if (lay_iter == lay_map.end()) {
-            std::cout << "create_rect: unknown layer " << inst.layer << ", skipping." << std::endl;
+            std::cout << "create_pin: unknown layer " << inst.layer << ", skipping." << std::endl;
             return;
         }
         oa::oaLayerNum layer = lay_iter->second;
 
         PurposeIter purp_iter = purp_map.find(inst.purpose);
         if (purp_iter == purp_map.end()) {
-            std::cout << "create_rect: unknown purpose " << inst.purpose << ", skipping." << std::endl;
+            std::cout << "create_pin: unknown purpose " << inst.purpose << ", skipping." << std::endl;
             return;
         }
         oa::oaPurposeNum purpose = purp_iter->second;
 
         oa::oaBox box(double_to_oa(inst.bbox[0]), double_to_oa(inst.bbox[1]),
                       double_to_oa(inst.bbox[2]), double_to_oa(inst.bbox[3]));
-        oa::oaRect * r = oa::oaRect::create(blk_ptr, layer, purpose, box);
-
-        // get terminal
-        oa::oaName term_name(ns, inst.term_name);
-        oa::oaTerm * term = oa::oaTerm::find(blk_ptr, term_name);
-	if (term == NULL) {
-            // get net
-            oa::oaNet * net = oa::oaNet::find(blk_ptr, term_name);
-            if (net == NULL) {
-                // create net
-                net = oa::oaNet::create(blk_ptr, term_name);
-            }
-            // create terminal
-            term = oa::oaTerm::create(net, term_name);
-	}
-
-        // create pin and add rectangle to pin.
-        oa::oaPin * pin = oa::oaPin::create(term, inst.pin_name, pin_dir);
-	r->addToPin(pin);
 
         // get label location and orientation
         oa::oaPoint op;
@@ -385,6 +367,28 @@ namespace bagoa {
         oa::oaText::create(blk_ptr, layer, purpose, inst.label,
                            op, oa::oacCenterCenterTextAlign, lorient,
                            oa::oacRomanFont, lheight);
+        
+        if (inst.make_pin_obj) {
+            // make pin object
+            oa::oaRect * r = oa::oaRect::create(blk_ptr, layer, purpose, box);
+
+            // get terminal
+            oa::oaName term_name(ns, inst.term_name);
+            oa::oaTerm * term = oa::oaTerm::find(blk_ptr, term_name);
+            if (term == NULL) {
+                // get net
+                oa::oaNet * net = oa::oaNet::find(blk_ptr, term_name);
+                if (net == NULL) {
+                    // create net
+                    net = oa::oaNet::create(blk_ptr, term_name);
+                }
+                // create terminal
+                term = oa::oaTerm::create(net, term_name);
+            }
+
+            // create pin and add rectangle to pin.
+            oa::oaPin * pin = oa::oaPin::create(term, inst.pin_name, pin_dir);
+            r->addToPin(pin);
+        }
     }
-    
 }

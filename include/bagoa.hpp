@@ -78,6 +78,7 @@ namespace bagoa {
         oa::oaString term_name;
         oa::oaString pin_name;
         oa::oaString label;
+        bool make_pin_obj;
     };
 
     typedef std::vector<Inst> InstList;
@@ -118,7 +119,7 @@ namespace bagoa {
         void add_pin(const std::string & net_name, const std::string & pin_name,
                      const std::string & label, const std::string & lay_name,
                      const std::string & purp_name, double xl, double yb,
-                     double xr, double yt);
+                     double xr, double yt, bool make_pin_obj=true);
 
         InstList inst_list;
         RectList rect_list;
