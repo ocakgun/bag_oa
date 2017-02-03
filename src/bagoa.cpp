@@ -125,58 +125,64 @@ namespace bagoa {
     }
 
     void OALayoutLibrary::open_library(const std::string & lib_path, const std::string & library) {
-        // initialize OA.
-        oaDesignInit( oacAPIMajorRevNumber, oacAPIMinorRevNumber, oacDataModelRevNumber);
+        try {            
+            oaDesignInit( oacAPIMajorRevNumber, oacAPIMinorRevNumber, oacDataModelRevNumber);
 
-        // open library definition
-        oa::oaString lib_def_path(lib_path.c_str());
-        oa::oaLibDefList::openLibs(lib_def_path);
-        
-        // open library
-        lib_name = oa::oaScalarName(ns, library.c_str());
-        lib_ptr = oa::oaLib::find(lib_name);
-        if (lib_ptr == NULL) {
-            throw std::invalid_argument("Cannot find library " + library);
-        } else if (!lib_ptr->isValid()) {
-            throw std::invalid_argument("Invalid library: " + library);
-        }
-        
-        // open technology file
-        tech_ptr = oa::oaTech::find(lib_ptr);
-        if (tech_ptr == NULL) {
-            // opened tech not found, attempt to open
-            if (!oa::oaTech::exists(lib_ptr)) {
-                throw std::runtime_error("Cannot find technology for library: " + library);            
-            } else {
-                tech_ptr = oa::oaTech::open(lib_ptr, 'r');
-                if (tech_ptr == NULL) {
-                    throw std::runtime_error("Cannot open technology for library: " + library);
+            // open library definition
+            oa::oaString lib_def_path(lib_path.c_str());
+            oa::oaLibDefList::openLibs(lib_def_path);
+            
+            // open library
+            lib_name = oa::oaScalarName(ns, library.c_str());
+            lib_ptr = oa::oaLib::find(lib_name);
+            if (lib_ptr == NULL) {
+                throw std::invalid_argument("Cannot find library " + library);
+            } else if (!lib_ptr->isValid()) {
+                throw std::invalid_argument("Invalid library: " + library);
+            }
+            
+            // open technology file
+            tech_ptr = oa::oaTech::find(lib_ptr);
+            if (tech_ptr == NULL) {
+                // opened tech not found, attempt to open
+                if (!oa::oaTech::exists(lib_ptr)) {
+                    throw std::runtime_error("Cannot find technology for library: " + library);            
+                } else {
+                    tech_ptr = oa::oaTech::open(lib_ptr, 'r');
+                    if (tech_ptr == NULL) {
+                        throw std::runtime_error("Cannot open technology for library: " + library);
+                    }
                 }
             }
+            
+            // get database unit
+            dbu_per_uu = tech_ptr->getDBUPerUU(oa::oaViewType::get(oa::oacMaskLayout));
+            
+            // fill layer/purpose map
+            oa::oaString temp;
+            oa::oaIter<oa::oaLayer> layers(tech_ptr->getLayers());
+            while (oa::oaLayer *layer = layers.getNext()) {
+                layer->getName(temp);
+                std::string name = static_cast<std::string>(temp);
+                oa::oaLayerNum id = layer->getNumber();
+                lay_map[name] = id;
+            }
+            oa::oaIter<oa::oaPurpose> purposes(tech_ptr->getPurposes());
+            while (oa::oaPurpose *purp = purposes.getNext()) {
+                purp->getName(temp);
+                std::string name = static_cast<std::string>(temp);
+                oa::oaLayerNum id = purp->getNumber();
+                purp_map[name] = id;
+            }
+            
+            is_open = true;
+        } catch (oa::oaCompatibilityError &ex) {
+            throw std::runtime_error("OA Compatibility Error: " + static_cast<std::string>(ex.getMsg()));
+        } catch (oa::oaDMError &ex) {
+            throw std::runtime_error("OA DM Error: " + static_cast<std::string>(ex.getMsg()));
+        } catch (oa::oaError &ex) {
+            throw std::runtime_error("OA Error: " + static_cast<std::string>(ex.getMsg()));
         }
-
-        // get database unit
-        dbu_per_uu = tech_ptr->getDBUPerUU(oa::oaViewType::get(oa::oacMaskLayout));
-        
-        // fill layer/purpose map
-        oa::oaString temp;
-        oa::oaIter<oa::oaLayer> layers(tech_ptr->getLayers());
-        while (oa::oaLayer *layer = layers.getNext()) {
-            layer->getName(temp);
-            std::string name = static_cast<std::string>(temp);
-            oa::oaLayerNum id = layer->getNumber();
-            lay_map[name] = id;
-        }
-        oa::oaIter<oa::oaPurpose> purposes(tech_ptr->getPurposes());
-        while (oa::oaPurpose *purp = purposes.getNext()) {
-            purp->getName(temp);
-            std::string name = static_cast<std::string>(temp);
-            oa::oaLayerNum id = purp->getNumber();
-            purp_map[name] = id;
-        }
-
-        is_open = true;
-        
     }    
 
     void OALayoutLibrary::add_purpose(const std::string & purp_name, unsigned int purp_num) {
@@ -204,31 +210,37 @@ namespace bagoa {
         if (!is_open) {
             return;
         }
-        
-        // open design and top block
-        oa::oaScalarName cell_name(ns, cell.c_str());
-        oa::oaScalarName view_name(ns, view.c_str());
-        oa::oaDesign * dsn_ptr = oa::oaDesign::open(lib_name, cell_name, view_name,
-                                                    oa::oaViewType::get(oa::oacMaskLayout), 'w');
-        oa::oaBlock * blk_ptr = oa::oaBlock::create(dsn_ptr);
 
-        // create geometries
-        for( InstIter it = layout.inst_list.begin(); it != layout.inst_list.end(); it++) {
-            create_inst(blk_ptr, *it);
+        try {
+            // open design and top block
+            oa::oaScalarName cell_name(ns, cell.c_str());
+            oa::oaScalarName view_name(ns, view.c_str());
+            oa::oaDesign * dsn_ptr = oa::oaDesign::open(lib_name, cell_name, view_name,
+                                                        oa::oaViewType::get(oa::oacMaskLayout), 'w');
+            oa::oaBlock * blk_ptr = oa::oaBlock::create(dsn_ptr);
+            
+            // create geometries
+            for( InstIter it = layout.inst_list.begin(); it != layout.inst_list.end(); it++) {
+                create_inst(blk_ptr, *it);
+            }
+            for( RectIter it = layout.rect_list.begin(); it != layout.rect_list.end(); it++) {
+                create_rect(blk_ptr, *it);
+            }
+            for( ViaIter it = layout.via_list.begin(); it != layout.via_list.end(); it++) {
+                create_via(blk_ptr, *it);
+            }
+            for( PinIter it = layout.pin_list.begin(); it != layout.pin_list.end(); it++) {
+                create_pin(blk_ptr, *it);
+            }        
+            
+            // save and close
+            dsn_ptr->save();
+            dsn_ptr->close();
+        } catch (oa::oaDesignError &ex) {
+            throw std::runtime_error("OA Design Error: " + static_cast<std::string>(ex.getMsg()));
+        } catch (oa::oaError &ex) {
+            throw std::runtime_error("OA Error: " + static_cast<std::string>(ex.getMsg()));
         }
-        for( RectIter it = layout.rect_list.begin(); it != layout.rect_list.end(); it++) {
-            create_rect(blk_ptr, *it);
-        }
-        for( ViaIter it = layout.via_list.begin(); it != layout.via_list.end(); it++) {
-            create_via(blk_ptr, *it);
-        }
-        for( PinIter it = layout.pin_list.begin(); it != layout.pin_list.end(); it++) {
-            create_pin(blk_ptr, *it);
-        }        
-
-        // save and close
-        dsn_ptr->save();
-        dsn_ptr->close();
     }
 
     oa::oaCoord OALayoutLibrary::double_to_oa(double val) {

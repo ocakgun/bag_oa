@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
         lib.close();
     } catch (oa::oaCompatibilityError &ex) {
         throw std::runtime_error("OA Compatibility Error: " + static_cast<std::string>(ex.getMsg()));
+    } catch (oa::oaDMError &ex) {
+        throw std::runtime_error("OA DM Error: " + static_cast<std::string>(ex.getMsg()));
     } catch (oa::oaError &ex) {
         throw std::runtime_error("OA Error: " + static_cast<std::string>(ex.getMsg()));
     }
