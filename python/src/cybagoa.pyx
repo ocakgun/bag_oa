@@ -4,12 +4,9 @@ from libcpp.string cimport string
 from libcpp.map cimport map
 from libcpp cimport bool
 
-cdef extern from "bagoa.hpp" namespace "bagoa":
-    cdef cppclass LibDefObserver:
-        pass
-
-    cdef cppclass OALayout:
-        OALayout()
+cdef extern from "bagLayout.hpp" namespace "baglayout":
+    cdef cppclass Layout:
+        Layout()
 
         void add_inst(const string & lib_name, const string & cell_name,
                       const string & view_name, const string & inst_name,
@@ -37,17 +34,22 @@ cdef extern from "bagoa.hpp" namespace "bagoa":
                      const string & purp_name, double xl, double yb,
                      double xr, double yt, bool make_pin_obj) except +
 
+
+cdef extern from "bagoa.hpp" namespace "bagoa":
+    cdef cppclass LibDefObserver:
+        pass
+
     cdef cppclass OALayoutLibrary:
         OALayoutLibrary()
         void open_library(const string & lib_path, const string & library) except +
         void add_purpose(const string & purp_name, unsigned int purp_num) except +
         void add_layer(const string & lay_name, unsigned int lay_num) except +
         void close() except +
-        void create_layout(const string & cell, const string & view, const OALayout & layout) except +
+        void create_layout(const string & cell, const string & view, const Layout & layout) except +
 
 
-cdef class PyOALayout:
-    cdef OALayout c_layout
+cdef class PyLayout:
+    cdef Layout c_layout
     cdef unicode encoding
     def __init__(self, unicode encoding):
         self.encoding = encoding
@@ -144,6 +146,6 @@ cdef class PyOALayoutLibrary:
     def add_layer(self, unicode lay_name, int lay_num):
         self.c_lib.add_layer(lay_name.encode(self.encoding), lay_num)
 
-    def create_layout(self, unicode cell, unicode view, PyOALayout layout):
+    def create_layout(self, unicode cell, unicode view, PyLayout layout):
         self.c_lib.create_layout(cell.encode(self.encoding), view.encode(self.encoding),
                                  layout.c_layout)

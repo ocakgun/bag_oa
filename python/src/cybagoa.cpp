@@ -4,6 +4,7 @@
 {
     "distutils": {
         "depends": [
+            "../include/bagLayout.hpp",
             "../include/bagoa.hpp"
         ],
         "include_dirs": [
@@ -313,6 +314,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include "typeinfo"
 #include <utility>
 #include <map>
+#include "bagLayout.hpp"
 #include "bagoa.hpp"
 #ifdef _OPENMP
 #include <omp.h>
@@ -534,24 +536,24 @@ static const char *__pyx_f[] = {
 };
 
 /*--- Type declarations ---*/
-struct __pyx_obj_7cybagoa_PyOALayout;
+struct __pyx_obj_7cybagoa_PyLayout;
 struct __pyx_obj_7cybagoa_PyOALayoutLibrary;
 
-/* "cybagoa.pyx":49
+/* "cybagoa.pyx":51
  * 
  * 
- * cdef class PyOALayout:             # <<<<<<<<<<<<<<
- *     cdef OALayout c_layout
+ * cdef class PyLayout:             # <<<<<<<<<<<<<<
+ *     cdef Layout c_layout
  *     cdef unicode encoding
  */
-struct __pyx_obj_7cybagoa_PyOALayout {
+struct __pyx_obj_7cybagoa_PyLayout {
   PyObject_HEAD
-  bagoa::OALayout c_layout;
+  baglayout::Layout c_layout;
   PyObject *encoding;
 };
 
 
-/* "cybagoa.pyx":118
+/* "cybagoa.pyx":120
  * 
  * 
  * cdef class PyOALayoutLibrary:             # <<<<<<<<<<<<<<
@@ -811,7 +813,7 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 /* Module declarations from 'libcpp' */
 
 /* Module declarations from 'cybagoa' */
-static PyTypeObject *__pyx_ptype_7cybagoa_PyOALayout = 0;
+static PyTypeObject *__pyx_ptype_7cybagoa_PyLayout = 0;
 static PyTypeObject *__pyx_ptype_7cybagoa_PyOALayoutLibrary = 0;
 static std::string __pyx_convert_string_from_py_std__in_string(PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "cybagoa"
@@ -896,11 +898,11 @@ static PyObject *__pyx_n_s_sp_cols;
 static PyObject *__pyx_n_s_sp_rows;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_view;
-static int __pyx_pf_7cybagoa_10PyOALayout___init__(struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_self, PyObject *__pyx_v_encoding); /* proto */
-static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_self, PyObject *__pyx_v_lib, PyObject *__pyx_v_cell, PyObject *__pyx_v_view, PyObject *__pyx_v_name, PyObject *__pyx_v_loc, PyObject *__pyx_v_orient, PyObject *__pyx_v_params, int __pyx_v_num_rows, int __pyx_v_num_cols, double __pyx_v_sp_rows, double __pyx_v_sp_cols); /* proto */
-static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_self, PyObject *__pyx_v_layer, PyObject *__pyx_v_bbox, int __pyx_v_arr_nx, int __pyx_v_arr_ny, double __pyx_v_arr_spx, double __pyx_v_arr_spy); /* proto */
-static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_self, PyObject *__pyx_v_id, PyObject *__pyx_v_loc, PyObject *__pyx_v_orient, int __pyx_v_num_rows, int __pyx_v_num_cols, double __pyx_v_sp_rows, double __pyx_v_sp_cols, PyObject *__pyx_v_enc1, PyObject *__pyx_v_enc2, double __pyx_v_cut_width, double __pyx_v_cut_height, int __pyx_v_arr_nx, int __pyx_v_arr_ny, double __pyx_v_arr_spx, double __pyx_v_arr_spy); /* proto */
-static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_self, PyObject *__pyx_v_net_name, PyObject *__pyx_v_pin_name, PyObject *__pyx_v_label, PyObject *__pyx_v_layer, PyObject *__pyx_v_bbox, bool __pyx_v_make_rect); /* proto */
+static int __pyx_pf_7cybagoa_8PyLayout___init__(struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_self, PyObject *__pyx_v_encoding); /* proto */
+static PyObject *__pyx_pf_7cybagoa_8PyLayout_2add_inst(struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_self, PyObject *__pyx_v_lib, PyObject *__pyx_v_cell, PyObject *__pyx_v_view, PyObject *__pyx_v_name, PyObject *__pyx_v_loc, PyObject *__pyx_v_orient, PyObject *__pyx_v_params, int __pyx_v_num_rows, int __pyx_v_num_cols, double __pyx_v_sp_rows, double __pyx_v_sp_cols); /* proto */
+static PyObject *__pyx_pf_7cybagoa_8PyLayout_4add_rect(struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_self, PyObject *__pyx_v_layer, PyObject *__pyx_v_bbox, int __pyx_v_arr_nx, int __pyx_v_arr_ny, double __pyx_v_arr_spx, double __pyx_v_arr_spy); /* proto */
+static PyObject *__pyx_pf_7cybagoa_8PyLayout_6add_via(struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_self, PyObject *__pyx_v_id, PyObject *__pyx_v_loc, PyObject *__pyx_v_orient, int __pyx_v_num_rows, int __pyx_v_num_cols, double __pyx_v_sp_rows, double __pyx_v_sp_cols, PyObject *__pyx_v_enc1, PyObject *__pyx_v_enc2, double __pyx_v_cut_width, double __pyx_v_cut_height, int __pyx_v_arr_nx, int __pyx_v_arr_ny, double __pyx_v_arr_spx, double __pyx_v_arr_spy); /* proto */
+static PyObject *__pyx_pf_7cybagoa_8PyLayout_8add_pin(struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_self, PyObject *__pyx_v_net_name, PyObject *__pyx_v_pin_name, PyObject *__pyx_v_label, PyObject *__pyx_v_layer, PyObject *__pyx_v_bbox, bool __pyx_v_make_rect); /* proto */
 static int __pyx_pf_7cybagoa_17PyOALayoutLibrary___init__(struct __pyx_obj_7cybagoa_PyOALayoutLibrary *__pyx_v_self, PyObject *__pyx_v_lib_path, PyObject *__pyx_v_library, PyObject *__pyx_v_encoding); /* proto */
 static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_2__enter__(struct __pyx_obj_7cybagoa_PyOALayoutLibrary *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_4__exit__(struct __pyx_obj_7cybagoa_PyOALayoutLibrary *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_args); /* proto */
@@ -908,12 +910,12 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_6__del__(struct __pyx_obj
 static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_8close(struct __pyx_obj_7cybagoa_PyOALayoutLibrary *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_10add_purpose(struct __pyx_obj_7cybagoa_PyOALayoutLibrary *__pyx_v_self, PyObject *__pyx_v_purp_name, int __pyx_v_purp_num); /* proto */
 static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_12add_layer(struct __pyx_obj_7cybagoa_PyOALayoutLibrary *__pyx_v_self, PyObject *__pyx_v_lay_name, int __pyx_v_lay_num); /* proto */
-static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_14create_layout(struct __pyx_obj_7cybagoa_PyOALayoutLibrary *__pyx_v_self, PyObject *__pyx_v_cell, PyObject *__pyx_v_view, struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_layout); /* proto */
-static PyObject *__pyx_tp_new_7cybagoa_PyOALayout(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_14create_layout(struct __pyx_obj_7cybagoa_PyOALayoutLibrary *__pyx_v_self, PyObject *__pyx_v_cell, PyObject *__pyx_v_view, struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_layout); /* proto */
+static PyObject *__pyx_tp_new_7cybagoa_PyLayout(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_7cybagoa_PyOALayoutLibrary(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 
-/* "cybagoa.pyx":52
- *     cdef OALayout c_layout
+/* "cybagoa.pyx":54
+ *     cdef Layout c_layout
  *     cdef unicode encoding
  *     def __init__(self, unicode encoding):             # <<<<<<<<<<<<<<
  *         self.encoding = encoding
@@ -921,8 +923,8 @@ static PyObject *__pyx_tp_new_7cybagoa_PyOALayoutLibrary(PyTypeObject *t, PyObje
  */
 
 /* Python wrapper */
-static int __pyx_pw_7cybagoa_10PyOALayout_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_7cybagoa_10PyOALayout_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_7cybagoa_8PyLayout_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_7cybagoa_8PyLayout_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_encoding = 0;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -945,7 +947,7 @@ static int __pyx_pw_7cybagoa_10PyOALayout_1__init__(PyObject *__pyx_v_self, PyOb
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 52, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 54, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -956,14 +958,14 @@ static int __pyx_pw_7cybagoa_10PyOALayout_1__init__(PyObject *__pyx_v_self, PyOb
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 52, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 54, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("cybagoa.PyOALayout.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cybagoa.PyLayout.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_encoding), (&PyUnicode_Type), 1, "encoding", 1))) __PYX_ERR(0, 52, __pyx_L1_error)
-  __pyx_r = __pyx_pf_7cybagoa_10PyOALayout___init__(((struct __pyx_obj_7cybagoa_PyOALayout *)__pyx_v_self), __pyx_v_encoding);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_encoding), (&PyUnicode_Type), 1, "encoding", 1))) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_r = __pyx_pf_7cybagoa_8PyLayout___init__(((struct __pyx_obj_7cybagoa_PyLayout *)__pyx_v_self), __pyx_v_encoding);
 
   /* function exit code */
   goto __pyx_L0;
@@ -974,12 +976,12 @@ static int __pyx_pw_7cybagoa_10PyOALayout_1__init__(PyObject *__pyx_v_self, PyOb
   return __pyx_r;
 }
 
-static int __pyx_pf_7cybagoa_10PyOALayout___init__(struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_self, PyObject *__pyx_v_encoding) {
+static int __pyx_pf_7cybagoa_8PyLayout___init__(struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_self, PyObject *__pyx_v_encoding) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "cybagoa.pyx":53
+  /* "cybagoa.pyx":55
  *     cdef unicode encoding
  *     def __init__(self, unicode encoding):
  *         self.encoding = encoding             # <<<<<<<<<<<<<<
@@ -992,8 +994,8 @@ static int __pyx_pf_7cybagoa_10PyOALayout___init__(struct __pyx_obj_7cybagoa_PyO
   __Pyx_DECREF(__pyx_v_self->encoding);
   __pyx_v_self->encoding = __pyx_v_encoding;
 
-  /* "cybagoa.pyx":52
- *     cdef OALayout c_layout
+  /* "cybagoa.pyx":54
+ *     cdef Layout c_layout
  *     cdef unicode encoding
  *     def __init__(self, unicode encoding):             # <<<<<<<<<<<<<<
  *         self.encoding = encoding
@@ -1006,7 +1008,7 @@ static int __pyx_pf_7cybagoa_10PyOALayout___init__(struct __pyx_obj_7cybagoa_PyO
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":55
+/* "cybagoa.pyx":57
  *         self.encoding = encoding
  * 
  *     def add_inst(self, unicode lib, unicode cell, unicode view,             # <<<<<<<<<<<<<<
@@ -1015,8 +1017,8 @@ static int __pyx_pf_7cybagoa_10PyOALayout___init__(struct __pyx_obj_7cybagoa_PyO
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7cybagoa_10PyOALayout_3add_inst(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_7cybagoa_10PyOALayout_3add_inst(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_7cybagoa_8PyLayout_3add_inst(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_7cybagoa_8PyLayout_3add_inst(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_lib = 0;
   PyObject *__pyx_v_cell = 0;
   PyObject *__pyx_v_view = 0;
@@ -1035,7 +1037,7 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_3add_inst(PyObject *__pyx_v_self
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_lib,&__pyx_n_s_cell,&__pyx_n_s_view,&__pyx_n_s_name,&__pyx_n_s_loc,&__pyx_n_s_orient,&__pyx_n_s_params,&__pyx_n_s_num_rows,&__pyx_n_s_num_cols,&__pyx_n_s_sp_rows,&__pyx_n_s_sp_cols,0};
     PyObject* values[11] = {0,0,0,0,0,0,0,0,0,0,0};
 
-    /* "cybagoa.pyx":56
+    /* "cybagoa.pyx":58
  * 
  *     def add_inst(self, unicode lib, unicode cell, unicode view,
  *                  unicode name, loc, unicode orient, params=None,             # <<<<<<<<<<<<<<
@@ -1069,27 +1071,27 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_3add_inst(PyObject *__pyx_v_self
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_cell)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, 1); __PYX_ERR(0, 55, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, 1); __PYX_ERR(0, 57, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_view)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, 2); __PYX_ERR(0, 55, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, 2); __PYX_ERR(0, 57, __pyx_L3_error)
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, 3); __PYX_ERR(0, 55, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, 3); __PYX_ERR(0, 57, __pyx_L3_error)
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_loc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, 4); __PYX_ERR(0, 55, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, 4); __PYX_ERR(0, 57, __pyx_L3_error)
         }
         case  5:
         if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_orient)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, 5); __PYX_ERR(0, 55, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, 5); __PYX_ERR(0, 57, __pyx_L3_error)
         }
         case  6:
         if (kw_args > 0) {
@@ -1118,7 +1120,7 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_3add_inst(PyObject *__pyx_v_self
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_inst") < 0)) __PYX_ERR(0, 55, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_inst") < 0)) __PYX_ERR(0, 57, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1145,42 +1147,42 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_3add_inst(PyObject *__pyx_v_self
     __pyx_v_orient = ((PyObject*)values[5]);
     __pyx_v_params = values[6];
     if (values[7]) {
-      __pyx_v_num_rows = __Pyx_PyInt_As_int(values[7]); if (unlikely((__pyx_v_num_rows == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+      __pyx_v_num_rows = __Pyx_PyInt_As_int(values[7]); if (unlikely((__pyx_v_num_rows == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L3_error)
     } else {
       __pyx_v_num_rows = ((int)1);
     }
     if (values[8]) {
-      __pyx_v_num_cols = __Pyx_PyInt_As_int(values[8]); if (unlikely((__pyx_v_num_cols == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+      __pyx_v_num_cols = __Pyx_PyInt_As_int(values[8]); if (unlikely((__pyx_v_num_cols == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L3_error)
     } else {
       __pyx_v_num_cols = ((int)1);
     }
     if (values[9]) {
-      __pyx_v_sp_rows = __pyx_PyFloat_AsDouble(values[9]); if (unlikely((__pyx_v_sp_rows == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+      __pyx_v_sp_rows = __pyx_PyFloat_AsDouble(values[9]); if (unlikely((__pyx_v_sp_rows == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L3_error)
     } else {
       __pyx_v_sp_rows = ((double)0.0);
     }
     if (values[10]) {
-      __pyx_v_sp_cols = __pyx_PyFloat_AsDouble(values[10]); if (unlikely((__pyx_v_sp_cols == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 58, __pyx_L3_error)
+      __pyx_v_sp_cols = __pyx_PyFloat_AsDouble(values[10]); if (unlikely((__pyx_v_sp_cols == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L3_error)
     } else {
       __pyx_v_sp_cols = ((double)0.0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 55, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_inst", 0, 6, 11, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 57, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("cybagoa.PyOALayout.add_inst", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cybagoa.PyLayout.add_inst", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_lib), (&PyUnicode_Type), 1, "lib", 1))) __PYX_ERR(0, 55, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cell), (&PyUnicode_Type), 1, "cell", 1))) __PYX_ERR(0, 55, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_view), (&PyUnicode_Type), 1, "view", 1))) __PYX_ERR(0, 55, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 56, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_orient), (&PyUnicode_Type), 1, "orient", 1))) __PYX_ERR(0, 56, __pyx_L1_error)
-  __pyx_r = __pyx_pf_7cybagoa_10PyOALayout_2add_inst(((struct __pyx_obj_7cybagoa_PyOALayout *)__pyx_v_self), __pyx_v_lib, __pyx_v_cell, __pyx_v_view, __pyx_v_name, __pyx_v_loc, __pyx_v_orient, __pyx_v_params, __pyx_v_num_rows, __pyx_v_num_cols, __pyx_v_sp_rows, __pyx_v_sp_cols);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_lib), (&PyUnicode_Type), 1, "lib", 1))) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cell), (&PyUnicode_Type), 1, "cell", 1))) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_view), (&PyUnicode_Type), 1, "view", 1))) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_orient), (&PyUnicode_Type), 1, "orient", 1))) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_r = __pyx_pf_7cybagoa_8PyLayout_2add_inst(((struct __pyx_obj_7cybagoa_PyLayout *)__pyx_v_self), __pyx_v_lib, __pyx_v_cell, __pyx_v_view, __pyx_v_name, __pyx_v_loc, __pyx_v_orient, __pyx_v_params, __pyx_v_num_rows, __pyx_v_num_cols, __pyx_v_sp_rows, __pyx_v_sp_cols);
 
-  /* "cybagoa.pyx":55
+  /* "cybagoa.pyx":57
  *         self.encoding = encoding
  * 
  *     def add_inst(self, unicode lib, unicode cell, unicode view,             # <<<<<<<<<<<<<<
@@ -1197,7 +1199,7 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_3add_inst(PyObject *__pyx_v_self
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_self, PyObject *__pyx_v_lib, PyObject *__pyx_v_cell, PyObject *__pyx_v_view, PyObject *__pyx_v_name, PyObject *__pyx_v_loc, PyObject *__pyx_v_orient, PyObject *__pyx_v_params, int __pyx_v_num_rows, int __pyx_v_num_cols, double __pyx_v_sp_rows, double __pyx_v_sp_cols) {
+static PyObject *__pyx_pf_7cybagoa_8PyLayout_2add_inst(struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_self, PyObject *__pyx_v_lib, PyObject *__pyx_v_cell, PyObject *__pyx_v_view, PyObject *__pyx_v_name, PyObject *__pyx_v_loc, PyObject *__pyx_v_orient, PyObject *__pyx_v_params, int __pyx_v_num_rows, int __pyx_v_num_cols, double __pyx_v_sp_rows, double __pyx_v_sp_cols) {
   std::map<std::string,int>  __pyx_v_int_map;
   std::map<std::string,std::string>  __pyx_v_str_map;
   std::map<std::string,double>  __pyx_v_double_map;
@@ -1231,88 +1233,14 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
   __Pyx_RefNannySetupContext("add_inst", 0);
   __Pyx_INCREF(__pyx_v_params);
 
-  /* "cybagoa.pyx":62
+  /* "cybagoa.pyx":64
  *         cdef map[string, string] str_map
  *         cdef map[string, double] double_map
  *         lib_name = lib.encode(self.encoding)             # <<<<<<<<<<<<<<
  *         cell_name = cell.encode(self.encoding)
  *         view_name = view.encode(self.encoding)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_lib, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-    }
-  }
-  if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 62, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
-    __Pyx_INCREF(__pyx_v_self->encoding);
-    __Pyx_GIVEREF(__pyx_v_self->encoding);
-    PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_lib_name = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "cybagoa.pyx":63
- *         cdef map[string, double] double_map
- *         lib_name = lib.encode(self.encoding)
- *         cell_name = cell.encode(self.encoding)             # <<<<<<<<<<<<<<
- *         view_name = view.encode(self.encoding)
- *         inst_name = name.encode(self.encoding)
- */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_cell, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = NULL;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_4)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_4);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-    }
-  }
-  if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  } else {
-    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
-    __Pyx_INCREF(__pyx_v_self->encoding);
-    __Pyx_GIVEREF(__pyx_v_self->encoding);
-    PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_cell_name = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "cybagoa.pyx":64
- *         lib_name = lib.encode(self.encoding)
- *         cell_name = cell.encode(self.encoding)
- *         view_name = view.encode(self.encoding)             # <<<<<<<<<<<<<<
- *         inst_name = name.encode(self.encoding)
- *         c_orient = orient.encode(self.encoding)
- */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_view, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_lib, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1339,17 +1267,17 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_view_name = __pyx_t_1;
+  __pyx_v_lib_name = __pyx_t_1;
   __pyx_t_1 = 0;
 
   /* "cybagoa.pyx":65
- *         cell_name = cell.encode(self.encoding)
+ *         cdef map[string, double] double_map
+ *         lib_name = lib.encode(self.encoding)
+ *         cell_name = cell.encode(self.encoding)             # <<<<<<<<<<<<<<
  *         view_name = view.encode(self.encoding)
- *         inst_name = name.encode(self.encoding)             # <<<<<<<<<<<<<<
- *         c_orient = orient.encode(self.encoding)
- *         params = params or {}
+ *         inst_name = name.encode(self.encoding)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_cell, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1376,17 +1304,17 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_inst_name = __pyx_t_1;
+  __pyx_v_cell_name = __pyx_t_1;
   __pyx_t_1 = 0;
 
   /* "cybagoa.pyx":66
- *         view_name = view.encode(self.encoding)
+ *         lib_name = lib.encode(self.encoding)
+ *         cell_name = cell.encode(self.encoding)
+ *         view_name = view.encode(self.encoding)             # <<<<<<<<<<<<<<
  *         inst_name = name.encode(self.encoding)
- *         c_orient = orient.encode(self.encoding)             # <<<<<<<<<<<<<<
- *         params = params or {}
- *         for key, val in params.items():
+ *         c_orient = orient.encode(self.encoding)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_orient, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_view, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1413,24 +1341,98 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_c_orient = __pyx_t_1;
+  __pyx_v_view_name = __pyx_t_1;
   __pyx_t_1 = 0;
 
   /* "cybagoa.pyx":67
+ *         cell_name = cell.encode(self.encoding)
+ *         view_name = view.encode(self.encoding)
+ *         inst_name = name.encode(self.encoding)             # <<<<<<<<<<<<<<
+ *         c_orient = orient.encode(self.encoding)
+ *         params = params or {}
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (!__pyx_t_4) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  } else {
+    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
+    __Pyx_INCREF(__pyx_v_self->encoding);
+    __Pyx_GIVEREF(__pyx_v_self->encoding);
+    PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_self->encoding);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_inst_name = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "cybagoa.pyx":68
+ *         view_name = view.encode(self.encoding)
+ *         inst_name = name.encode(self.encoding)
+ *         c_orient = orient.encode(self.encoding)             # <<<<<<<<<<<<<<
+ *         params = params or {}
+ *         for key, val in params.items():
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_orient, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (!__pyx_t_3) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  } else {
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
+    __Pyx_INCREF(__pyx_v_self->encoding);
+    __Pyx_GIVEREF(__pyx_v_self->encoding);
+    PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self->encoding);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_c_orient = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "cybagoa.pyx":69
  *         inst_name = name.encode(self.encoding)
  *         c_orient = orient.encode(self.encoding)
  *         params = params or {}             # <<<<<<<<<<<<<<
  *         for key, val in params.items():
  *             key = key.encode(self.encoding)
  */
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_params); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_params); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 69, __pyx_L1_error)
   if (!__pyx_t_5) {
   } else {
     __Pyx_INCREF(__pyx_v_params);
     __pyx_t_1 = __pyx_v_params;
     goto __pyx_L3_bool_binop_done;
   }
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_t_2);
   __pyx_t_1 = __pyx_t_2;
@@ -1439,14 +1441,14 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
   __Pyx_DECREF_SET(__pyx_v_params, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":68
+  /* "cybagoa.pyx":70
  *         c_orient = orient.encode(self.encoding)
  *         params = params or {}
  *         for key, val in params.items():             # <<<<<<<<<<<<<<
  *             key = key.encode(self.encoding)
  *             if isinstance(val, bytes):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_params, __pyx_n_s_items); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_params, __pyx_n_s_items); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1459,10 +1461,10 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -1470,9 +1472,9 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_6 = 0;
     __pyx_t_7 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_7 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __pyx_t_7 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 70, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -1480,17 +1482,17 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 68, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 70, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 68, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 70, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -1500,7 +1502,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 68, __pyx_L1_error)
+          else __PYX_ERR(0, 70, __pyx_L1_error)
         }
         break;
       }
@@ -1516,7 +1518,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 68, __pyx_L1_error)
+        __PYX_ERR(0, 70, __pyx_L1_error)
       }
       #if CYTHON_COMPILING_IN_CPYTHON
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -1529,15 +1531,15 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
       __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(__pyx_t_3);
       #else
-      __pyx_t_4 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
+      __pyx_t_4 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 70, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
+      __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       #endif
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 68, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 70, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
@@ -1545,7 +1547,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
       __Pyx_GOTREF(__pyx_t_4);
       index = 1; __pyx_t_3 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_3)) goto __pyx_L7_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_3);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 2) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 2) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L8_unpacking_done;
@@ -1553,7 +1555,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 68, __pyx_L1_error)
+      __PYX_ERR(0, 70, __pyx_L1_error)
       __pyx_L8_unpacking_done:;
     }
     __Pyx_XDECREF_SET(__pyx_v_key, __pyx_t_4);
@@ -1561,14 +1563,14 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __Pyx_XDECREF_SET(__pyx_v_val, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "cybagoa.pyx":69
+    /* "cybagoa.pyx":71
  *         params = params or {}
  *         for key, val in params.items():
  *             key = key.encode(self.encoding)             # <<<<<<<<<<<<<<
  *             if isinstance(val, bytes):
  *                 str_map[key] = val
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_key, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 69, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_key, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -1581,16 +1583,16 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
       }
     }
     if (!__pyx_t_4) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 69, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_INCREF(__pyx_v_self->encoding);
       __Pyx_GIVEREF(__pyx_v_self->encoding);
       PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_v_self->encoding);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
@@ -1598,7 +1600,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __Pyx_DECREF_SET(__pyx_v_key, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "cybagoa.pyx":70
+    /* "cybagoa.pyx":72
  *         for key, val in params.items():
  *             key = key.encode(self.encoding)
  *             if isinstance(val, bytes):             # <<<<<<<<<<<<<<
@@ -1609,18 +1611,18 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __pyx_t_10 = (__pyx_t_5 != 0);
     if (__pyx_t_10) {
 
-      /* "cybagoa.pyx":71
+      /* "cybagoa.pyx":73
  *             key = key.encode(self.encoding)
  *             if isinstance(val, bytes):
  *                 str_map[key] = val             # <<<<<<<<<<<<<<
  *             elif isinstance(val, unicode):
  *                 str_map[key] = val.encode(self.encoding)
  */
-      __pyx_t_11 = __pyx_convert_string_from_py_std__in_string(__pyx_v_val); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
-      __pyx_t_12 = __pyx_convert_string_from_py_std__in_string(__pyx_v_key); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
+      __pyx_t_11 = __pyx_convert_string_from_py_std__in_string(__pyx_v_val); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 73, __pyx_L1_error)
+      __pyx_t_12 = __pyx_convert_string_from_py_std__in_string(__pyx_v_key); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 73, __pyx_L1_error)
       (__pyx_v_str_map[__pyx_t_12]) = __pyx_t_11;
 
-      /* "cybagoa.pyx":70
+      /* "cybagoa.pyx":72
  *         for key, val in params.items():
  *             key = key.encode(self.encoding)
  *             if isinstance(val, bytes):             # <<<<<<<<<<<<<<
@@ -1630,7 +1632,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
       goto __pyx_L9;
     }
 
-    /* "cybagoa.pyx":72
+    /* "cybagoa.pyx":74
  *             if isinstance(val, bytes):
  *                 str_map[key] = val
  *             elif isinstance(val, unicode):             # <<<<<<<<<<<<<<
@@ -1641,14 +1643,14 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __pyx_t_5 = (__pyx_t_10 != 0);
     if (__pyx_t_5) {
 
-      /* "cybagoa.pyx":73
+      /* "cybagoa.pyx":75
  *                 str_map[key] = val
  *             elif isinstance(val, unicode):
  *                 str_map[key] = val.encode(self.encoding)             # <<<<<<<<<<<<<<
  *             elif isinstance(val, int):
  *                 int_map[key] = val
  */
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_val, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_val, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_8 = NULL;
       if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -1661,26 +1663,26 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
         }
       }
       if (!__pyx_t_8) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
       } else {
-        __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 75, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_8); __pyx_t_8 = NULL;
         __Pyx_INCREF(__pyx_v_self->encoding);
         __Pyx_GIVEREF(__pyx_v_self->encoding);
         PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self->encoding);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_11 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 73, __pyx_L1_error)
+      __pyx_t_11 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_12 = __pyx_convert_string_from_py_std__in_string(__pyx_v_key); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 73, __pyx_L1_error)
+      __pyx_t_12 = __pyx_convert_string_from_py_std__in_string(__pyx_v_key); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L1_error)
       (__pyx_v_str_map[__pyx_t_12]) = __pyx_t_11;
 
-      /* "cybagoa.pyx":72
+      /* "cybagoa.pyx":74
  *             if isinstance(val, bytes):
  *                 str_map[key] = val
  *             elif isinstance(val, unicode):             # <<<<<<<<<<<<<<
@@ -1690,7 +1692,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
       goto __pyx_L9;
     }
 
-    /* "cybagoa.pyx":74
+    /* "cybagoa.pyx":76
  *             elif isinstance(val, unicode):
  *                 str_map[key] = val.encode(self.encoding)
  *             elif isinstance(val, int):             # <<<<<<<<<<<<<<
@@ -1701,18 +1703,18 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __pyx_t_10 = (__pyx_t_5 != 0);
     if (__pyx_t_10) {
 
-      /* "cybagoa.pyx":75
+      /* "cybagoa.pyx":77
  *                 str_map[key] = val.encode(self.encoding)
  *             elif isinstance(val, int):
  *                 int_map[key] = val             # <<<<<<<<<<<<<<
  *             elif isinstance(val, float):
  *                 double_map[key] = val
  */
-      __pyx_t_13 = __Pyx_PyInt_As_int(__pyx_v_val); if (unlikely((__pyx_t_13 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L1_error)
-      __pyx_t_11 = __pyx_convert_string_from_py_std__in_string(__pyx_v_key); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyInt_As_int(__pyx_v_val); if (unlikely((__pyx_t_13 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_11 = __pyx_convert_string_from_py_std__in_string(__pyx_v_key); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L1_error)
       (__pyx_v_int_map[__pyx_t_11]) = __pyx_t_13;
 
-      /* "cybagoa.pyx":74
+      /* "cybagoa.pyx":76
  *             elif isinstance(val, unicode):
  *                 str_map[key] = val.encode(self.encoding)
  *             elif isinstance(val, int):             # <<<<<<<<<<<<<<
@@ -1722,7 +1724,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
       goto __pyx_L9;
     }
 
-    /* "cybagoa.pyx":76
+    /* "cybagoa.pyx":78
  *             elif isinstance(val, int):
  *                 int_map[key] = val
  *             elif isinstance(val, float):             # <<<<<<<<<<<<<<
@@ -1733,18 +1735,18 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __pyx_t_5 = (__pyx_t_10 != 0);
     if (__pyx_t_5) {
 
-      /* "cybagoa.pyx":77
+      /* "cybagoa.pyx":79
  *                 int_map[key] = val
  *             elif isinstance(val, float):
  *                 double_map[key] = val             # <<<<<<<<<<<<<<
  * 
  *         self.c_layout.add_inst(lib_name, cell_name, view_name,
  */
-      __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_v_val); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L1_error)
-      __pyx_t_11 = __pyx_convert_string_from_py_std__in_string(__pyx_v_key); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_v_val); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L1_error)
+      __pyx_t_11 = __pyx_convert_string_from_py_std__in_string(__pyx_v_key); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L1_error)
       (__pyx_v_double_map[__pyx_t_11]) = __pyx_t_14;
 
-      /* "cybagoa.pyx":76
+      /* "cybagoa.pyx":78
  *             elif isinstance(val, int):
  *                 int_map[key] = val
  *             elif isinstance(val, float):             # <<<<<<<<<<<<<<
@@ -1754,7 +1756,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     }
     __pyx_L9:;
 
-    /* "cybagoa.pyx":68
+    /* "cybagoa.pyx":70
  *         c_orient = orient.encode(self.encoding)
  *         params = params or {}
  *         for key, val in params.items():             # <<<<<<<<<<<<<<
@@ -1764,44 +1766,44 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cybagoa.pyx":79
+  /* "cybagoa.pyx":81
  *                 double_map[key] = val
  * 
  *         self.c_layout.add_inst(lib_name, cell_name, view_name,             # <<<<<<<<<<<<<<
  *                                inst_name, loc[0], loc[1],
  *                                c_orient, int_map, str_map,
  */
-  __pyx_t_11 = __pyx_convert_string_from_py_std__in_string(__pyx_v_lib_name); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L1_error)
-  __pyx_t_12 = __pyx_convert_string_from_py_std__in_string(__pyx_v_cell_name); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L1_error)
-  __pyx_t_15 = __pyx_convert_string_from_py_std__in_string(__pyx_v_view_name); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_11 = __pyx_convert_string_from_py_std__in_string(__pyx_v_lib_name); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_12 = __pyx_convert_string_from_py_std__in_string(__pyx_v_cell_name); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_15 = __pyx_convert_string_from_py_std__in_string(__pyx_v_view_name); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 81, __pyx_L1_error)
 
-  /* "cybagoa.pyx":80
+  /* "cybagoa.pyx":82
  * 
  *         self.c_layout.add_inst(lib_name, cell_name, view_name,
  *                                inst_name, loc[0], loc[1],             # <<<<<<<<<<<<<<
  *                                c_orient, int_map, str_map,
  *                                double_map, num_rows, num_cols,
  */
-  __pyx_t_16 = __pyx_convert_string_from_py_std__in_string(__pyx_v_inst_name); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 80, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_loc, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_16 = __pyx_convert_string_from_py_std__in_string(__pyx_v_inst_name); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_loc, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 82, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_loc, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_loc, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_17 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_17 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_17 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_17 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 82, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cybagoa.pyx":81
+  /* "cybagoa.pyx":83
  *         self.c_layout.add_inst(lib_name, cell_name, view_name,
  *                                inst_name, loc[0], loc[1],
  *                                c_orient, int_map, str_map,             # <<<<<<<<<<<<<<
  *                                double_map, num_rows, num_cols,
  *                                sp_rows, sp_cols)
  */
-  __pyx_t_18 = __pyx_convert_string_from_py_std__in_string(__pyx_v_c_orient); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_18 = __pyx_convert_string_from_py_std__in_string(__pyx_v_c_orient); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 83, __pyx_L1_error)
 
-  /* "cybagoa.pyx":79
+  /* "cybagoa.pyx":81
  *                 double_map[key] = val
  * 
  *         self.c_layout.add_inst(lib_name, cell_name, view_name,             # <<<<<<<<<<<<<<
@@ -1812,10 +1814,10 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
     __pyx_v_self->c_layout.add_inst(__pyx_t_11, __pyx_t_12, __pyx_t_15, __pyx_t_16, __pyx_t_14, __pyx_t_17, __pyx_t_18, __pyx_v_int_map, __pyx_v_str_map, __pyx_v_double_map, __pyx_v_num_rows, __pyx_v_num_cols, __pyx_v_sp_rows, __pyx_v_sp_cols);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 79, __pyx_L1_error)
+    __PYX_ERR(0, 81, __pyx_L1_error)
   }
 
-  /* "cybagoa.pyx":55
+  /* "cybagoa.pyx":57
  *         self.encoding = encoding
  * 
  *     def add_inst(self, unicode lib, unicode cell, unicode view,             # <<<<<<<<<<<<<<
@@ -1832,7 +1834,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("cybagoa.PyOALayout.add_inst", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cybagoa.PyLayout.add_inst", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_lib_name);
@@ -1848,7 +1850,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":85
+/* "cybagoa.pyx":87
  *                                sp_rows, sp_cols)
  * 
  *     def add_rect(self, layer, bbox, int arr_nx=1, int arr_ny=1,             # <<<<<<<<<<<<<<
@@ -1857,8 +1859,8 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_2add_inst(struct __pyx_obj_7cyba
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7cybagoa_10PyOALayout_5add_rect(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_7cybagoa_10PyOALayout_5add_rect(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_7cybagoa_8PyLayout_5add_rect(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_7cybagoa_8PyLayout_5add_rect(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_layer = 0;
   PyObject *__pyx_v_bbox = 0;
   int __pyx_v_arr_nx;
@@ -1892,7 +1894,7 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_5add_rect(PyObject *__pyx_v_self
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_bbox)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_rect", 0, 2, 6, 1); __PYX_ERR(0, 85, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_rect", 0, 2, 6, 1); __PYX_ERR(0, 87, __pyx_L3_error)
         }
         case  2:
         if (kw_args > 0) {
@@ -1916,7 +1918,7 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_5add_rect(PyObject *__pyx_v_self
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_rect") < 0)) __PYX_ERR(0, 85, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_rect") < 0)) __PYX_ERR(0, 87, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1933,42 +1935,42 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_5add_rect(PyObject *__pyx_v_self
     __pyx_v_layer = values[0];
     __pyx_v_bbox = values[1];
     if (values[2]) {
-      __pyx_v_arr_nx = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_arr_nx == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 85, __pyx_L3_error)
+      __pyx_v_arr_nx = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_arr_nx == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L3_error)
     } else {
       __pyx_v_arr_nx = ((int)1);
     }
     if (values[3]) {
-      __pyx_v_arr_ny = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_arr_ny == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 85, __pyx_L3_error)
+      __pyx_v_arr_ny = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_arr_ny == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L3_error)
     } else {
       __pyx_v_arr_ny = ((int)1);
     }
     if (values[4]) {
-      __pyx_v_arr_spx = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_arr_spx == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
+      __pyx_v_arr_spx = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_arr_spx == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 88, __pyx_L3_error)
     } else {
       __pyx_v_arr_spx = ((double)0.0);
     }
     if (values[5]) {
-      __pyx_v_arr_spy = __pyx_PyFloat_AsDouble(values[5]); if (unlikely((__pyx_v_arr_spy == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
+      __pyx_v_arr_spy = __pyx_PyFloat_AsDouble(values[5]); if (unlikely((__pyx_v_arr_spy == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 88, __pyx_L3_error)
     } else {
       __pyx_v_arr_spy = ((double)0.0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_rect", 0, 2, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 85, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_rect", 0, 2, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 87, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("cybagoa.PyOALayout.add_rect", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cybagoa.PyLayout.add_rect", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7cybagoa_10PyOALayout_4add_rect(((struct __pyx_obj_7cybagoa_PyOALayout *)__pyx_v_self), __pyx_v_layer, __pyx_v_bbox, __pyx_v_arr_nx, __pyx_v_arr_ny, __pyx_v_arr_spx, __pyx_v_arr_spy);
+  __pyx_r = __pyx_pf_7cybagoa_8PyLayout_4add_rect(((struct __pyx_obj_7cybagoa_PyLayout *)__pyx_v_self), __pyx_v_layer, __pyx_v_bbox, __pyx_v_arr_nx, __pyx_v_arr_ny, __pyx_v_arr_spx, __pyx_v_arr_spy);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_self, PyObject *__pyx_v_layer, PyObject *__pyx_v_bbox, int __pyx_v_arr_nx, int __pyx_v_arr_ny, double __pyx_v_arr_spx, double __pyx_v_arr_spy) {
+static PyObject *__pyx_pf_7cybagoa_8PyLayout_4add_rect(struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_self, PyObject *__pyx_v_layer, PyObject *__pyx_v_bbox, int __pyx_v_arr_nx, int __pyx_v_arr_ny, double __pyx_v_arr_spx, double __pyx_v_arr_spy) {
   PyObject *__pyx_v_lay = NULL;
   PyObject *__pyx_v_purp = NULL;
   PyObject *__pyx_r = NULL;
@@ -1985,16 +1987,16 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cyba
   double __pyx_t_10;
   __Pyx_RefNannySetupContext("add_rect", 0);
 
-  /* "cybagoa.pyx":87
+  /* "cybagoa.pyx":89
  *     def add_rect(self, layer, bbox, int arr_nx=1, int arr_ny=1,
  *                  double arr_spx=0.0, double arr_spy=0.0):
  *         lay = layer[0].encode(self.encoding)             # <<<<<<<<<<<<<<
  *         purp = layer[1].encode(self.encoding)
  *         self.c_layout.add_rect(lay, purp, bbox[0][0], bbox[0][1],
  */
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_layer, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_layer, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -2008,16 +2010,16 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cyba
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
     __Pyx_INCREF(__pyx_v_self->encoding);
     __Pyx_GIVEREF(__pyx_v_self->encoding);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
@@ -2025,16 +2027,16 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cyba
   __pyx_v_lay = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":88
+  /* "cybagoa.pyx":90
  *                  double arr_spx=0.0, double arr_spy=0.0):
  *         lay = layer[0].encode(self.encoding)
  *         purp = layer[1].encode(self.encoding)             # <<<<<<<<<<<<<<
  *         self.c_layout.add_rect(lay, purp, bbox[0][0], bbox[0][1],
  *                                bbox[1][0], bbox[1][1], arr_nx, arr_ny,
  */
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_layer, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_layer, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_encode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_encode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -2048,16 +2050,16 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cyba
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_self->encoding);
     __Pyx_GIVEREF(__pyx_v_self->encoding);
     PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
@@ -2065,53 +2067,53 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cyba
   __pyx_v_purp = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":89
+  /* "cybagoa.pyx":91
  *         lay = layer[0].encode(self.encoding)
  *         purp = layer[1].encode(self.encoding)
  *         self.c_layout.add_rect(lay, purp, bbox[0][0], bbox[0][1],             # <<<<<<<<<<<<<<
  *                                bbox[1][0], bbox[1][1], arr_nx, arr_ny,
  *                                arr_spx, arr_spy)
  */
-  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_v_lay); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 89, __pyx_L1_error)
-  __pyx_t_6 = __pyx_convert_string_from_py_std__in_string(__pyx_v_purp); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 89, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_bbox, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_v_lay); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_6 = __pyx_convert_string_from_py_std__in_string(__pyx_v_purp); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_bbox, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_bbox, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_bbox, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_4, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_4, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":90
+  /* "cybagoa.pyx":92
  *         purp = layer[1].encode(self.encoding)
  *         self.c_layout.add_rect(lay, purp, bbox[0][0], bbox[0][1],
  *                                bbox[1][0], bbox[1][1], arr_nx, arr_ny,             # <<<<<<<<<<<<<<
  *                                arr_spx, arr_spy)
  * 
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_bbox, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_bbox, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_bbox, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_bbox, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_4, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_4, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":89
+  /* "cybagoa.pyx":91
  *         lay = layer[0].encode(self.encoding)
  *         purp = layer[1].encode(self.encoding)
  *         self.c_layout.add_rect(lay, purp, bbox[0][0], bbox[0][1],             # <<<<<<<<<<<<<<
@@ -2122,10 +2124,10 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cyba
     __pyx_v_self->c_layout.add_rect(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10, __pyx_v_arr_nx, __pyx_v_arr_ny, __pyx_v_arr_spx, __pyx_v_arr_spy);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 89, __pyx_L1_error)
+    __PYX_ERR(0, 91, __pyx_L1_error)
   }
 
-  /* "cybagoa.pyx":85
+  /* "cybagoa.pyx":87
  *                                sp_rows, sp_cols)
  * 
  *     def add_rect(self, layer, bbox, int arr_nx=1, int arr_ny=1,             # <<<<<<<<<<<<<<
@@ -2141,7 +2143,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cyba
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("cybagoa.PyOALayout.add_rect", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cybagoa.PyLayout.add_rect", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_lay);
@@ -2151,7 +2153,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cyba
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":93
+/* "cybagoa.pyx":95
  *                                arr_spx, arr_spy)
  * 
  *     def add_via(self, unicode id, loc, unicode orient,             # <<<<<<<<<<<<<<
@@ -2160,8 +2162,8 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_4add_rect(struct __pyx_obj_7cyba
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7cybagoa_10PyOALayout_7add_via(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_7cybagoa_10PyOALayout_7add_via(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_7cybagoa_8PyLayout_7add_via(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_7cybagoa_8PyLayout_7add_via(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_id = 0;
   PyObject *__pyx_v_loc = 0;
   PyObject *__pyx_v_orient = 0;
@@ -2213,42 +2215,42 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_7add_via(PyObject *__pyx_v_self,
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_loc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 1); __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 1); __PYX_ERR(0, 95, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_orient)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 2); __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 2); __PYX_ERR(0, 95, __pyx_L3_error)
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_num_rows)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 3); __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 3); __PYX_ERR(0, 95, __pyx_L3_error)
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_num_cols)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 4); __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 4); __PYX_ERR(0, 95, __pyx_L3_error)
         }
         case  5:
         if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_sp_rows)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 5); __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 5); __PYX_ERR(0, 95, __pyx_L3_error)
         }
         case  6:
         if (likely((values[6] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_sp_cols)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 6); __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 6); __PYX_ERR(0, 95, __pyx_L3_error)
         }
         case  7:
         if (likely((values[7] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_enc1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 7); __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 7); __PYX_ERR(0, 95, __pyx_L3_error)
         }
         case  8:
         if (likely((values[8] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_enc2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 8); __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, 8); __PYX_ERR(0, 95, __pyx_L3_error)
         }
         case  9:
         if (kw_args > 0) {
@@ -2282,7 +2284,7 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_7add_via(PyObject *__pyx_v_self,
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_via") < 0)) __PYX_ERR(0, 93, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_via") < 0)) __PYX_ERR(0, 95, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2308,54 +2310,54 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_7add_via(PyObject *__pyx_v_self,
     __pyx_v_id = ((PyObject*)values[0]);
     __pyx_v_loc = values[1];
     __pyx_v_orient = ((PyObject*)values[2]);
-    __pyx_v_num_rows = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_num_rows == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L3_error)
-    __pyx_v_num_cols = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_num_cols == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L3_error)
-    __pyx_v_sp_rows = __pyx_PyFloat_AsDouble(values[5]); if (unlikely((__pyx_v_sp_rows == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L3_error)
-    __pyx_v_sp_cols = __pyx_PyFloat_AsDouble(values[6]); if (unlikely((__pyx_v_sp_cols == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L3_error)
+    __pyx_v_num_rows = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_num_rows == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
+    __pyx_v_num_cols = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_num_cols == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
+    __pyx_v_sp_rows = __pyx_PyFloat_AsDouble(values[5]); if (unlikely((__pyx_v_sp_rows == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
+    __pyx_v_sp_cols = __pyx_PyFloat_AsDouble(values[6]); if (unlikely((__pyx_v_sp_cols == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
     __pyx_v_enc1 = values[7];
     __pyx_v_enc2 = values[8];
     if (values[9]) {
-      __pyx_v_cut_width = __pyx_PyFloat_AsDouble(values[9]); if (unlikely((__pyx_v_cut_width == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 95, __pyx_L3_error)
+      __pyx_v_cut_width = __pyx_PyFloat_AsDouble(values[9]); if (unlikely((__pyx_v_cut_width == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 97, __pyx_L3_error)
     } else {
       __pyx_v_cut_width = ((double)-1.0);
     }
     if (values[10]) {
-      __pyx_v_cut_height = __pyx_PyFloat_AsDouble(values[10]); if (unlikely((__pyx_v_cut_height == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 95, __pyx_L3_error)
+      __pyx_v_cut_height = __pyx_PyFloat_AsDouble(values[10]); if (unlikely((__pyx_v_cut_height == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 97, __pyx_L3_error)
     } else {
       __pyx_v_cut_height = ((double)-1.0);
     }
     if (values[11]) {
-      __pyx_v_arr_nx = __Pyx_PyInt_As_int(values[11]); if (unlikely((__pyx_v_arr_nx == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
+      __pyx_v_arr_nx = __Pyx_PyInt_As_int(values[11]); if (unlikely((__pyx_v_arr_nx == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L3_error)
     } else {
       __pyx_v_arr_nx = ((int)1);
     }
     if (values[12]) {
-      __pyx_v_arr_ny = __Pyx_PyInt_As_int(values[12]); if (unlikely((__pyx_v_arr_ny == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
+      __pyx_v_arr_ny = __Pyx_PyInt_As_int(values[12]); if (unlikely((__pyx_v_arr_ny == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L3_error)
     } else {
       __pyx_v_arr_ny = ((int)1);
     }
     if (values[13]) {
-      __pyx_v_arr_spx = __pyx_PyFloat_AsDouble(values[13]); if (unlikely((__pyx_v_arr_spx == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
+      __pyx_v_arr_spx = __pyx_PyFloat_AsDouble(values[13]); if (unlikely((__pyx_v_arr_spx == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L3_error)
     } else {
       __pyx_v_arr_spx = ((double)0.0);
     }
     if (values[14]) {
-      __pyx_v_arr_spy = __pyx_PyFloat_AsDouble(values[14]); if (unlikely((__pyx_v_arr_spy == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 97, __pyx_L3_error)
+      __pyx_v_arr_spy = __pyx_PyFloat_AsDouble(values[14]); if (unlikely((__pyx_v_arr_spy == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L3_error)
     } else {
       __pyx_v_arr_spy = ((double)0.0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 93, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_via", 0, 9, 15, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 95, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("cybagoa.PyOALayout.add_via", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cybagoa.PyLayout.add_via", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_id), (&PyUnicode_Type), 1, "id", 1))) __PYX_ERR(0, 93, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_orient), (&PyUnicode_Type), 1, "orient", 1))) __PYX_ERR(0, 93, __pyx_L1_error)
-  __pyx_r = __pyx_pf_7cybagoa_10PyOALayout_6add_via(((struct __pyx_obj_7cybagoa_PyOALayout *)__pyx_v_self), __pyx_v_id, __pyx_v_loc, __pyx_v_orient, __pyx_v_num_rows, __pyx_v_num_cols, __pyx_v_sp_rows, __pyx_v_sp_cols, __pyx_v_enc1, __pyx_v_enc2, __pyx_v_cut_width, __pyx_v_cut_height, __pyx_v_arr_nx, __pyx_v_arr_ny, __pyx_v_arr_spx, __pyx_v_arr_spy);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_id), (&PyUnicode_Type), 1, "id", 1))) __PYX_ERR(0, 95, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_orient), (&PyUnicode_Type), 1, "orient", 1))) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_r = __pyx_pf_7cybagoa_8PyLayout_6add_via(((struct __pyx_obj_7cybagoa_PyLayout *)__pyx_v_self), __pyx_v_id, __pyx_v_loc, __pyx_v_orient, __pyx_v_num_rows, __pyx_v_num_cols, __pyx_v_sp_rows, __pyx_v_sp_cols, __pyx_v_enc1, __pyx_v_enc2, __pyx_v_cut_width, __pyx_v_cut_height, __pyx_v_arr_nx, __pyx_v_arr_ny, __pyx_v_arr_spx, __pyx_v_arr_spy);
 
   /* function exit code */
   goto __pyx_L0;
@@ -2366,7 +2368,7 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_7add_via(PyObject *__pyx_v_self,
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_self, PyObject *__pyx_v_id, PyObject *__pyx_v_loc, PyObject *__pyx_v_orient, int __pyx_v_num_rows, int __pyx_v_num_cols, double __pyx_v_sp_rows, double __pyx_v_sp_cols, PyObject *__pyx_v_enc1, PyObject *__pyx_v_enc2, double __pyx_v_cut_width, double __pyx_v_cut_height, int __pyx_v_arr_nx, int __pyx_v_arr_ny, double __pyx_v_arr_spx, double __pyx_v_arr_spy) {
+static PyObject *__pyx_pf_7cybagoa_8PyLayout_6add_via(struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_self, PyObject *__pyx_v_id, PyObject *__pyx_v_loc, PyObject *__pyx_v_orient, int __pyx_v_num_rows, int __pyx_v_num_cols, double __pyx_v_sp_rows, double __pyx_v_sp_cols, PyObject *__pyx_v_enc1, PyObject *__pyx_v_enc2, double __pyx_v_cut_width, double __pyx_v_cut_height, int __pyx_v_arr_nx, int __pyx_v_arr_ny, double __pyx_v_arr_spx, double __pyx_v_arr_spy) {
   PyObject *__pyx_v_via_name = NULL;
   PyObject *__pyx_v_via_orient = NULL;
   PyObject *__pyx_r = NULL;
@@ -2389,14 +2391,14 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybag
   double __pyx_t_16;
   __Pyx_RefNannySetupContext("add_via", 0);
 
-  /* "cybagoa.pyx":98
+  /* "cybagoa.pyx":100
  *                 int arr_nx=1, int arr_ny=1, double arr_spx=0.0,
  *                 double arr_spy=0.0):
  *         via_name = id.encode(self.encoding)             # <<<<<<<<<<<<<<
  *         via_orient = orient.encode(self.encoding)
  *         self.c_layout.add_via(via_name, loc[0], loc[1], via_orient,
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_id, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_id, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2409,16 +2411,16 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybag
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_self->encoding);
     __Pyx_GIVEREF(__pyx_v_self->encoding);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
@@ -2426,14 +2428,14 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybag
   __pyx_v_via_name = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":99
+  /* "cybagoa.pyx":101
  *                 double arr_spy=0.0):
  *         via_name = id.encode(self.encoding)
  *         via_orient = orient.encode(self.encoding)             # <<<<<<<<<<<<<<
  *         self.c_layout.add_via(via_name, loc[0], loc[1], via_orient,
  *                               num_rows, num_cols, sp_rows, sp_cols,
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_orient, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_orient, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2446,16 +2448,16 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybag
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
     __Pyx_INCREF(__pyx_v_self->encoding);
     __Pyx_GIVEREF(__pyx_v_self->encoding);
     PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
@@ -2463,73 +2465,73 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybag
   __pyx_v_via_orient = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":100
+  /* "cybagoa.pyx":102
  *         via_name = id.encode(self.encoding)
  *         via_orient = orient.encode(self.encoding)
  *         self.c_layout.add_via(via_name, loc[0], loc[1], via_orient,             # <<<<<<<<<<<<<<
  *                               num_rows, num_cols, sp_rows, sp_cols,
  *                               enc1[0], enc1[3], enc1[1], enc1[2],
  */
-  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_v_via_name); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_loc, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_v_via_name); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_loc, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_loc, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_loc, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_8 = __pyx_convert_string_from_py_std__in_string(__pyx_v_via_orient); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_8 = __pyx_convert_string_from_py_std__in_string(__pyx_v_via_orient); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L1_error)
 
-  /* "cybagoa.pyx":102
+  /* "cybagoa.pyx":104
  *         self.c_layout.add_via(via_name, loc[0], loc[1], via_orient,
  *                               num_rows, num_cols, sp_rows, sp_cols,
  *                               enc1[0], enc1[3], enc1[1], enc1[2],             # <<<<<<<<<<<<<<
  *                               enc2[0], enc2[3], enc2[1], enc2[2],
  *                               cut_width, cut_height, arr_nx, arr_ny, arr_spx, arr_spy)
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc1, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc1, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":103
+  /* "cybagoa.pyx":105
  *                               num_rows, num_cols, sp_rows, sp_cols,
  *                               enc1[0], enc1[3], enc1[1], enc1[2],
  *                               enc2[0], enc2[3], enc2[1], enc2[2],             # <<<<<<<<<<<<<<
  *                               cut_width, cut_height, arr_nx, arr_ny, arr_spx, arr_spy)
  * 
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_13 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_13 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_13 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_13 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc2, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc2, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_15 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_15 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_15 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_15 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc2, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_enc2, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_16 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_16 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_16 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_16 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":100
+  /* "cybagoa.pyx":102
  *         via_name = id.encode(self.encoding)
  *         via_orient = orient.encode(self.encoding)
  *         self.c_layout.add_via(via_name, loc[0], loc[1], via_orient,             # <<<<<<<<<<<<<<
@@ -2540,10 +2542,10 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybag
     __pyx_v_self->c_layout.add_via(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_v_num_rows, __pyx_v_num_cols, __pyx_v_sp_rows, __pyx_v_sp_cols, __pyx_t_9, __pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_13, __pyx_t_14, __pyx_t_15, __pyx_t_16, __pyx_v_cut_width, __pyx_v_cut_height, __pyx_v_arr_nx, __pyx_v_arr_ny, __pyx_v_arr_spx, __pyx_v_arr_spy);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 100, __pyx_L1_error)
+    __PYX_ERR(0, 102, __pyx_L1_error)
   }
 
-  /* "cybagoa.pyx":93
+  /* "cybagoa.pyx":95
  *                                arr_spx, arr_spy)
  * 
  *     def add_via(self, unicode id, loc, unicode orient,             # <<<<<<<<<<<<<<
@@ -2559,7 +2561,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybag
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("cybagoa.PyOALayout.add_via", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cybagoa.PyLayout.add_via", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_via_name);
@@ -2569,7 +2571,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybag
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":106
+/* "cybagoa.pyx":108
  *                               cut_width, cut_height, arr_nx, arr_ny, arr_spx, arr_spy)
  * 
  *     def add_pin(self, unicode net_name, unicode pin_name, unicode label, layer, bbox,             # <<<<<<<<<<<<<<
@@ -2578,8 +2580,8 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_6add_via(struct __pyx_obj_7cybag
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7cybagoa_10PyOALayout_9add_pin(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_7cybagoa_10PyOALayout_9add_pin(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_7cybagoa_8PyLayout_9add_pin(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_7cybagoa_8PyLayout_9add_pin(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_net_name = 0;
   PyObject *__pyx_v_pin_name = 0;
   PyObject *__pyx_v_label = 0;
@@ -2613,22 +2615,22 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_9add_pin(PyObject *__pyx_v_self,
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_pin_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_pin", 0, 5, 6, 1); __PYX_ERR(0, 106, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_pin", 0, 5, 6, 1); __PYX_ERR(0, 108, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_label)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_pin", 0, 5, 6, 2); __PYX_ERR(0, 106, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_pin", 0, 5, 6, 2); __PYX_ERR(0, 108, __pyx_L3_error)
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_layer)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_pin", 0, 5, 6, 3); __PYX_ERR(0, 106, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_pin", 0, 5, 6, 3); __PYX_ERR(0, 108, __pyx_L3_error)
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_bbox)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_pin", 0, 5, 6, 4); __PYX_ERR(0, 106, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_pin", 0, 5, 6, 4); __PYX_ERR(0, 108, __pyx_L3_error)
         }
         case  5:
         if (kw_args > 0) {
@@ -2637,7 +2639,7 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_9add_pin(PyObject *__pyx_v_self,
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_pin") < 0)) __PYX_ERR(0, 106, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_pin") < 0)) __PYX_ERR(0, 108, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2657,10 +2659,10 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_9add_pin(PyObject *__pyx_v_self,
     __pyx_v_layer = values[3];
     __pyx_v_bbox = values[4];
     if (values[5]) {
-      __pyx_v_make_rect = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_make_rect == (bool)-1) && PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
+      __pyx_v_make_rect = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_make_rect == (bool)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L3_error)
     } else {
 
-      /* "cybagoa.pyx":107
+      /* "cybagoa.pyx":109
  * 
  *     def add_pin(self, unicode net_name, unicode pin_name, unicode label, layer, bbox,
  *                 bool make_rect=True):             # <<<<<<<<<<<<<<
@@ -2672,18 +2674,18 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_9add_pin(PyObject *__pyx_v_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_pin", 0, 5, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 106, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_pin", 0, 5, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 108, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("cybagoa.PyOALayout.add_pin", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cybagoa.PyLayout.add_pin", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_net_name), (&PyUnicode_Type), 1, "net_name", 1))) __PYX_ERR(0, 106, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pin_name), (&PyUnicode_Type), 1, "pin_name", 1))) __PYX_ERR(0, 106, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_label), (&PyUnicode_Type), 1, "label", 1))) __PYX_ERR(0, 106, __pyx_L1_error)
-  __pyx_r = __pyx_pf_7cybagoa_10PyOALayout_8add_pin(((struct __pyx_obj_7cybagoa_PyOALayout *)__pyx_v_self), __pyx_v_net_name, __pyx_v_pin_name, __pyx_v_label, __pyx_v_layer, __pyx_v_bbox, __pyx_v_make_rect);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_net_name), (&PyUnicode_Type), 1, "net_name", 1))) __PYX_ERR(0, 108, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pin_name), (&PyUnicode_Type), 1, "pin_name", 1))) __PYX_ERR(0, 108, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_label), (&PyUnicode_Type), 1, "label", 1))) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_r = __pyx_pf_7cybagoa_8PyLayout_8add_pin(((struct __pyx_obj_7cybagoa_PyLayout *)__pyx_v_self), __pyx_v_net_name, __pyx_v_pin_name, __pyx_v_label, __pyx_v_layer, __pyx_v_bbox, __pyx_v_make_rect);
 
-  /* "cybagoa.pyx":106
+  /* "cybagoa.pyx":108
  *                               cut_width, cut_height, arr_nx, arr_ny, arr_spx, arr_spy)
  * 
  *     def add_pin(self, unicode net_name, unicode pin_name, unicode label, layer, bbox,             # <<<<<<<<<<<<<<
@@ -2700,7 +2702,7 @@ static PyObject *__pyx_pw_7cybagoa_10PyOALayout_9add_pin(PyObject *__pyx_v_self,
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_self, PyObject *__pyx_v_net_name, PyObject *__pyx_v_pin_name, PyObject *__pyx_v_label, PyObject *__pyx_v_layer, PyObject *__pyx_v_bbox, bool __pyx_v_make_rect) {
+static PyObject *__pyx_pf_7cybagoa_8PyLayout_8add_pin(struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_self, PyObject *__pyx_v_net_name, PyObject *__pyx_v_pin_name, PyObject *__pyx_v_label, PyObject *__pyx_v_layer, PyObject *__pyx_v_bbox, bool __pyx_v_make_rect) {
   PyObject *__pyx_v_c_net = NULL;
   PyObject *__pyx_v_c_pin = NULL;
   PyObject *__pyx_v_c_label = NULL;
@@ -2723,88 +2725,14 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybag
   double __pyx_t_13;
   __Pyx_RefNannySetupContext("add_pin", 0);
 
-  /* "cybagoa.pyx":108
+  /* "cybagoa.pyx":110
  *     def add_pin(self, unicode net_name, unicode pin_name, unicode label, layer, bbox,
  *                 bool make_rect=True):
  *         c_net = net_name.encode(self.encoding)             # <<<<<<<<<<<<<<
  *         c_pin = pin_name.encode(self.encoding)
  *         c_label = label.encode(self.encoding)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_net_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-    }
-  }
-  if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 108, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
-    __Pyx_INCREF(__pyx_v_self->encoding);
-    __Pyx_GIVEREF(__pyx_v_self->encoding);
-    PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_c_net = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "cybagoa.pyx":109
- *                 bool make_rect=True):
- *         c_net = net_name.encode(self.encoding)
- *         c_pin = pin_name.encode(self.encoding)             # <<<<<<<<<<<<<<
- *         c_label = label.encode(self.encoding)
- *         lay = layer[0].encode(self.encoding)
- */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_pin_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = NULL;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_4)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_4);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-    }
-  }
-  if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  } else {
-    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
-    __Pyx_INCREF(__pyx_v_self->encoding);
-    __Pyx_GIVEREF(__pyx_v_self->encoding);
-    PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_c_pin = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "cybagoa.pyx":110
- *         c_net = net_name.encode(self.encoding)
- *         c_pin = pin_name.encode(self.encoding)
- *         c_label = label.encode(self.encoding)             # <<<<<<<<<<<<<<
- *         lay = layer[0].encode(self.encoding)
- *         purp = layer[1].encode(self.encoding)
- */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_label, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_net_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2831,19 +2759,93 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybag
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_c_label = __pyx_t_1;
+  __pyx_v_c_net = __pyx_t_1;
   __pyx_t_1 = 0;
 
   /* "cybagoa.pyx":111
+ *                 bool make_rect=True):
+ *         c_net = net_name.encode(self.encoding)
+ *         c_pin = pin_name.encode(self.encoding)             # <<<<<<<<<<<<<<
+ *         c_label = label.encode(self.encoding)
+ *         lay = layer[0].encode(self.encoding)
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_pin_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (!__pyx_t_4) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  } else {
+    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 111, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
+    __Pyx_INCREF(__pyx_v_self->encoding);
+    __Pyx_GIVEREF(__pyx_v_self->encoding);
+    PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_self->encoding);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_c_pin = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "cybagoa.pyx":112
+ *         c_net = net_name.encode(self.encoding)
+ *         c_pin = pin_name.encode(self.encoding)
+ *         c_label = label.encode(self.encoding)             # <<<<<<<<<<<<<<
+ *         lay = layer[0].encode(self.encoding)
+ *         purp = layer[1].encode(self.encoding)
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_label, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (!__pyx_t_3) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  } else {
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
+    __Pyx_INCREF(__pyx_v_self->encoding);
+    __Pyx_GIVEREF(__pyx_v_self->encoding);
+    PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self->encoding);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_c_label = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "cybagoa.pyx":113
  *         c_pin = pin_name.encode(self.encoding)
  *         c_label = label.encode(self.encoding)
  *         lay = layer[0].encode(self.encoding)             # <<<<<<<<<<<<<<
  *         purp = layer[1].encode(self.encoding)
  *         self.c_layout.add_pin(c_net, c_pin, c_label, lay, purp,
  */
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_layer, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_layer, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 113, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_encode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_encode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 113, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -2857,16 +2859,16 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybag
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 111, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2); __pyx_t_2 = NULL;
     __Pyx_INCREF(__pyx_v_self->encoding);
     __Pyx_GIVEREF(__pyx_v_self->encoding);
     PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
@@ -2874,16 +2876,16 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybag
   __pyx_v_lay = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":112
+  /* "cybagoa.pyx":114
  *         c_label = label.encode(self.encoding)
  *         lay = layer[0].encode(self.encoding)
  *         purp = layer[1].encode(self.encoding)             # <<<<<<<<<<<<<<
  *         self.c_layout.add_pin(c_net, c_pin, c_label, lay, purp,
  *                               bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1],
  */
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_layer, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_layer, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -2897,16 +2899,16 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybag
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4); __pyx_t_4 = NULL;
     __Pyx_INCREF(__pyx_v_self->encoding);
     __Pyx_GIVEREF(__pyx_v_self->encoding);
     PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
@@ -2914,56 +2916,56 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybag
   __pyx_v_purp = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":113
+  /* "cybagoa.pyx":115
  *         lay = layer[0].encode(self.encoding)
  *         purp = layer[1].encode(self.encoding)
  *         self.c_layout.add_pin(c_net, c_pin, c_label, lay, purp,             # <<<<<<<<<<<<<<
  *                               bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1],
  *                               make_rect)
  */
-  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_v_c_net); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 113, __pyx_L1_error)
-  __pyx_t_6 = __pyx_convert_string_from_py_std__in_string(__pyx_v_c_pin); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 113, __pyx_L1_error)
-  __pyx_t_7 = __pyx_convert_string_from_py_std__in_string(__pyx_v_c_label); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 113, __pyx_L1_error)
-  __pyx_t_8 = __pyx_convert_string_from_py_std__in_string(__pyx_v_lay); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 113, __pyx_L1_error)
-  __pyx_t_9 = __pyx_convert_string_from_py_std__in_string(__pyx_v_purp); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_v_c_net); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_6 = __pyx_convert_string_from_py_std__in_string(__pyx_v_c_pin); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_7 = __pyx_convert_string_from_py_std__in_string(__pyx_v_c_label); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_8 = __pyx_convert_string_from_py_std__in_string(__pyx_v_lay); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_9 = __pyx_convert_string_from_py_std__in_string(__pyx_v_purp); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 115, __pyx_L1_error)
 
-  /* "cybagoa.pyx":114
+  /* "cybagoa.pyx":116
  *         purp = layer[1].encode(self.encoding)
  *         self.c_layout.add_pin(c_net, c_pin, c_label, lay, purp,
  *                               bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1],             # <<<<<<<<<<<<<<
  *                               make_rect)
  * 
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_bbox, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_bbox, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_bbox, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_bbox, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_bbox, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_bbox, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_bbox, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_bbox, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_13 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_13 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_13 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_13 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":113
+  /* "cybagoa.pyx":115
  *         lay = layer[0].encode(self.encoding)
  *         purp = layer[1].encode(self.encoding)
  *         self.c_layout.add_pin(c_net, c_pin, c_label, lay, purp,             # <<<<<<<<<<<<<<
@@ -2974,10 +2976,10 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybag
     __pyx_v_self->c_layout.add_pin(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_13, __pyx_v_make_rect);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 113, __pyx_L1_error)
+    __PYX_ERR(0, 115, __pyx_L1_error)
   }
 
-  /* "cybagoa.pyx":106
+  /* "cybagoa.pyx":108
  *                               cut_width, cut_height, arr_nx, arr_ny, arr_spx, arr_spy)
  * 
  *     def add_pin(self, unicode net_name, unicode pin_name, unicode label, layer, bbox,             # <<<<<<<<<<<<<<
@@ -2993,7 +2995,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybag
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("cybagoa.PyOALayout.add_pin", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cybagoa.PyLayout.add_pin", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_c_net);
@@ -3006,7 +3008,7 @@ static PyObject *__pyx_pf_7cybagoa_10PyOALayout_8add_pin(struct __pyx_obj_7cybag
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":123
+/* "cybagoa.pyx":125
  *     cdef bytes library
  *     cdef unicode encoding
  *     def __init__(self, unicode lib_path, unicode library, unicode encoding):             # <<<<<<<<<<<<<<
@@ -3044,16 +3046,16 @@ static int __pyx_pw_7cybagoa_17PyOALayoutLibrary_1__init__(PyObject *__pyx_v_sel
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_library)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 123, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 125, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_encoding)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 123, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 125, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 123, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 125, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -3068,15 +3070,15 @@ static int __pyx_pw_7cybagoa_17PyOALayoutLibrary_1__init__(PyObject *__pyx_v_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 123, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 125, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cybagoa.PyOALayoutLibrary.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_lib_path), (&PyUnicode_Type), 1, "lib_path", 1))) __PYX_ERR(0, 123, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_library), (&PyUnicode_Type), 1, "library", 1))) __PYX_ERR(0, 123, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_encoding), (&PyUnicode_Type), 1, "encoding", 1))) __PYX_ERR(0, 123, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_lib_path), (&PyUnicode_Type), 1, "lib_path", 1))) __PYX_ERR(0, 125, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_library), (&PyUnicode_Type), 1, "library", 1))) __PYX_ERR(0, 125, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_encoding), (&PyUnicode_Type), 1, "encoding", 1))) __PYX_ERR(0, 125, __pyx_L1_error)
   __pyx_r = __pyx_pf_7cybagoa_17PyOALayoutLibrary___init__(((struct __pyx_obj_7cybagoa_PyOALayoutLibrary *)__pyx_v_self), __pyx_v_lib_path, __pyx_v_library, __pyx_v_encoding);
 
   /* function exit code */
@@ -3097,14 +3099,14 @@ static int __pyx_pf_7cybagoa_17PyOALayoutLibrary___init__(struct __pyx_obj_7cyba
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "cybagoa.pyx":124
+  /* "cybagoa.pyx":126
  *     cdef unicode encoding
  *     def __init__(self, unicode lib_path, unicode library, unicode encoding):
  *         self.lib_path = lib_path.encode(encoding)             # <<<<<<<<<<<<<<
  *         self.library = library.encode(encoding)
  *         self.encoding = encoding
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_lib_path, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_lib_path, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3117,35 +3119,35 @@ static int __pyx_pf_7cybagoa_17PyOALayoutLibrary___init__(struct __pyx_obj_7cyba
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_encoding);
     __Pyx_GIVEREF(__pyx_v_encoding);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyBytes_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 124, __pyx_L1_error)
+  if (!(likely(PyBytes_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->lib_path);
   __Pyx_DECREF(__pyx_v_self->lib_path);
   __pyx_v_self->lib_path = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":125
+  /* "cybagoa.pyx":127
  *     def __init__(self, unicode lib_path, unicode library, unicode encoding):
  *         self.lib_path = lib_path.encode(encoding)
  *         self.library = library.encode(encoding)             # <<<<<<<<<<<<<<
  *         self.encoding = encoding
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_library, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_library, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3158,28 +3160,28 @@ static int __pyx_pf_7cybagoa_17PyOALayoutLibrary___init__(struct __pyx_obj_7cyba
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
     __Pyx_INCREF(__pyx_v_encoding);
     __Pyx_GIVEREF(__pyx_v_encoding);
     PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyBytes_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 125, __pyx_L1_error)
+  if (!(likely(PyBytes_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->library);
   __Pyx_DECREF(__pyx_v_self->library);
   __pyx_v_self->library = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":126
+  /* "cybagoa.pyx":128
  *         self.lib_path = lib_path.encode(encoding)
  *         self.library = library.encode(encoding)
  *         self.encoding = encoding             # <<<<<<<<<<<<<<
@@ -3192,7 +3194,7 @@ static int __pyx_pf_7cybagoa_17PyOALayoutLibrary___init__(struct __pyx_obj_7cyba
   __Pyx_DECREF(__pyx_v_self->encoding);
   __pyx_v_self->encoding = __pyx_v_encoding;
 
-  /* "cybagoa.pyx":123
+  /* "cybagoa.pyx":125
  *     cdef bytes library
  *     cdef unicode encoding
  *     def __init__(self, unicode lib_path, unicode library, unicode encoding):             # <<<<<<<<<<<<<<
@@ -3215,7 +3217,7 @@ static int __pyx_pf_7cybagoa_17PyOALayoutLibrary___init__(struct __pyx_obj_7cyba
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":128
+/* "cybagoa.pyx":130
  *         self.encoding = encoding
  * 
  *     def __enter__(self):             # <<<<<<<<<<<<<<
@@ -3243,23 +3245,23 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_2__enter__(struct __pyx_o
   std::string __pyx_t_2;
   __Pyx_RefNannySetupContext("__enter__", 0);
 
-  /* "cybagoa.pyx":129
+  /* "cybagoa.pyx":131
  * 
  *     def __enter__(self):
  *         self.c_lib.open_library(self.lib_path, self.library)             # <<<<<<<<<<<<<<
  *         return self
  * 
  */
-  __pyx_t_1 = __pyx_convert_string_from_py_std__in_string(__pyx_v_self->lib_path); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 129, __pyx_L1_error)
-  __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_v_self->library); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert_string_from_py_std__in_string(__pyx_v_self->lib_path); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_v_self->library); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L1_error)
   try {
     __pyx_v_self->c_lib.open_library(__pyx_t_1, __pyx_t_2);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 129, __pyx_L1_error)
+    __PYX_ERR(0, 131, __pyx_L1_error)
   }
 
-  /* "cybagoa.pyx":130
+  /* "cybagoa.pyx":132
  *     def __enter__(self):
  *         self.c_lib.open_library(self.lib_path, self.library)
  *         return self             # <<<<<<<<<<<<<<
@@ -3271,7 +3273,7 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_2__enter__(struct __pyx_o
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "cybagoa.pyx":128
+  /* "cybagoa.pyx":130
  *         self.encoding = encoding
  * 
  *     def __enter__(self):             # <<<<<<<<<<<<<<
@@ -3289,7 +3291,7 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_2__enter__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":132
+/* "cybagoa.pyx":134
  *         return self
  * 
  *     def __exit__(self, *args):             # <<<<<<<<<<<<<<
@@ -3323,14 +3325,14 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_4__exit__(struct __pyx_ob
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__exit__", 0);
 
-  /* "cybagoa.pyx":133
+  /* "cybagoa.pyx":135
  * 
  *     def __exit__(self, *args):
  *         self.close()             # <<<<<<<<<<<<<<
  * 
  *     def __del__(self):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_close); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_close); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3343,16 +3345,16 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_4__exit__(struct __pyx_ob
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":132
+  /* "cybagoa.pyx":134
  *         return self
  * 
  *     def __exit__(self, *args):             # <<<<<<<<<<<<<<
@@ -3375,7 +3377,7 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_4__exit__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":135
+/* "cybagoa.pyx":137
  *         self.close()
  * 
  *     def __del__(self):             # <<<<<<<<<<<<<<
@@ -3404,14 +3406,14 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_6__del__(struct __pyx_obj
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__del__", 0);
 
-  /* "cybagoa.pyx":136
+  /* "cybagoa.pyx":138
  * 
  *     def __del__(self):
  *         self.close()             # <<<<<<<<<<<<<<
  * 
  *     def close(self):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_close); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_close); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3424,16 +3426,16 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_6__del__(struct __pyx_obj
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":135
+  /* "cybagoa.pyx":137
  *         self.close()
  * 
  *     def __del__(self):             # <<<<<<<<<<<<<<
@@ -3456,7 +3458,7 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_6__del__(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":138
+/* "cybagoa.pyx":140
  *         self.close()
  * 
  *     def close(self):             # <<<<<<<<<<<<<<
@@ -3482,7 +3484,7 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_8close(struct __pyx_obj_7
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("close", 0);
 
-  /* "cybagoa.pyx":139
+  /* "cybagoa.pyx":141
  * 
  *     def close(self):
  *         self.c_lib.close()             # <<<<<<<<<<<<<<
@@ -3493,10 +3495,10 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_8close(struct __pyx_obj_7
     __pyx_v_self->c_lib.close();
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 139, __pyx_L1_error)
+    __PYX_ERR(0, 141, __pyx_L1_error)
   }
 
-  /* "cybagoa.pyx":138
+  /* "cybagoa.pyx":140
  *         self.close()
  * 
  *     def close(self):             # <<<<<<<<<<<<<<
@@ -3516,7 +3518,7 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_8close(struct __pyx_obj_7
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":141
+/* "cybagoa.pyx":143
  *         self.c_lib.close()
  * 
  *     def add_purpose(self, unicode purp_name, int purp_num):             # <<<<<<<<<<<<<<
@@ -3552,11 +3554,11 @@ static PyObject *__pyx_pw_7cybagoa_17PyOALayoutLibrary_11add_purpose(PyObject *_
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_purp_num)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_purpose", 1, 2, 2, 1); __PYX_ERR(0, 141, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_purpose", 1, 2, 2, 1); __PYX_ERR(0, 143, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_purpose") < 0)) __PYX_ERR(0, 141, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_purpose") < 0)) __PYX_ERR(0, 143, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3565,17 +3567,17 @@ static PyObject *__pyx_pw_7cybagoa_17PyOALayoutLibrary_11add_purpose(PyObject *_
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_purp_name = ((PyObject*)values[0]);
-    __pyx_v_purp_num = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_purp_num == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L3_error)
+    __pyx_v_purp_num = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_purp_num == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 143, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_purpose", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 141, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_purpose", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 143, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cybagoa.PyOALayoutLibrary.add_purpose", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_purp_name), (&PyUnicode_Type), 1, "purp_name", 1))) __PYX_ERR(0, 141, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_purp_name), (&PyUnicode_Type), 1, "purp_name", 1))) __PYX_ERR(0, 143, __pyx_L1_error)
   __pyx_r = __pyx_pf_7cybagoa_17PyOALayoutLibrary_10add_purpose(((struct __pyx_obj_7cybagoa_PyOALayoutLibrary *)__pyx_v_self), __pyx_v_purp_name, __pyx_v_purp_num);
 
   /* function exit code */
@@ -3597,14 +3599,14 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_10add_purpose(struct __py
   std::string __pyx_t_5;
   __Pyx_RefNannySetupContext("add_purpose", 0);
 
-  /* "cybagoa.pyx":142
+  /* "cybagoa.pyx":144
  * 
  *     def add_purpose(self, unicode purp_name, int purp_num):
  *         self.c_lib.add_purpose(purp_name.encode(self.encoding), purp_num)             # <<<<<<<<<<<<<<
  * 
  *     def add_layer(self, unicode lay_name, int lay_num):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_purp_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_purp_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3617,30 +3619,30 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_10add_purpose(struct __py
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_self->encoding);
     __Pyx_GIVEREF(__pyx_v_self->encoding);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 144, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   try {
     __pyx_v_self->c_lib.add_purpose(__pyx_t_5, __pyx_v_purp_num);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 142, __pyx_L1_error)
+    __PYX_ERR(0, 144, __pyx_L1_error)
   }
 
-  /* "cybagoa.pyx":141
+  /* "cybagoa.pyx":143
  *         self.c_lib.close()
  * 
  *     def add_purpose(self, unicode purp_name, int purp_num):             # <<<<<<<<<<<<<<
@@ -3664,7 +3666,7 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_10add_purpose(struct __py
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":144
+/* "cybagoa.pyx":146
  *         self.c_lib.add_purpose(purp_name.encode(self.encoding), purp_num)
  * 
  *     def add_layer(self, unicode lay_name, int lay_num):             # <<<<<<<<<<<<<<
@@ -3700,11 +3702,11 @@ static PyObject *__pyx_pw_7cybagoa_17PyOALayoutLibrary_13add_layer(PyObject *__p
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_lay_num)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_layer", 1, 2, 2, 1); __PYX_ERR(0, 144, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_layer", 1, 2, 2, 1); __PYX_ERR(0, 146, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_layer") < 0)) __PYX_ERR(0, 144, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_layer") < 0)) __PYX_ERR(0, 146, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3713,17 +3715,17 @@ static PyObject *__pyx_pw_7cybagoa_17PyOALayoutLibrary_13add_layer(PyObject *__p
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_lay_name = ((PyObject*)values[0]);
-    __pyx_v_lay_num = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_lay_num == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 144, __pyx_L3_error)
+    __pyx_v_lay_num = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_lay_num == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 146, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_layer", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 144, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_layer", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 146, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cybagoa.PyOALayoutLibrary.add_layer", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_lay_name), (&PyUnicode_Type), 1, "lay_name", 1))) __PYX_ERR(0, 144, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_lay_name), (&PyUnicode_Type), 1, "lay_name", 1))) __PYX_ERR(0, 146, __pyx_L1_error)
   __pyx_r = __pyx_pf_7cybagoa_17PyOALayoutLibrary_12add_layer(((struct __pyx_obj_7cybagoa_PyOALayoutLibrary *)__pyx_v_self), __pyx_v_lay_name, __pyx_v_lay_num);
 
   /* function exit code */
@@ -3745,14 +3747,14 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_12add_layer(struct __pyx_
   std::string __pyx_t_5;
   __Pyx_RefNannySetupContext("add_layer", 0);
 
-  /* "cybagoa.pyx":145
+  /* "cybagoa.pyx":147
  * 
  *     def add_layer(self, unicode lay_name, int lay_num):
  *         self.c_lib.add_layer(lay_name.encode(self.encoding), lay_num)             # <<<<<<<<<<<<<<
  * 
- *     def create_layout(self, unicode cell, unicode view, PyOALayout layout):
+ *     def create_layout(self, unicode cell, unicode view, PyLayout layout):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_lay_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_lay_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3765,30 +3767,30 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_12add_layer(struct __pyx_
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_self->encoding);
     __Pyx_GIVEREF(__pyx_v_self->encoding);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   try {
     __pyx_v_self->c_lib.add_layer(__pyx_t_5, __pyx_v_lay_num);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 145, __pyx_L1_error)
+    __PYX_ERR(0, 147, __pyx_L1_error)
   }
 
-  /* "cybagoa.pyx":144
+  /* "cybagoa.pyx":146
  *         self.c_lib.add_purpose(purp_name.encode(self.encoding), purp_num)
  * 
  *     def add_layer(self, unicode lay_name, int lay_num):             # <<<<<<<<<<<<<<
@@ -3812,10 +3814,10 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_12add_layer(struct __pyx_
   return __pyx_r;
 }
 
-/* "cybagoa.pyx":147
+/* "cybagoa.pyx":149
  *         self.c_lib.add_layer(lay_name.encode(self.encoding), lay_num)
  * 
- *     def create_layout(self, unicode cell, unicode view, PyOALayout layout):             # <<<<<<<<<<<<<<
+ *     def create_layout(self, unicode cell, unicode view, PyLayout layout):             # <<<<<<<<<<<<<<
  *         self.c_lib.create_layout(cell.encode(self.encoding), view.encode(self.encoding),
  *                                  layout.c_layout)
  */
@@ -3825,7 +3827,7 @@ static PyObject *__pyx_pw_7cybagoa_17PyOALayoutLibrary_15create_layout(PyObject 
 static PyObject *__pyx_pw_7cybagoa_17PyOALayoutLibrary_15create_layout(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_cell = 0;
   PyObject *__pyx_v_view = 0;
-  struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_layout = 0;
+  struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_layout = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("create_layout (wrapper)", 0);
@@ -3850,16 +3852,16 @@ static PyObject *__pyx_pw_7cybagoa_17PyOALayoutLibrary_15create_layout(PyObject 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_view)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("create_layout", 1, 3, 3, 1); __PYX_ERR(0, 147, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("create_layout", 1, 3, 3, 1); __PYX_ERR(0, 149, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_layout)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("create_layout", 1, 3, 3, 2); __PYX_ERR(0, 147, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("create_layout", 1, 3, 3, 2); __PYX_ERR(0, 149, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "create_layout") < 0)) __PYX_ERR(0, 147, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "create_layout") < 0)) __PYX_ERR(0, 149, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -3870,19 +3872,19 @@ static PyObject *__pyx_pw_7cybagoa_17PyOALayoutLibrary_15create_layout(PyObject 
     }
     __pyx_v_cell = ((PyObject*)values[0]);
     __pyx_v_view = ((PyObject*)values[1]);
-    __pyx_v_layout = ((struct __pyx_obj_7cybagoa_PyOALayout *)values[2]);
+    __pyx_v_layout = ((struct __pyx_obj_7cybagoa_PyLayout *)values[2]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("create_layout", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 147, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("create_layout", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 149, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cybagoa.PyOALayoutLibrary.create_layout", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cell), (&PyUnicode_Type), 1, "cell", 1))) __PYX_ERR(0, 147, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_view), (&PyUnicode_Type), 1, "view", 1))) __PYX_ERR(0, 147, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_layout), __pyx_ptype_7cybagoa_PyOALayout, 1, "layout", 0))) __PYX_ERR(0, 147, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cell), (&PyUnicode_Type), 1, "cell", 1))) __PYX_ERR(0, 149, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_view), (&PyUnicode_Type), 1, "view", 1))) __PYX_ERR(0, 149, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_layout), __pyx_ptype_7cybagoa_PyLayout, 1, "layout", 0))) __PYX_ERR(0, 149, __pyx_L1_error)
   __pyx_r = __pyx_pf_7cybagoa_17PyOALayoutLibrary_14create_layout(((struct __pyx_obj_7cybagoa_PyOALayoutLibrary *)__pyx_v_self), __pyx_v_cell, __pyx_v_view, __pyx_v_layout);
 
   /* function exit code */
@@ -3894,7 +3896,7 @@ static PyObject *__pyx_pw_7cybagoa_17PyOALayoutLibrary_15create_layout(PyObject 
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_14create_layout(struct __pyx_obj_7cybagoa_PyOALayoutLibrary *__pyx_v_self, PyObject *__pyx_v_cell, PyObject *__pyx_v_view, struct __pyx_obj_7cybagoa_PyOALayout *__pyx_v_layout) {
+static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_14create_layout(struct __pyx_obj_7cybagoa_PyOALayoutLibrary *__pyx_v_self, PyObject *__pyx_v_cell, PyObject *__pyx_v_view, struct __pyx_obj_7cybagoa_PyLayout *__pyx_v_layout) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3905,13 +3907,13 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_14create_layout(struct __
   std::string __pyx_t_6;
   __Pyx_RefNannySetupContext("create_layout", 0);
 
-  /* "cybagoa.pyx":148
+  /* "cybagoa.pyx":150
  * 
- *     def create_layout(self, unicode cell, unicode view, PyOALayout layout):
+ *     def create_layout(self, unicode cell, unicode view, PyLayout layout):
  *         self.c_lib.create_layout(cell.encode(self.encoding), view.encode(self.encoding),             # <<<<<<<<<<<<<<
  *                                  layout.c_layout)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_cell, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_cell, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3924,23 +3926,23 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_14create_layout(struct __
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_self->encoding);
     __Pyx_GIVEREF(__pyx_v_self->encoding);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_view, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_view, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3953,25 +3955,25 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_14create_layout(struct __
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_self->encoding); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
     __Pyx_INCREF(__pyx_v_self->encoding);
     __Pyx_GIVEREF(__pyx_v_self->encoding);
     PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_self->encoding);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_6 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cybagoa.pyx":149
- *     def create_layout(self, unicode cell, unicode view, PyOALayout layout):
+  /* "cybagoa.pyx":151
+ *     def create_layout(self, unicode cell, unicode view, PyLayout layout):
  *         self.c_lib.create_layout(cell.encode(self.encoding), view.encode(self.encoding),
  *                                  layout.c_layout)             # <<<<<<<<<<<<<<
  */
@@ -3979,13 +3981,13 @@ static PyObject *__pyx_pf_7cybagoa_17PyOALayoutLibrary_14create_layout(struct __
     __pyx_v_self->c_lib.create_layout(__pyx_t_5, __pyx_t_6, __pyx_v_layout->c_layout);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 148, __pyx_L1_error)
+    __PYX_ERR(0, 150, __pyx_L1_error)
   }
 
-  /* "cybagoa.pyx":147
+  /* "cybagoa.pyx":149
  *         self.c_lib.add_layer(lay_name.encode(self.encoding), lay_num)
  * 
- *     def create_layout(self, unicode cell, unicode view, PyOALayout layout):             # <<<<<<<<<<<<<<
+ *     def create_layout(self, unicode cell, unicode view, PyLayout layout):             # <<<<<<<<<<<<<<
  *         self.c_lib.create_layout(cell.encode(self.encoding), view.encode(self.encoding),
  *                                  layout.c_layout)
  */
@@ -4058,8 +4060,8 @@ static std::string __pyx_convert_string_from_py_std__in_string(PyObject *__pyx_v
   return __pyx_r;
 }
 
-static PyObject *__pyx_tp_new_7cybagoa_PyOALayout(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
-  struct __pyx_obj_7cybagoa_PyOALayout *p;
+static PyObject *__pyx_tp_new_7cybagoa_PyLayout(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  struct __pyx_obj_7cybagoa_PyLayout *p;
   PyObject *o;
   if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
     o = (*t->tp_alloc)(t, 0);
@@ -4067,14 +4069,14 @@ static PyObject *__pyx_tp_new_7cybagoa_PyOALayout(PyTypeObject *t, CYTHON_UNUSED
     o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
   }
   if (unlikely(!o)) return 0;
-  p = ((struct __pyx_obj_7cybagoa_PyOALayout *)o);
-  new((void*)&(p->c_layout)) bagoa::OALayout();
+  p = ((struct __pyx_obj_7cybagoa_PyLayout *)o);
+  new((void*)&(p->c_layout)) baglayout::Layout();
   p->encoding = ((PyObject*)Py_None); Py_INCREF(Py_None);
   return o;
 }
 
-static void __pyx_tp_dealloc_7cybagoa_PyOALayout(PyObject *o) {
-  struct __pyx_obj_7cybagoa_PyOALayout *p = (struct __pyx_obj_7cybagoa_PyOALayout *)o;
+static void __pyx_tp_dealloc_7cybagoa_PyLayout(PyObject *o) {
+  struct __pyx_obj_7cybagoa_PyLayout *p = (struct __pyx_obj_7cybagoa_PyLayout *)o;
   #if PY_VERSION_HEX >= 0x030400a1
   if (unlikely(Py_TYPE(o)->tp_finalize) && (!PyType_IS_GC(Py_TYPE(o)) || !_PyGC_FINALIZED(o))) {
     if (PyObject_CallFinalizerFromDealloc(o)) return;
@@ -4085,20 +4087,20 @@ static void __pyx_tp_dealloc_7cybagoa_PyOALayout(PyObject *o) {
   (*Py_TYPE(o)->tp_free)(o);
 }
 
-static PyMethodDef __pyx_methods_7cybagoa_PyOALayout[] = {
-  {"add_inst", (PyCFunction)__pyx_pw_7cybagoa_10PyOALayout_3add_inst, METH_VARARGS|METH_KEYWORDS, 0},
-  {"add_rect", (PyCFunction)__pyx_pw_7cybagoa_10PyOALayout_5add_rect, METH_VARARGS|METH_KEYWORDS, 0},
-  {"add_via", (PyCFunction)__pyx_pw_7cybagoa_10PyOALayout_7add_via, METH_VARARGS|METH_KEYWORDS, 0},
-  {"add_pin", (PyCFunction)__pyx_pw_7cybagoa_10PyOALayout_9add_pin, METH_VARARGS|METH_KEYWORDS, 0},
+static PyMethodDef __pyx_methods_7cybagoa_PyLayout[] = {
+  {"add_inst", (PyCFunction)__pyx_pw_7cybagoa_8PyLayout_3add_inst, METH_VARARGS|METH_KEYWORDS, 0},
+  {"add_rect", (PyCFunction)__pyx_pw_7cybagoa_8PyLayout_5add_rect, METH_VARARGS|METH_KEYWORDS, 0},
+  {"add_via", (PyCFunction)__pyx_pw_7cybagoa_8PyLayout_7add_via, METH_VARARGS|METH_KEYWORDS, 0},
+  {"add_pin", (PyCFunction)__pyx_pw_7cybagoa_8PyLayout_9add_pin, METH_VARARGS|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_7cybagoa_PyOALayout = {
+static PyTypeObject __pyx_type_7cybagoa_PyLayout = {
   PyVarObject_HEAD_INIT(0, 0)
-  "cybagoa.PyOALayout", /*tp_name*/
-  sizeof(struct __pyx_obj_7cybagoa_PyOALayout), /*tp_basicsize*/
+  "cybagoa.PyLayout", /*tp_name*/
+  sizeof(struct __pyx_obj_7cybagoa_PyLayout), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_7cybagoa_PyOALayout, /*tp_dealloc*/
+  __pyx_tp_dealloc_7cybagoa_PyLayout, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -4126,7 +4128,7 @@ static PyTypeObject __pyx_type_7cybagoa_PyOALayout = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_7cybagoa_PyOALayout, /*tp_methods*/
+  __pyx_methods_7cybagoa_PyLayout, /*tp_methods*/
   0, /*tp_members*/
   0, /*tp_getset*/
   0, /*tp_base*/
@@ -4134,9 +4136,9 @@ static PyTypeObject __pyx_type_7cybagoa_PyOALayout = {
   0, /*tp_descr_get*/
   0, /*tp_descr_set*/
   0, /*tp_dictoffset*/
-  __pyx_pw_7cybagoa_10PyOALayout_1__init__, /*tp_init*/
+  __pyx_pw_7cybagoa_8PyLayout_1__init__, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_7cybagoa_PyOALayout, /*tp_new*/
+  __pyx_tp_new_7cybagoa_PyLayout, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -4417,13 +4419,13 @@ PyMODINIT_FUNC PyInit_cybagoa(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_7cybagoa_PyOALayout) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
-  __pyx_type_7cybagoa_PyOALayout.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "PyOALayout", (PyObject *)&__pyx_type_7cybagoa_PyOALayout) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
-  __pyx_ptype_7cybagoa_PyOALayout = &__pyx_type_7cybagoa_PyOALayout;
-  if (PyType_Ready(&__pyx_type_7cybagoa_PyOALayoutLibrary) < 0) __PYX_ERR(0, 118, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7cybagoa_PyLayout) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_type_7cybagoa_PyLayout.tp_print = 0;
+  if (PyObject_SetAttrString(__pyx_m, "PyLayout", (PyObject *)&__pyx_type_7cybagoa_PyLayout) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_ptype_7cybagoa_PyLayout = &__pyx_type_7cybagoa_PyLayout;
+  if (PyType_Ready(&__pyx_type_7cybagoa_PyOALayoutLibrary) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
   __pyx_type_7cybagoa_PyOALayoutLibrary.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "PyOALayoutLibrary", (PyObject *)&__pyx_type_7cybagoa_PyOALayoutLibrary) < 0) __PYX_ERR(0, 118, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "PyOALayoutLibrary", (PyObject *)&__pyx_type_7cybagoa_PyOALayoutLibrary) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
   __pyx_ptype_7cybagoa_PyOALayoutLibrary = &__pyx_type_7cybagoa_PyOALayoutLibrary;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/

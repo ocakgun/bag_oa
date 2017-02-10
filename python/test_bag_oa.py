@@ -1,6 +1,6 @@
-from cybagoa import PyOALayout, PyOALayoutLibrary
+from cybagoa import PyLayout, PyOALayoutLibrary
 
-layout = PyOALayout('utf-8')
+layout = PyLayout('utf-8')
 layout.add_rect(('M1', 'drawing'), [[0.0, 0.0], [0.2, 0.1]],
                 arr_nx=3, arr_ny=2, arr_spx=0.25, arr_spy=0.2)
 
