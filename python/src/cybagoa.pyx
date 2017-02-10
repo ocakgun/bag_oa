@@ -2,9 +2,10 @@
 
 from libcpp.string cimport string
 from libcpp.map cimport map
+from libcpp.vector cimport vector
 from libcpp cimport bool
 
-cdef extern from "bagLayout.hpp" namespace "baglayout":
+cdef extern from "bag.hpp" namespace "bag":
     cdef cppclass Layout:
         Layout()
 
@@ -34,6 +35,18 @@ cdef extern from "bagLayout.hpp" namespace "baglayout":
                      const string & purp_name, double xl, double yb,
                      double xr, double yt, bool make_pin_obj) except +
 
+    cdef cppclass SchInst:
+        SchInst()
+        string inst_name, lib_name, cell_name
+        map[string, string] params
+        map[string, string] term_map
+        
+    cdef cppclass SchCell:
+        SchCell()
+        string lib_name, cell_name, new_cell_name
+        map[string, string] pin_map
+        map[string, vector[SchInst]] inst_map
+
 
 cdef extern from "bagoa.hpp" namespace "bagoa":
     cdef cppclass LibDefObserver:
@@ -47,6 +60,13 @@ cdef extern from "bagoa.hpp" namespace "bagoa":
         void close() except +
         void create_layout(const string & cell, const string & view, const Layout & layout) except +
 
+    cdef cppclass OASchematicWriter:
+        OASchematicWriter()
+        void open_library(const string & lib_path, const string & library) except +
+        void close() except +
+        void create_schematics(const vector[SchCell] & cell_list, const string & sch_name,
+                               const string & sym_name) except +
+
 
 cdef class PyLayout:
     cdef Layout c_layout
@@ -55,7 +75,7 @@ cdef class PyLayout:
         self.encoding = encoding
 
     def add_inst(self, unicode lib, unicode cell, unicode view,
-                 unicode name, loc, unicode orient, params=None,
+                 unicode name, loc, unicode orient, object params=None,
                  int num_rows=1, int num_cols=1, double sp_rows=0.0,
                  double sp_cols=0.0):
         cdef map[string, int] int_map
@@ -84,7 +104,7 @@ cdef class PyLayout:
                                double_map, num_rows, num_cols,
                                sp_rows, sp_cols)
         
-    def add_rect(self, layer, bbox, int arr_nx=1, int arr_ny=1,
+    def add_rect(self, object layer, object bbox, int arr_nx=1, int arr_ny=1,
                  double arr_spx=0.0, double arr_spy=0.0):
         lay = layer[0].encode(self.encoding)
         purp = layer[1].encode(self.encoding)
@@ -94,7 +114,7 @@ cdef class PyLayout:
 
     def add_via(self, unicode id, loc, unicode orient,
                 int num_rows, int num_cols, double sp_rows, double sp_cols,
-                enc1, enc2, double cut_width=-1, double cut_height=-1,
+                object enc1, object enc2, double cut_width=-1, double cut_height=-1,
                 int arr_nx=1, int arr_ny=1, double arr_spx=0.0,
                 double arr_spy=0.0):
         via_name = id.encode(self.encoding)
@@ -105,8 +125,8 @@ cdef class PyLayout:
                               enc2[0], enc2[3], enc2[1], enc2[2],
                               cut_width, cut_height, arr_nx, arr_ny, arr_spx, arr_spy)
 
-    def add_pin(self, unicode net_name, unicode pin_name, unicode label, layer, bbox,
-                bool make_rect=True):
+    def add_pin(self, unicode net_name, unicode pin_name, unicode label, object layer,
+                object bbox, bool make_rect=True):
         c_net = net_name.encode(self.encoding)
         c_pin = pin_name.encode(self.encoding)
         c_label = label.encode(self.encoding)
@@ -115,8 +135,7 @@ cdef class PyLayout:
         self.c_layout.add_pin(c_net, c_pin, c_label, lay, purp,
                               bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1],
                               make_rect)
-
-
+        
 cdef class PyOALayoutLibrary:
     cdef OALayoutLibrary c_lib
     cdef bytes lib_path
@@ -149,3 +168,66 @@ cdef class PyOALayoutLibrary:
     def create_layout(self, unicode cell, unicode view, PyLayout layout):
         self.c_lib.create_layout(cell.encode(self.encoding), view.encode(self.encoding),
                                  layout.c_layout)
+
+
+cdef class PySchCell:
+    cdef SchCell c_inst
+    cdef unicode encoding
+    def __init__(self, unicode lib_name, unicode cell_name, unicode new_cell_name, unicode encoding):
+        self.encoding = encoding
+        self.c_inst.lib_name = lib_name.encode(encoding)
+        self.c_inst.cell_name = cell_name.encode(encoding)
+        self.c_inst.new_cell_name = new_cell_name.encode(encoding)
+
+    def rename_pin(self, unicode old_name, unicode new_name):
+        self.c_inst.pin_map[old_name.encode(self.encoding)] = new_name.encode(self.encoding)
+
+    def add_inst(self, unicode inst_name, unicode default_lib, object inst_list):
+        cdef vector[SchInst] cinst_list
+        cdef SchInst cur_inst
+        for inst in inst_list:
+            cur_inst = SchInst()
+            actual_lib = inst['lib_name'] or default_lib
+            cur_inst.inst_name = inst['name'].encode(self.encoding)
+            cur_inst.lib_name = actual_lib.encode(self.encoding)
+            cur_inst.cell_name = inst['cell_name'].encode(self.encoding)
+            for name, value in inst['params']:
+                cur_inst.params[name.encode(self.encoding)] = value.encode(self.encoding)
+            for name, value in inst['term_mapping']:
+                cur_inst.term_map[name.encode(self.encoding)] = value.encode(self.encoding)
+
+            cinst_list.push_back(cur_inst)
+
+        self.c_inst.inst_map[inst_name.encode(self.encoding)] = cinst_list
+
+
+cdef class PyOASchematicWriter:
+    cdef OASchematicWriter c_writer
+    cdef vector[SchCell] c_cell_list
+    cdef bytes lib_path
+    cdef bytes library
+    cdef unicode encoding
+    def __init__(self, unicode lib_path, unicode library, unicode encoding):
+        self.lib_path = lib_path.encode(encoding)
+        self.library = library.encode(encoding)
+        self.encoding = encoding
+    
+    def __enter__(self):
+        self.c_writer.open_library(self.lib_path, self.library)
+        return self
+
+    def __exit__(self, *args):
+        self.close()
+        
+    def __del__(self):
+        self.close()
+            
+    def close(self):
+        self.c_writer.close()
+
+    def add_sch_cell(self, PySchCell cell):
+        self.c_cell_list.push_back(cell.c_inst)
+    
+    def create_schematics(self, unicode sch_name, unicode sym_name):
+        self.c_writer.create_schematics(self.c_cell_list, sch_name.encode(self.encoding),
+                                        sym_name.encode(self.encoding))

@@ -4,7 +4,7 @@ from Cython.Build import cythonize
 
 setup(
     ext_modules=cythonize(Extension('cybagoa',
-                                    sources=['src/cybagoa.pyx', '../src/bagLayout.cpp', '../src/bagoa.cpp'],
+                                    sources=['src/cybagoa.pyx', '../src/bag.cpp', '../src/bagoa.cpp'],
                                     language='c++',
                                     include_dirs=[os.environ['OA_INCLUDE_DIR'],
                                                   '../include/'],

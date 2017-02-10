@@ -1,6 +1,6 @@
-#include "bagLayout.hpp"
+#include <bag.hpp>
 
-namespace baglayout {
+namespace bag {
 
 unsigned char get_orient_code(const std::string & orient_str) {
 	if (orient_str == "R0") {

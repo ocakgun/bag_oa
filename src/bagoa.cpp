@@ -112,7 +112,7 @@ void OALayoutLibrary::close() {
 }
 
 void OALayoutLibrary::create_layout(const std::string & cell, const std::string & view,
-		const baglayout::Layout & layout) {
+		const bag::Layout & layout) {
 	// do nothing if no library is opened
 	if (!is_open) {
 		return;
@@ -127,18 +127,16 @@ void OALayoutLibrary::create_layout(const std::string & cell, const std::string 
 		oa::oaBlock * blk_ptr = oa::oaBlock::create(dsn_ptr);
 
 		// create geometries
-		for (baglayout::InstIter it = layout.inst_list.begin(); it != layout.inst_list.end();
-				it++) {
+		for (bag::InstIter it = layout.inst_list.begin(); it != layout.inst_list.end(); it++) {
 			create_inst(blk_ptr, *it);
 		}
-		for (baglayout::RectIter it = layout.rect_list.begin(); it != layout.rect_list.end();
-				it++) {
+		for (bag::RectIter it = layout.rect_list.begin(); it != layout.rect_list.end(); it++) {
 			create_rect(blk_ptr, *it);
 		}
-		for (baglayout::ViaIter it = layout.via_list.begin(); it != layout.via_list.end(); it++) {
+		for (bag::ViaIter it = layout.via_list.begin(); it != layout.via_list.end(); it++) {
 			create_via(blk_ptr, *it);
 		}
-		for (baglayout::PinIter it = layout.pin_list.begin(); it != layout.pin_list.end(); it++) {
+		for (bag::PinIter it = layout.pin_list.begin(); it != layout.pin_list.end(); it++) {
 			create_pin(blk_ptr, *it);
 		}
 
@@ -173,7 +171,7 @@ void OALayoutLibrary::array_figure(oa::oaFig * fig_ptr, unsigned int nx, unsigne
 	}
 }
 
-void OALayoutLibrary::create_inst(oa::oaBlock * blk_ptr, const baglayout::Inst & inst) {
+void OALayoutLibrary::create_inst(oa::oaBlock * blk_ptr, const bag::Inst & inst) {
 	oa::oaScalarName lib_name(ns, oa::oaString(inst.lib_name.c_str()));
 	oa::oaScalarName cell_name(ns, oa::oaString(inst.cell_name.c_str()));
 	oa::oaScalarName view_name(ns, oa::oaString(inst.view_name.c_str()));
@@ -187,16 +185,15 @@ void OALayoutLibrary::create_inst(oa::oaBlock * blk_ptr, const baglayout::Inst &
 
 	// create oa ParamArray
 	oa::oaParamArray oa_params;
-	for (baglayout::IntIter it = inst.int_params.begin(); it != inst.int_params.end(); it++) {
+	for (bag::IntIter it = inst.int_params.begin(); it != inst.int_params.end(); it++) {
 		oa::oaString key(it->first.c_str());
 		oa_params.append(oa::oaParam(key, it->second));
 	}
-	for (baglayout::DoubleIter it = inst.double_params.begin(); it != inst.double_params.end();
-			it++) {
+	for (bag::DoubleIter it = inst.double_params.begin(); it != inst.double_params.end(); it++) {
 		oa::oaString key(it->first.c_str());
 		oa_params.append(oa::oaParam(key, it->second));
 	}
-	for (baglayout::StrIter it = inst.str_params.begin(); it != inst.str_params.end(); it++) {
+	for (bag::StrIter it = inst.str_params.begin(); it != inst.str_params.end(); it++) {
 		oa::oaString key(it->first.c_str());
 		oa_params.append(oa::oaParam(key, oa::oaString(it->second.c_str())));
 	}
@@ -215,7 +212,7 @@ void OALayoutLibrary::create_inst(oa::oaBlock * blk_ptr, const baglayout::Inst &
 	}
 }
 
-void OALayoutLibrary::create_via(oa::oaBlock * blk_ptr, const baglayout::Via & inst) {
+void OALayoutLibrary::create_via(oa::oaBlock * blk_ptr, const bag::Via & inst) {
 	oa::oaString oa_via_id = oa::oaString(inst.via_id.c_str());
 	oa::oaStdViaDef * vdef = static_cast<oa::oaStdViaDef *>(oa::oaViaDef::find(tech_ptr, oa_via_id));
 	if (vdef == NULL) {
@@ -255,7 +252,7 @@ void OALayoutLibrary::create_via(oa::oaBlock * blk_ptr, const baglayout::Via & i
 	array_figure(fig, inst.nx, inst.ny, inst.spx, inst.spy);
 }
 
-void OALayoutLibrary::create_rect(oa::oaBlock * blk_ptr, const baglayout::Rect & inst) {
+void OALayoutLibrary::create_rect(oa::oaBlock * blk_ptr, const bag::Rect & inst) {
 	LayerIter lay_iter = lay_map.find(inst.layer);
 	if (lay_iter == lay_map.end()) {
 		std::cout << "create_rect: unknown layer " << inst.layer << ", skipping." << std::endl;
@@ -276,7 +273,7 @@ void OALayoutLibrary::create_rect(oa::oaBlock * blk_ptr, const baglayout::Rect &
 	array_figure(static_cast<oa::oaFig *>(r), inst.nx, inst.ny, inst.spx, inst.spy);
 }
 
-void OALayoutLibrary::create_pin(oa::oaBlock * blk_ptr, const baglayout::Pin & inst) {
+void OALayoutLibrary::create_pin(oa::oaBlock * blk_ptr, const bag::Pin & inst) {
 	// draw pin rectangle
 	LayerIter lay_iter = lay_map.find(inst.layer);
 	if (lay_iter == lay_map.end()) {
@@ -334,4 +331,97 @@ void OALayoutLibrary::create_pin(oa::oaBlock * blk_ptr, const baglayout::Pin & i
 		r->addToPin(pin);
 	}
 }
+
+void OASchematicWriter::open_library(const std::string & lib_path, const std::string & library) {
+	try {
+		oaDesignInit
+		( oacAPIMajorRevNumber, oacAPIMinorRevNumber, oacDataModelRevNumber);
+
+		// open library definition
+		oa::oaString lib_def_path(lib_path.c_str());
+		oa::oaLibDefList::openLibs(lib_def_path);
+
+		// open library
+		lib_name = oa::oaScalarName(ns, library.c_str());
+		lib_ptr = oa::oaLib::find(lib_name);
+		if (lib_ptr == NULL) {
+			throw std::invalid_argument("Cannot find library " + library);
+		} else if (!lib_ptr->isValid()) {
+			throw std::invalid_argument("Invalid library: " + library);
+		}
+
+		is_open = true;
+	} catch (oa::oaCompatibilityError &ex) {
+		throw std::runtime_error(
+				"OA Compatibility Error: " + static_cast<std::string>(ex.getMsg()));
+	} catch (oa::oaDMError &ex) {
+		throw std::runtime_error("OA DM Error: " + static_cast<std::string>(ex.getMsg()));
+	} catch (oa::oaError &ex) {
+		throw std::runtime_error("OA Error: " + static_cast<std::string>(ex.getMsg()));
+	}
+}
+
+void OASchematicWriter::create_schematics(const std::vector<bag::SchCell> & cell_list,
+		const std::string & sch_name, const std::string & sym_name) {
+	// do nothing if no library is opened
+	if (!is_open) {
+		return;
+	}
+
+	try {
+		oa::oaScalarName sch_view(ns, sch_name.c_str());
+		oa::oaScalarName sym_view(ns, sym_name.c_str());
+		oa::oaString part_name_prop("partName");
+		std::vector<bag::SchCell>::const_iterator it;
+		for (std::vector<bag::SchCell>::const_iterator it = cell_list.begin();
+				it != cell_list.end(); it++) {
+			oa::oaScalarName sch_lib(ns, it->lib_name.c_str());
+			oa::oaScalarName cell_name(ns, it->cell_name.c_str());
+			oa::oaScalarName new_cell_name(ns, it->new_cell_name.c_str());
+			oa::oaBoolean rename_module = (it->cell_name != it->new_cell_name);
+
+			// oa::oaString debug_lib;
+			// lib_name.get(debug_lib);
+			// std::cout << "copying " << it->lib_name << ", " << it->cell_name << " to " << debug_lib
+			// 		<< ", " << it->new_cell_name << " , rename = " << rename_module << std::endl;
+
+			// copy schematic
+			oa::oaDesign * dsn_ptr = oa::oaDesign::open(sch_lib, cell_name, sch_view,
+					oa::oaViewType::get(oa::oacSchematic), 'r');
+			dsn_ptr->saveAs(lib_name, new_cell_name, sch_view, rename_module);
+			dsn_ptr->close();
+
+			// open symbol
+			dsn_ptr = oa::oaDesign::open(sch_lib, cell_name, sym_view,
+					oa::oaViewType::get(oa::oacSchematicSymbol), 'r');
+			// modify partName property
+			oa::oaStringProp * prop_ptr = static_cast<oa::oaStringProp *>(oa::oaProp::find(dsn_ptr,
+					part_name_prop));
+			if (prop_ptr != NULL) {
+				prop_ptr->setValue(oa::oaString(it->new_cell_name.c_str()));
+			} else {
+				std::cout << "create_schematic : cannot find partName property, not modifying."
+						<< std::endl;
+			}
+			// copy symbol
+			dsn_ptr->saveAs(lib_name, new_cell_name, sym_view, rename_module);
+			dsn_ptr->close();
+		}
+
+	} catch (oa::oaDesignError &ex) {
+		throw std::runtime_error("OA Design Error: " + static_cast<std::string>(ex.getMsg()));
+	} catch (oa::oaError &ex) {
+		throw std::runtime_error("OA Error: " + static_cast<std::string>(ex.getMsg()));
+	}
+}
+
+void OASchematicWriter::close() {
+	if (is_open) {
+		lib_ptr->close();
+
+		is_open = false;
+	}
+
+}
+
 }

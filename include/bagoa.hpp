@@ -1,8 +1,9 @@
 #ifndef BAGOA_H_
 #define BAGOA_H_
 
+#include <bag.hpp>
+
 #include "oaDesignDB.h"
-#include "bagLayout.hpp"
 
 // techID = techOpenTechFile(lib_name "tech.oa" "r")
 // techGetPurposeNum(techID "pin")
@@ -34,8 +35,7 @@ public:
 class OALayoutLibrary {
 public:
 	OALayoutLibrary() :
-			is_open(false), dbu_per_uu(1000), lib_def_obs(1), lib_ptr(NULL),
-			tech_ptr(NULL) {
+			is_open(false), dbu_per_uu(1000), lib_def_obs(1), lib_ptr(NULL), tech_ptr(NULL) {
 	}
 	~OALayoutLibrary() {
 	}
@@ -49,16 +49,16 @@ public:
 	void close();
 
 	void create_layout(const std::string & cell, const std::string & view,
-			const baglayout::Layout & layout);
+			const bag::Layout & layout);
 
 private:
 	oa::oaCoord double_to_oa(double val);
 	void array_figure(oa::oaFig * fig_ptr, unsigned int nx, unsigned int ny, double spx,
 			double spy);
-	void create_inst(oa::oaBlock * blk_ptr, const baglayout::Inst & inst);
-	void create_rect(oa::oaBlock * blk_ptr, const baglayout::Rect & inst);
-	void create_via(oa::oaBlock * blk_ptr, const baglayout::Via & inst);
-	void create_pin(oa::oaBlock * blk_ptr, const baglayout::Pin & inst);
+	void create_inst(oa::oaBlock * blk_ptr, const bag::Inst & inst);
+	void create_rect(oa::oaBlock * blk_ptr, const bag::Rect & inst);
+	void create_via(oa::oaBlock * blk_ptr, const bag::Via & inst);
+	void create_pin(oa::oaBlock * blk_ptr, const bag::Pin & inst);
 
 	bool is_open;
 	oa::oaUInt4 dbu_per_uu;
@@ -68,6 +68,29 @@ private:
 
 	oa::oaLib * lib_ptr;
 	oa::oaTech * tech_ptr;
+	oa::oaScalarName lib_name;
+};
+
+class OASchematicWriter {
+public:
+	OASchematicWriter() :
+			is_open(false), lib_def_obs(1), lib_ptr(NULL) {
+	}
+	~OASchematicWriter() {
+	}
+
+	void open_library(const std::string & lib_path, const std::string & library);
+
+	void create_schematics(const std::vector<bag::SchCell> & cell_list,
+			const std::string & sch_name, const std::string & sym_name);
+
+	void close();
+
+private:
+	bool is_open;
+	LibDefObserver lib_def_obs;
+
+	oa::oaLib * lib_ptr;
 	oa::oaScalarName lib_name;
 };
 

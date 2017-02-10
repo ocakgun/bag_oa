@@ -1,5 +1,5 @@
-#ifndef BAGLAYOUT_H_
-#define BAGLAYOUT_H_
+#ifndef BAG_H_
+#define BAG_H_
 
 #include <iostream>
 #include <exception>
@@ -8,7 +8,11 @@
 #include <map>
 #include <vector>
 
-namespace baglayout {
+namespace bag {
+
+/*
+ *  Layout related classes
+ */
 
 typedef std::map<std::string, unsigned int> LayerMap;
 typedef LayerMap::iterator LayerIter;
@@ -21,6 +25,7 @@ typedef StrMap::const_iterator StrIter;
 typedef std::map<std::string, double> DoubleMap;
 typedef DoubleMap::const_iterator DoubleIter;
 
+// a layout instance
 struct Inst {
 	std::string lib_name;
 	std::string cell_name;
@@ -38,6 +43,7 @@ struct Inst {
 typedef std::vector<Inst> InstList;
 typedef InstList::const_iterator InstIter;
 
+// a layout rectangle
 struct Rect {
 	std::string layer;
 	std::string purpose;
@@ -49,6 +55,7 @@ struct Rect {
 typedef std::vector<Rect> RectList;
 typedef RectList::const_iterator RectIter;
 
+// a layout via
 struct Via {
 	std::string via_id;
 	unsigned char orient;
@@ -67,6 +74,7 @@ struct Via {
 typedef std::vector<Via> ViaList;
 typedef ViaList::const_iterator ViaIter;
 
+// a layout pin
 struct Pin {
 	std::string layer;
 	std::string purpose;
@@ -80,6 +88,7 @@ struct Pin {
 typedef std::vector<Pin> PinList;
 typedef PinList::const_iterator PinIter;
 
+// a class containing layout information of a cell.
 class Layout {
 public:
 	Layout() {
@@ -115,6 +124,40 @@ public:
 };
 
 unsigned char get_orient_code(const std::string & orient_str);
+
+/*
+ *  Schematic related classes
+ */
+
+// a class representing how to change a schematic instance
+class SchInst {
+public:
+	SchInst() {
+	}
+	~SchInst() {
+	}
+
+	std::string inst_name;
+	std::string lib_name;
+	std::string cell_name;
+	StrMap params;
+	StrMap term_map;
+};
+
+// a class representing how to modify a schematic cell
+class SchCell {
+public:
+	SchCell() {
+	}
+	~SchCell() {
+	}
+
+	std::string lib_name;
+	std::string cell_name;
+	std::string new_cell_name;
+	StrMap pin_map;
+	std::map<std::string, std::vector<SchInst> > inst_map;
+};
 
 }
 
