@@ -1,7 +1,9 @@
 # list sources explicitly, so if we add/remove sources cmake 
 # knows to update makefiles.
-set(SOURCES 
+set(SOURCES
+  bagLayout.cpp 
   bagoa.cpp
+  ${CMAKE_SOURCE_DIR}/include/bagLayout.hpp
   ${CMAKE_SOURCE_DIR}/include/bagoa.hpp
   )
 

@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
         double enc2[] = {0.4, 0.3, 0.2, 0.1};
 
         // create layout
-        bagoa::OALayout layout;
+        baglayout::Layout layout;
         layout.add_rect(argv[1], "drawing", 0.0, 0.0, 0.2, 0.1, 3, 2, 0.3, 0.6);
         layout.add_via(argv[2], 0.25, 0.25, "R0", 2, 3, 0.1, 0.15,
                        enc1[0], enc1[3], enc1[1], enc1[2],
