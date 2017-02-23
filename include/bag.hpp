@@ -55,6 +55,19 @@ struct Rect {
 typedef std::vector<Rect> RectList;
 typedef RectList::const_iterator RectIter;
 
+// a layout path segment
+struct PathSeg {
+	std::string layer;
+	std::string purpose;
+	double x0, y0, x1, y1;
+	double width;
+	std::string begin_style;
+	std::string end_style;
+};
+
+typedef std::vector<PathSeg> PathSegList;
+typedef PathSegList::const_iterator PathSegIter;
+
 // a layout via
 struct Via {
 	std::string via_id;
@@ -106,6 +119,10 @@ public:
 			double xr, double yt, unsigned int nx = 1, unsigned int ny = 1, double spx = 0,
 			double spy = 0);
 
+	void add_path_seg(const std::string & lay_name, const std::string & purp_name,
+			double x0, double y0, double x1, double y1, double width,
+			const std::string & begin_style, const std::string & end_style);
+
 	void add_via(const std::string & via_name, double xc, double yc, const std::string & orient,
 			unsigned int num_rows, unsigned int num_cols, double sp_rows, double sp_cols,
 			double enc1_xl, double enc1_yb, double enc1_xr, double enc1_yt, double enc2_xl,
@@ -121,6 +138,7 @@ public:
 	RectList rect_list;
 	ViaList via_list;
 	PinList pin_list;
+	PathSegList path_seg_list;
 };
 
 unsigned char get_orient_code(const std::string & orient_str);

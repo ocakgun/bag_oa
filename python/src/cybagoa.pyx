@@ -21,6 +21,11 @@ cdef extern from "bag.hpp" namespace "bag":
                       unsigned int nx, unsigned int ny,
                       double spx, double spy) except +
 
+        void add_path_seg(const string & lay_name, const string & purp_name,
+                          double x0, double y0, double x1, double y1,
+                          double width, const string & begin_style,
+                          const string & end_style) except +
+
         void add_via(const string & via_name, double xc, double yc,
                      const string & orient, unsigned int num_rows,
                      unsigned int num_cols, double sp_rows, double sp_cols,
@@ -75,71 +80,118 @@ cdef class PyLayout:
         self.encoding = encoding
 
     def add_inst(self, unicode lib, unicode cell, unicode view,
-                 unicode name, loc, unicode orient, object params=None,
+                 unicode name, object loc, unicode orient, object params=None,
                  int num_rows=1, int num_cols=1, double sp_rows=0.0,
                  double sp_cols=0.0):
         cdef map[string, int] int_map
         cdef map[string, string] str_map
         cdef map[string, double] double_map
-        lib_name = lib.encode(self.encoding)
-        cell_name = cell.encode(self.encoding)
-        view_name = view.encode(self.encoding)
-        inst_name = name.encode(self.encoding)
-        c_orient = orient.encode(self.encoding)
-        params = params or {}
-        for key, val in params.items():
-            key = key.encode(self.encoding)
-            if isinstance(val, bytes):
-                str_map[key] = val
-            elif isinstance(val, unicode):
-                str_map[key] = val.encode(self.encoding)
-            elif isinstance(val, int):
-                int_map[key] = val
-            elif isinstance(val, float):
-                double_map[key] = val
+        cdef string lib_name = lib.encode(self.encoding)
+        cdef string cell_name = cell.encode(self.encoding)
+        cdef string view_name = view.encode(self.encoding)
+        cdef string inst_name = name.encode(self.encoding)
+        cdef string c_orient = orient.encode(self.encoding)
+        cdef string par_key
+        cdef double xo = loc[0]
+        cdef double yo = loc[1]
+        if params is not None:
+            for key, val in params.items():
+                par_key = key.encode(self.encoding)
+                if isinstance(val, bytes):
+                    str_map[par_key] = val
+                elif isinstance(val, unicode):
+                    str_map[par_key] = val.encode(self.encoding)
+                elif isinstance(val, int):
+                    int_map[par_key] = val
+                elif isinstance(val, float):
+                    double_map[par_key] = val
 
         self.c_layout.add_inst(lib_name, cell_name, view_name,
-                               inst_name, loc[0], loc[1],
+                               inst_name, xo, yo,
                                c_orient, int_map, str_map,
                                double_map, num_rows, num_cols,
                                sp_rows, sp_cols)
         
-    def add_rect(self, object layer, object bbox, int arr_nx=1, int arr_ny=1,
+    def add_rect(self, object layer, object bbox,
+                 int arr_nx=1, int arr_ny=1,
                  double arr_spx=0.0, double arr_spy=0.0):
-        lay = layer[0].encode(self.encoding)
-        purp = layer[1].encode(self.encoding)
-        self.c_layout.add_rect(lay, purp, bbox[0][0], bbox[0][1],
-                               bbox[1][0], bbox[1][1], arr_nx, arr_ny,
+        cdef string lay = layer[0].encode(self.encoding)
+        cdef string purp = layer[1].encode(self.encoding)
+        cdef double xl = bbox[0][0]
+        cdef double yb = bbox[0][1]
+        cdef double xr = bbox[1][0]
+        cdef double yt = bbox[1][1]
+        self.c_layout.add_rect(lay, purp, xl, yb, xr, yt, arr_nx, arr_ny,
                                arr_spx, arr_spy)
+
+    def add_path(self, object layer, double width, list points,
+                 unicode end_style, unicode join_style):
+        cdef string lay = layer[0].encode(self.encoding)
+        cdef string purp = layer[1].encode(self.encoding)
+        cdef string estyle = end_style.encode(self.encoding)
+        cdef string jstyle = join_style.encode(self.encoding)
+        cdef string start_s, stop_s
+        cdef double x0, y0, x1, y1
+        cdef int plen = len(points)
+        cdef int idx
+        for idx, p in enumerate(points):
+            x1, y1 = p[0], p[1]
+            if idx > 0:
+                if idx == 1:
+                    start_s = estyle
+                    stop_s = jstyle
+                elif idx == plen - 1:
+                    start_s = jstyle
+                    stop_s = estyle
+                else:
+                    start_s = jstyle
+                    stop_s = jstyle
+                    self.c_layout.add_path_seg(lay, purp, x0, y0, x1, y1, width,
+                                               start_s, stop_s)
+            x0, y0 = x1, y1
 
     def add_via(self, unicode id, loc, unicode orient,
                 int num_rows, int num_cols, double sp_rows, double sp_cols,
                 object enc1, object enc2, double cut_width=-1, double cut_height=-1,
                 int arr_nx=1, int arr_ny=1, double arr_spx=0.0,
                 double arr_spy=0.0):
-        via_name = id.encode(self.encoding)
-        via_orient = orient.encode(self.encoding)
-        self.c_layout.add_via(via_name, loc[0], loc[1], via_orient, 
+        cdef string via_name = id.encode(self.encoding)
+        cdef string via_orient = orient.encode(self.encoding)
+        cdef double xo = loc[0]
+        cdef double yo = loc[1]
+        cdef double xl1 = enc1[0]
+        cdef double yb1 = enc1[3]
+        cdef double xr1 = enc1[1]
+        cdef double yt1 = enc1[2]
+        cdef double xl2 = enc2[0]
+        cdef double yb2 = enc2[3]
+        cdef double xr2 = enc2[1]
+        cdef double yt2 = enc2[2]
+        self.c_layout.add_via(via_name, xo, yo, via_orient, 
                               num_rows, num_cols, sp_rows, sp_cols,
-                              enc1[0], enc1[3], enc1[1], enc1[2],
-                              enc2[0], enc2[3], enc2[1], enc2[2],
+                              xl1, yb1, xr1, yt1,
+                              xl2, yb2, xr2, yt2,
                               cut_width, cut_height, arr_nx, arr_ny, arr_spx, arr_spy)
 
     def add_pin(self, unicode net_name, unicode pin_name, unicode label, object layer,
                 object bbox, bool make_rect=True):
-        c_net = net_name.encode(self.encoding)
-        c_pin = pin_name.encode(self.encoding)
-        c_label = label.encode(self.encoding)
-        lay = layer[0].encode(self.encoding)
-        purp = layer[1].encode(self.encoding)
+        cdef string c_net = net_name.encode(self.encoding)
+        cdef string c_pin = pin_name.encode(self.encoding)
+        cdef string c_label = label.encode(self.encoding)
+        cdef string lay = layer[0].encode(self.encoding)
+        cdef string purp = layer[1].encode(self.encoding)
+        cdef double xl = bbox[0][0]
+        cdef double yb = bbox[0][1]
+        cdef double xr = bbox[1][0]
+        cdef double yt = bbox[1][1]
         self.c_layout.add_pin(c_net, c_pin, c_label, lay, purp,
-                              bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1],
+                              xl, yb, xr, yt,
                               make_rect)
         
 cdef class PyOALayoutLibrary:
     cdef OALayoutLibrary c_lib
-    cdef bytes lib_path
-    cdef bytes library
+    cdef string lib_path
+    cdef string library
     cdef unicode encoding
     def __init__(self, unicode lib_path, unicode library, unicode encoding):
         self.lib_path = lib_path.encode(encoding)
@@ -160,14 +212,17 @@ cdef class PyOALayoutLibrary:
         self.c_lib.close()
         
     def add_purpose(self, unicode purp_name, int purp_num):
-        self.c_lib.add_purpose(purp_name.encode(self.encoding), purp_num)
+        cdef string purp = purp_name.encode(self.encoding)
+        self.c_lib.add_purpose(purp, purp_num)
 
     def add_layer(self, unicode lay_name, int lay_num):
-        self.c_lib.add_layer(lay_name.encode(self.encoding), lay_num)
+        cdef string lay = lay_name.encode(self.encoding)
+        self.c_lib.add_layer(lay, lay_num)
 
     def create_layout(self, unicode cell, unicode view, PyLayout layout):
-        self.c_lib.create_layout(cell.encode(self.encoding), view.encode(self.encoding),
-                                 layout.c_layout)
+        cdef string cname = cell.encode(self.encoding)
+        cdef string vname = view.encode(self.encoding)
+        self.c_lib.create_layout(cname, vname, layout.c_layout)
 
 
 cdef class PySchCell:
@@ -180,14 +235,20 @@ cdef class PySchCell:
         self.c_inst.new_cell_name = new_cell_name.encode(encoding)
 
     def rename_pin(self, unicode old_name, unicode new_name):
-        self.c_inst.pin_map[old_name.encode(self.encoding)] = new_name.encode(self.encoding)
+        cdef string oname = old_name.encode(self.encoding)
+        cdef string nname = new_name.encode(self.encoding)
+        self.c_inst.pin_map[oname] = nname
 
     def add_inst(self, unicode inst_name, unicode default_lib, object inst_list):
         cdef vector[SchInst] cinst_list
         cdef SchInst cur_inst
+        cdef unicode actual_lib
+        cdef string iname = inst_name.encode(self.encoding)
         for inst in inst_list:
             cur_inst = SchInst()
-            actual_lib = inst['lib_name'] or default_lib
+            actual_lib = inst['lib_name']
+            if actual_lib is None:
+                actual_lib = default_lib
             cur_inst.inst_name = inst['name'].encode(self.encoding)
             cur_inst.lib_name = actual_lib.encode(self.encoding)
             cur_inst.cell_name = inst['cell_name'].encode(self.encoding)
@@ -198,14 +259,14 @@ cdef class PySchCell:
 
             cinst_list.push_back(cur_inst)
 
-        self.c_inst.inst_map[inst_name.encode(self.encoding)] = cinst_list
+        self.c_inst.inst_map[iname] = cinst_list
 
 
 cdef class PyOASchematicWriter:
     cdef OASchematicWriter c_writer
     cdef vector[SchCell] c_cell_list
-    cdef bytes lib_path
-    cdef bytes library
+    cdef string lib_path
+    cdef string library
     cdef unicode encoding
     def __init__(self, unicode lib_path, unicode library, unicode encoding):
         self.lib_path = lib_path.encode(encoding)
@@ -229,5 +290,7 @@ cdef class PyOASchematicWriter:
         self.c_cell_list.push_back(cell.c_inst)
     
     def create_schematics(self, unicode sch_name, unicode sym_name):
-        self.c_writer.create_schematics(self.c_cell_list, sch_name.encode(self.encoding),
-                                        sym_name.encode(self.encoding))
+        cdef string c_sch_name = sch_name.encode(self.encoding)
+        cdef string c_sym_name = sym_name.encode(self.encoding)
+        self.c_writer.create_schematics(self.c_cell_list, c_sch_name,
+                                        c_sym_name)

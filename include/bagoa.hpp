@@ -57,6 +57,7 @@ private:
 			double spy);
 	void create_inst(oa::oaBlock * blk_ptr, const bag::Inst & inst);
 	void create_rect(oa::oaBlock * blk_ptr, const bag::Rect & inst);
+	void create_path_seg(oa::oaBlock * blk_ptr, const bag::PathSeg & inst);
 	void create_via(oa::oaBlock * blk_ptr, const bag::Via & inst);
 	void create_pin(oa::oaBlock * blk_ptr, const bag::Pin & inst);
 

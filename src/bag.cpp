@@ -60,6 +60,22 @@ void Layout::add_rect(const std::string & lay_name, const std::string & purp_nam
 	rect_list.push_back(r);
 }
 
+void Layout::add_path_seg(const std::string & lay_name, const std::string & purp_name, double x0,
+		double y0, double x1, double y1, double width, const std::string & begin_style,
+		const std::string & end_style) {
+	PathSeg p;
+	p.layer = lay_name;
+	p.purpose = purp_name;
+	p.x0 = x0;
+	p.y0 = y0;
+	p.x1 = x1;
+	p.y1 = y1;
+	p.width= width;
+	p.begin_style = begin_style;
+	p.end_style = end_style;
+	path_seg_list.push_back(p);
+}
+
 void Layout::add_via(const std::string & via_name, double xc, double yc, const std::string & orient,
 		unsigned int num_rows, unsigned int num_cols, double sp_rows, double sp_cols,
 		double enc1_xl, double enc1_yb, double enc1_xr, double enc1_yt, double enc2_xl,

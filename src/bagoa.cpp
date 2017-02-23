@@ -133,6 +133,10 @@ void OALayoutLibrary::create_layout(const std::string & cell, const std::string 
 		for (bag::RectIter it = layout.rect_list.begin(); it != layout.rect_list.end(); it++) {
 			create_rect(blk_ptr, *it);
 		}
+		for (bag::PathSegIter it = layout.path_seg_list.begin(); it != layout.path_seg_list.end();
+				it++) {
+			create_path_seg(blk_ptr, *it);
+		}
 		for (bag::ViaIter it = layout.via_list.begin(); it != layout.via_list.end(); it++) {
 			create_via(blk_ptr, *it);
 		}
@@ -271,6 +275,51 @@ void OALayoutLibrary::create_rect(oa::oaBlock * blk_ptr, const bag::Rect & inst)
 			double_to_oa(inst.bbox[2]), double_to_oa(inst.bbox[3]));
 	oa::oaRect * r = oa::oaRect::create(blk_ptr, layer, purpose, box);
 	array_figure(static_cast<oa::oaFig *>(r), inst.nx, inst.ny, inst.spx, inst.spy);
+}
+
+void OALayoutLibrary::create_path_seg(oa::oaBlock * blk_ptr, const bag::PathSeg & inst) {
+	LayerIter lay_iter = lay_map.find(inst.layer);
+	if (lay_iter == lay_map.end()) {
+		std::cout << "create_path_seg: unknown layer " << inst.layer << ", skipping." << std::endl;
+		return;
+	}
+	oa::oaLayerNum layer = lay_iter->second;
+
+	PurposeIter purp_iter = purp_map.find(inst.purpose);
+	if (purp_iter == purp_map.end()) {
+		std::cout << "create_path_seg: unknown purpose " << inst.purpose << ", skipping."
+				<< std::endl;
+		return;
+	}
+	oa::oaPurposeNum purpose = purp_iter->second;
+
+	oa::oaPoint start = oa::oaPoint(double_to_oa(inst.x0), double_to_oa(inst.y0));
+	oa::oaPoint stop = oa::oaPoint(double_to_oa(inst.x1), double_to_oa(inst.y1));
+
+	oa::oaDist width, diagExt;
+	if (start.x() != stop.x() and start.y() != stop.y()) {
+		// both X and Y coordinate differ, must be diagonal
+		// set width in diagonal unit, round to even
+		width = double_to_oa(inst.width * sqrt(2) / 2) * 2;
+		diagExt = double_to_oa(inst.width / 2);
+	} else {
+		width = double_to_oa(inst.width / 2) * 2;
+		diagExt = double_to_oa(inst.width * sqrt(2) / 2);
+	}
+
+	oa::oaSegStyle style(width, oa::oacTruncateEndStyle, oa::oacTruncateEndStyle);
+	if (inst.begin_style == "extend") {
+		style.setBeginStyle(oa::oacExtendEndStyle);
+	} else if (inst.begin_style == "round") {
+		style.setBeginStyle(oa::oacCustomEndStyle, width / 2, diagExt, diagExt, width / 2);
+	}
+	if (inst.end_style == "extend") {
+		style.setEndStyle(oa::oacExtendEndStyle);
+	} else if (inst.end_style == "round") {
+		style.setEndStyle(oa::oacCustomEndStyle, width / 2, diagExt, diagExt, width / 2);
+	}
+
+	oa::oaPathSeg::create(blk_ptr, layer, purpose, start, stop, style);
 }
 
 void OALayoutLibrary::create_pin(oa::oaBlock * blk_ptr, const bag::Pin & inst) {
