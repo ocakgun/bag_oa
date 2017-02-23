@@ -146,8 +146,8 @@ cdef class PyLayout:
                 else:
                     start_s = jstyle
                     stop_s = jstyle
-                    self.c_layout.add_path_seg(lay, purp, x0, y0, x1, y1, width,
-                                               start_s, stop_s)
+                self.c_layout.add_path_seg(lay, purp, x0, y0, x1, y1, width,
+                                           start_s, stop_s)
             x0, y0 = x1, y1
 
     def add_via(self, unicode id, loc, unicode orient,
