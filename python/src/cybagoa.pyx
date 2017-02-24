@@ -137,15 +137,11 @@ cdef class PyLayout:
         for idx, p in enumerate(points):
             x1, y1 = p[0], p[1]
             if idx > 0:
+                start_s = stop_s = jstyle
                 if idx == 1:
                     start_s = estyle
-                    stop_s = jstyle
-                elif idx == plen - 1:
-                    start_s = jstyle
+                if idx == plen - 1:
                     stop_s = estyle
-                else:
-                    start_s = jstyle
-                    stop_s = jstyle
                 self.c_layout.add_path_seg(lay, purp, x0, y0, x1, y1, width,
                                            start_s, stop_s)
             x0, y0 = x1, y1
