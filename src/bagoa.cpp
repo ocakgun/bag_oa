@@ -143,6 +143,9 @@ void OALayoutLibrary::create_layout(const std::string & cell, const std::string 
 		for (bag::PinIter it = layout.pin_list.begin(); it != layout.pin_list.end(); it++) {
 			create_pin(blk_ptr, *it);
 		}
+		for (bag::BlockageIter it = layout.block_list.begin(); it != layout.block_list.end(); it++) {
+			create_blockage(blk_ptr, *it);
+		}
 
 		// save and close
 		dsn_ptr->save();
@@ -378,6 +381,30 @@ void OALayoutLibrary::create_pin(oa::oaBlock * blk_ptr, const bag::Pin & inst) {
 		oa::oaString oa_pin_name = oa::oaString(inst.pin_name.c_str());
 		oa::oaPin * pin = oa::oaPin::create(term, oa_pin_name, pin_dir);
 		r->addToPin(pin);
+	}
+}
+
+void OALayoutLibrary::create_blockage(oa::oaBlock * blk_ptr, const bag::Blockage & inst) {
+	// make oaPointArray
+	oa::oaPointArray pt_arr;
+	for (unsigned int idx = 0; idx < inst.xcoord.size(); idx++) {
+		oa::oaCoord x_unit = double_to_oa(inst.xcoord[idx]);
+		oa::oaCoord y_unit = double_to_oa(inst.ycoord[idx]);
+		pt_arr.append(oa::oaPoint(x_unit, y_unit));
+	}
+	if (inst.type == "placement") {
+		// area blockage
+		oa::oaAreaBlockage::create(blk_ptr, pt_arr);
+	} else {
+		LayerIter lay_iter = lay_map.find(inst.layer);
+		if (lay_iter == lay_map.end()) {
+			std::cout << "create_rect: unknown layer " << inst.layer << ", skipping." << std::endl;
+			return;
+		}
+		oa::oaLayerNum layer = lay_iter->second;
+		oa::oaBlockageType block_type(oa::oaString(inst.type.c_str()));
+
+		oa::oaLayerBlockage::create(blk_ptr, block_type, layer, pt_arr);
 	}
 }
 

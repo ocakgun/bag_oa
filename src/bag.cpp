@@ -126,4 +126,14 @@ void Layout::add_pin(const std::string & net_name, const std::string & pin_name,
 	pin_list.push_back(p);
 }
 
+void Layout::add_blockage(const std::string & type, const std::string & layer, const std::vector<double> & xcoord,
+		const std::vector<double> & ycoord) {
+	Blockage b;
+	b.type = type;
+	b.layer = layer;
+	b.xcoord = xcoord;
+	b.ycoord = ycoord;
+}
+
+
 }

@@ -43,6 +43,17 @@ struct Inst {
 typedef std::vector<Inst> InstList;
 typedef InstList::const_iterator InstIter;
 
+// a layer/area blockage object
+struct Blockage {
+	std::string layer;
+	std::string type;
+	std::vector<double> xcoord;
+	std::vector<double> ycoord;
+};
+
+typedef std::vector<Blockage> BlockageList;
+typedef BlockageList::const_iterator BlockageIter;
+
 // a layout rectangle
 struct Rect {
 	std::string layer;
@@ -134,11 +145,15 @@ public:
 			const std::string & label, const std::string & lay_name, const std::string & purp_name,
 			double xl, double yb, double xr, double yt, bool make_pin_obj = true);
 
+	void add_blockage(const std::string & type, const std::string & layer, const std::vector<double> & xcoord,
+			const std::vector<double> & ycoord);
+
 	InstList inst_list;
 	RectList rect_list;
 	ViaList via_list;
 	PinList pin_list;
 	PathSegList path_seg_list;
+	BlockageList block_list;
 };
 
 unsigned char get_orient_code(const std::string & orient_str);

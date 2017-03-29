@@ -1,7 +1,7 @@
 # list sources explicitly, so if we add/remove sources cmake 
 # knows to update makefiles.
 set(SOURCES
-  test.cpp
+  read_oa.cpp
   )
 
 # setup link library path.  Must call before defining target.
