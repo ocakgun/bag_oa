@@ -133,6 +133,8 @@ void Layout::add_blockage(const std::string & type, const std::string & layer, c
 	b.layer = layer;
 	b.xcoord = xcoord;
 	b.ycoord = ycoord;
+
+        block_list.push_back(b);
 }
 
 

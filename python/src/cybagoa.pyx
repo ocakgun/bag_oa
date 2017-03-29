@@ -40,6 +40,9 @@ cdef extern from "bag.hpp" namespace "bag":
                      const string & purp_name, double xl, double yb,
                      double xr, double yt, bool make_pin_obj) except +
 
+        void add_blockage(const string & btype, const string & layer, const vector[double] & xcoord,
+                          const vector[double] & ycoord) except + 
+        
     cdef cppclass SchInst:
         SchInst()
         string inst_name, lib_name, cell_name
@@ -124,6 +127,17 @@ cdef class PyLayout:
         self.c_layout.add_rect(lay, purp, xl, yb, xr, yt, arr_nx, arr_ny,
                                arr_spx, arr_spy)
 
+    def add_blockage(self, unicode btype, unicode layer, list points):
+        cdef string btype_c = btype.encode(self.encoding)
+        cdef string layer_c = layer.encode(self.encoding)
+        cdef vector[double] xcoord
+        cdef vector[double] ycoord
+        for xval, yval in points:
+            xcoord.push_back(xval)
+            ycoord.push_back(yval)
+
+        self.c_layout.add_blockage(btype_c, layer_c, xcoord, ycoord)
+        
     def add_path(self, object layer, double width, list points,
                  unicode end_style, unicode join_style):
         cdef string lay = layer[0].encode(self.encoding)
@@ -131,7 +145,10 @@ cdef class PyLayout:
         cdef string estyle = end_style.encode(self.encoding)
         cdef string jstyle = join_style.encode(self.encoding)
         cdef string start_s, stop_s
-        cdef double x0, y0, x1, y1
+        cdef double x0 = 0
+        cdef double y0 = 0
+        cdef double x1 = 0
+        cdef double y1 = 0
         cdef int plen = len(points)
         cdef int idx
         for idx, p in enumerate(points):
