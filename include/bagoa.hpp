@@ -61,6 +61,7 @@ private:
 	void create_via(oa::oaBlock * blk_ptr, const bag::Via & inst);
 	void create_pin(oa::oaBlock * blk_ptr, const bag::Pin & inst);
 	void create_blockage(oa::oaBlock * blk_ptr, const bag::Blockage & inst);
+	void create_boundary(oa::oaBlock * blk_ptr, const bag::Boundary & inst);
 
 	bool is_open;
 	oa::oaUInt4 dbu_per_uu;

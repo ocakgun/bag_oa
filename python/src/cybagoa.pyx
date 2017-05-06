@@ -41,7 +41,10 @@ cdef extern from "bag.hpp" namespace "bag":
                      double xr, double yt, bool make_pin_obj) except +
 
         void add_blockage(const string & btype, const string & layer, const vector[double] & xcoord,
-                          const vector[double] & ycoord) except + 
+                          const vector[double] & ycoord) except +
+
+        void add_boundary(const string & btype, const vector[double] & xcoord,
+                  const vector[double] & ycoord) except +
         
     cdef cppclass SchInst:
         SchInst()
@@ -137,7 +140,17 @@ cdef class PyLayout:
             ycoord.push_back(yval)
 
         self.c_layout.add_blockage(btype_c, layer_c, xcoord, ycoord)
-        
+
+    def add_boundary(self, unicode btype, list points):
+        cdef string btype_c = btype.encode(self.encoding)
+        cdef vector[double] xcoord
+        cdef vector[double] ycoord
+        for xval, yval in points:
+            xcoord.push_back(xval)
+            ycoord.push_back(yval)
+
+        self.c_layout.add_boundary(btype_c, xcoord, ycoord)
+
     def add_path(self, object layer, double width, list points,
                  unicode end_style, unicode join_style):
         cdef string lay = layer[0].encode(self.encoding)

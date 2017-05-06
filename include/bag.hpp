@@ -43,6 +43,16 @@ struct Inst {
 typedef std::vector<Inst> InstList;
 typedef InstList::const_iterator InstIter;
 
+// a boundary object
+struct Boundary {
+	std::string type;
+	std::vector<double> xcoord;
+	std::vector<double> ycoord;
+};
+
+typedef std::vector<Boundary> BoundaryList;
+typedef BoundaryList::const_iterator BoundaryIter;
+
 // a layer/area blockage object
 struct Blockage {
 	std::string layer;
@@ -148,12 +158,18 @@ public:
 	void add_blockage(const std::string & type, const std::string & layer, const std::vector<double> & xcoord,
 			const std::vector<double> & ycoord);
 
+    void add_boundary(const std::string & type, const std::vector<double> & xcoord,
+            const std::vector<double> & ycoord);
+
+
 	InstList inst_list;
 	RectList rect_list;
 	ViaList via_list;
 	PinList pin_list;
 	PathSegList path_seg_list;
 	BlockageList block_list;
+	BoundaryList boundary_list;
+
 };
 
 unsigned char get_orient_code(const std::string & orient_str);

@@ -146,6 +146,9 @@ void OALayoutLibrary::create_layout(const std::string & cell, const std::string 
 		for (bag::BlockageIter it = layout.block_list.begin(); it != layout.block_list.end(); it++) {
 			create_blockage(blk_ptr, *it);
 		}
+		for (bag::BoundaryIter it = layout.boundary_list.begin(); it != layout.boundary_list.end(); it++) {
+			create_boundary(blk_ptr, *it);
+		}
 
 		// save and close
 		dsn_ptr->save();
@@ -405,6 +408,26 @@ void OALayoutLibrary::create_blockage(oa::oaBlock * blk_ptr, const bag::Blockage
 		oa::oaBlockageType block_type(oa::oaString(inst.type.c_str()));
 
 		oa::oaLayerBlockage::create(blk_ptr, block_type, layer, pt_arr);
+	}
+}
+
+void OALayoutLibrary::create_boundary(oa::oaBlock * blk_ptr, const bag::Boundary & inst) {
+	// make oaPointArray
+	oa::oaPointArray pt_arr;
+	for (unsigned int idx = 0; idx < inst.xcoord.size(); idx++) {
+		oa::oaCoord x_unit = double_to_oa(inst.xcoord[idx]);
+		oa::oaCoord y_unit = double_to_oa(inst.ycoord[idx]);
+		pt_arr.append(oa::oaPoint(x_unit, y_unit));
+	}
+	if (inst.type == "PR") {
+		// PR boundary
+		oa::oaPRBoundary::create(blk_ptr, pt_arr);
+	} else if (inst.type == "snap") {
+		oa::oaSnapBoundary::create(blk_ptr, pt_arr);
+	} else if (inst.type == "area") {
+	    oa::oaAreaBoundary::create(blk_ptr, pt_arr);
+	} else {
+	    std::cout << "create_rect: unknown boundary type" << inst.type << ", skipping." << std::endl;
 	}
 }
 

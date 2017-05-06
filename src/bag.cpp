@@ -134,8 +134,17 @@ void Layout::add_blockage(const std::string & type, const std::string & layer, c
 	b.xcoord = xcoord;
 	b.ycoord = ycoord;
 
-        block_list.push_back(b);
+    block_list.push_back(b);
 }
 
+void Layout::add_boundary(const std::string & type, const std::vector<double> & xcoord,
+		const std::vector<double> & ycoord) {
+	Boundary b;
+	b.type = type;
+	b.xcoord = xcoord;
+	b.ycoord = ycoord;
+
+    boundary_list.push_back(b);
+}
 
 }
