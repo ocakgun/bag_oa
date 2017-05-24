@@ -4,6 +4,8 @@ namespace bagoa {
 
 // OA namespace object
 const oa::oaNativeNS ns;
+const oa::oaCdbaNS ns_cdba;
+
 // Layout pin access direction (all)
 const oa::oaByte pin_dir = oacTop | oacBottom | oacLeft | oacRight;
 
@@ -367,7 +369,7 @@ void OALayoutLibrary::create_pin(oa::oaBlock * blk_ptr, const bag::Pin & inst) {
 		oa::oaRect * r = oa::oaRect::create(blk_ptr, layer, purpose, box);
 
 		// get terminal
-		oa::oaName term_name(ns, oa::oaString(inst.term_name.c_str()));
+		oa::oaName term_name(ns_cdba, oa::oaString(inst.term_name.c_str()));
 		oa::oaTerm * term = oa::oaTerm::find(blk_ptr, term_name);
 		if (term == NULL) {
 			// get net
